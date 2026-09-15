@@ -13,6 +13,9 @@ dependencies = [
     "ee-failures",
     "ee-ranking",
     "ee-evaluation",
+    "ee-policies",
+    "ee-provenance",
+    "ee-agent[anthropic]",
 ]
 
 [project.optional-dependencies]
@@ -43,6 +46,9 @@ ee-coverage = { workspace = true }
 ee-failures = { workspace = true }
 ee-ranking = { workspace = true }
 ee-evaluation = { workspace = true }
+ee-policies = { workspace = true }
+ee-provenance = { workspace = true }
+ee-agent = { workspace = true }
 
 [tool.ruff]
 line-length = 110

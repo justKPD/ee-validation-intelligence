@@ -1,0 +1,29 @@
+# Agent authority policy (ADR-002). Anything not listed is denied (default deny).
+version = "policy-1.0"
+
+[permissions]
+read_requirements = true
+read_tests = true
+read_results = true
+read_risk = true
+read_coverage = true
+read_failures = true
+explain_risk = true
+recommend_test = true
+propose_test_plan = true
+request_clarification = true
+
+modify_requirement = false
+modify_test_case = false
+change_test_verdict = false
+close_defect = false
+approve_release = false
+approve_recommendation = false
+execute_test = false
+
+# Risk-tiered autonomy matrix: how far the agent may go without a human.
+[autonomy]
+read = "AUTO"                 # evidence gathering runs automatically
+recommend = "PROPOSE_ONLY"    # recommendations are persisted as PROPOSED; humans approve or reject
+modify = "DENY"               # authoritative definitions are never changed by the agent
+verdict_and_release = "NEVER_DELEGATED"

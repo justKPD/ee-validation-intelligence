@@ -74,8 +74,15 @@ def test_limit_validation(client: TestClient) -> None:
     assert client.get("/components", params={"limit": 5000}).status_code == 422
 
 
+AGENTIC_WRITE_PATHS = {"/agent/plan", "/recommendations/{recommendation_id}/decision"}
+
+
 def test_no_write_endpoints_for_authoritative_data(client: TestClient) -> None:
+    """ADR-002: the only writes are the agentic layer (runs, recommendations, approvals, ledger)."""
     schema = client.get("/openapi.json").json()
     for path, ops in schema["paths"].items():
         for method in ops:
-            assert method == "get", f"unexpected {method.upper()} {path}"
+            if path in AGENTIC_WRITE_PATHS:
+                assert method == "post", f"unexpected {method.upper()} {path}"
+            else:
+                assert method == "get", f"unexpected {method.upper()} {path}"

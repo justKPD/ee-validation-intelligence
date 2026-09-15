@@ -8,7 +8,7 @@ from ee_domain.telemetry import configure_tracing
 from fastapi import FastAPI
 from sqlalchemy import Engine, text
 
-from ee_api.routes import catalog, intelligence, ranking
+from ee_api.routes import agent, catalog, intelligence, ranking
 
 DISCLAIMER = (
     "Independent portfolio project using entirely synthetic data. "
@@ -36,10 +36,12 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
     app.state.rankings = {}
     app.state.models = {}
     app.state.dataset_view = None
+    app.state.agent = None
     app.state.benchmark_dir = benchmark_dir or REPO_ROOT / "benchmarks" / "shadow-planning" / "results"
     app.include_router(catalog.router)
     app.include_router(intelligence.router)
     app.include_router(ranking.router)
+    app.include_router(agent.router)
 
     configure_tracing("ee-api")
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor

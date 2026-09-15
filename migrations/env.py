@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 
+import ee_provenance.models  # noqa: F401  (registers agentic-layer tables on Base.metadata)
 from alembic import context
 from ee_domain.models import Base
 from sqlalchemy import engine_from_config, pool
