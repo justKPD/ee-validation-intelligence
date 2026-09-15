@@ -38,6 +38,13 @@ def main() -> None:
     baseline = load("benchmarks/agent-reliability/results/baseline-pre-fix/latest.json")
     adv = load("benchmarks/agent-reliability/results/adversarial.json")
     cal = load("benchmarks/calibration/results/latest.json")
+    # dataset sizes come from the generated manifest (written by ee-seed / ee-generate), never typed by hand
+    manifest = load("data/synthetic/dataset/manifest.json")
+    if manifest.get("seed") != shadow["seed"]:
+        raise SystemExit(
+            f"dataset seed {manifest.get('seed')} does not match benchmark seed {shadow['seed']}"
+        )
+    c = manifest["counts"]
     agg = shadow["aggregate"]
     rb, eng = agg["at_engineer_budget"]["risk_based"], agg["engineer"]
     k10 = {s: agg["at_k"][s]["10"] for s in agg["at_k"]}
@@ -86,8 +93,8 @@ And can an AI agent explain those recommendations without being allowed to chang
 
 ## What I built
 
-An end-to-end platform on a seeded synthetic programme: 40 fictional ECUs, 150 requirements, 250 tests, 6 builds,
-4 variants, about 1,800 executions and about 110 defects. It has three pillars:
+An end-to-end platform on a seeded synthetic programme: {c["components"]} fictional ECUs, {c["requirements"]} requirements,
+{c["test_cases"]} tests, {c["builds"]} builds, {c["variants"]} variants, {c["executions"]:,} executions and {c["defects"]} defects. It has three pillars:
 
 1. **Validation intelligence.** Deterministic, explainable component risk (FMEA plus change, dependency, history and
    staleness signals). Evidence-aware coverage (CURRENT / STALE / INCOMPATIBLE / MISSING / FAILED). Failure

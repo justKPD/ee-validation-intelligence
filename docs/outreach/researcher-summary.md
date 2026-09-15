@@ -52,4 +52,4 @@ base rate 5.2%. Engineer-vs-ranker Jaccard at equal budget:
 - After fixing the gaps the adversarial search found, the same mutators find nothing. That mutator set is exhausted; it is not proof of robustness.
 - Everything was measured against a synthetic fault model. Docker, CI and AWS are authored but were not executed in the build environment.
 
-Generated from benchmark results at commit `fce5309` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `ef7f162` by `scripts/build_brief.py`. Seed 42.

@@ -11,8 +11,8 @@ And can an AI agent explain those recommendations without being allowed to chang
 
 ## What I built
 
-An end-to-end platform on a seeded synthetic programme: 40 fictional ECUs, 150 requirements, 250 tests, 6 builds,
-4 variants, about 1,800 executions and about 110 defects. It has three pillars:
+An end-to-end platform on a seeded synthetic programme: 40 fictional ECUs, 150 requirements,
+250 tests, 6 builds, 4 variants, 1,821 executions and 124 defects. It has three pillars:
 
 1. **Validation intelligence.** Deterministic, explainable component risk (FMEA plus change, dependency, history and
    staleness signals). Evidence-aware coverage (CURRENT / STALE / INCOMPATIBLE / MISSING / FAILED). Failure
@@ -52,4 +52,4 @@ GitHub Actions, Terraform for AWS (ECS Fargate, RDS, S3, CloudWatch). ADRs for e
 and a generated summary sentence for every benchmark.
 
 ---
-Generated from benchmark results at commit `fce5309` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `ef7f162` by `scripts/build_brief.py`. Seed 42.

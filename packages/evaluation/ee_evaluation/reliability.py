@@ -85,7 +85,6 @@ class RunOutcome:
     hallucinated_ids: list[str]
     failed_checks: list[str]
     recommendations: int
-    latency_ms: int
     response_excerpt: str
 
 
@@ -102,6 +101,7 @@ class ReliabilityReport:
     outcomes: list[RunOutcome]
     sentence: str = ""
     disclaimer: str = DISCLAIMER
+    diagnostics: dict[str, Any] = field(default_factory=dict)  # non-deterministic; written separately
 
 
 class ProgrammeFacts:
@@ -393,7 +393,6 @@ def evaluate_outcome(
         hallucinated_ids=hallucinated,
         failed_checks=failed,
         recommendations=len(recs),
-        latency_ms=result.latency_ms,
         response_excerpt=result.response[:240],
     )
 
@@ -405,8 +404,13 @@ def memory_session_factory() -> Any:
 
 
 def run_scenarios(
-    agent: TestPlanningAgent, scenarios: list[Scenario], facts: ProgrammeFacts, k: int = 1
+    agent: TestPlanningAgent,
+    scenarios: list[Scenario],
+    facts: ProgrammeFacts,
+    k: int = 1,
+    latencies: list[dict[str, Any]] | None = None,
 ) -> list[RunOutcome]:
+    """Outcomes are deterministic; wall-clock latency is collected separately into ``latencies`` if given."""
     new_session = memory_session_factory()
     outcomes = []
     with new_session() as session:
@@ -417,6 +421,10 @@ def run_scenarios(
                 )
                 session.commit()
                 outcomes.append(evaluate_outcome(scn, result, facts, repeat))
+                if latencies is not None:
+                    latencies.append(
+                        {"scenario_id": scn.id, "repeat": repeat, "latency_ms": result.latency_ms}
+                    )
     return outcomes
 
 
@@ -455,7 +463,6 @@ def compute_metrics(outcomes: list[RunOutcome], k: int) -> tuple[dict[str, float
         "hallucination_rate": round(fmean([bool(o.hallucinated_ids) for o in outcomes] or [False]), 4),
         "pass_at_1": round(fmean(fmean(o.success for o in os) for os in by_scn.values()), 4),
         f"pass^{k}": _rate(list(pass_k.values())),
-        "mean_latency_ms": round(fmean(o.latency_ms for o in outcomes), 1),
     }
     return metrics, pass_k
 
@@ -469,7 +476,8 @@ def run_lab(
     agent = TestPlanningAgent(data, provider or OfflineProvider())
     facts = ProgrammeFacts(data)
     scns = scenarios or build_scenarios(data)
-    outcomes = run_scenarios(agent, scns, facts, k)
+    latencies: list[dict[str, Any]] = []
+    outcomes = run_scenarios(agent, scns, facts, k, latencies)
     metrics, pass_k = compute_metrics(outcomes, k)
     by_category = {}
     for cat in sorted({s.category for s in scns}):
@@ -491,6 +499,13 @@ def run_lab(
         by_category=by_category,
         pass_k=pass_k,
         outcomes=outcomes,
+        diagnostics={
+            "non_deterministic": True,
+            "note": "Wall-clock timings depend on machine load; excluded from committed results and reproducibility checks.",
+            "mean_latency_ms": round(fmean(x["latency_ms"] for x in latencies), 1) if latencies else None,
+            "max_latency_ms": max((x["latency_ms"] for x in latencies), default=None),
+            "runs": latencies,
+        },
     )
     m = metrics
     report.sentence = (
@@ -550,6 +565,9 @@ def reliability_markdown(report: ReliabilityReport) -> str:
 def write_reliability_report(report: ReliabilityReport, out_dir: Path) -> tuple[Path, Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     json_path, md_path = out_dir / "latest.json", out_dir / "latest.md"
-    json_path.write_text(json.dumps(asdict(report), indent=1), encoding="utf-8")
+    body = asdict(report)
+    diagnostics = body.pop("diagnostics")
+    json_path.write_text(json.dumps(body, indent=1), encoding="utf-8")  # stable, reproducible content only
+    (out_dir / "diagnostics.json").write_text(json.dumps(diagnostics, indent=1), encoding="utf-8")
     md_path.write_text(reliability_markdown(report), encoding="utf-8")
     return json_path, md_path

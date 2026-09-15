@@ -20,7 +20,6 @@ Provider `offline` · model `deterministic-explainer-1.0` · k = 3
 | hallucination_rate | 0.0% |
 | pass_at_1 | 96.0% |
 | pass^3 | 96.0% |
-| mean_latency_ms | 112.1 |
 
 ## By category
 

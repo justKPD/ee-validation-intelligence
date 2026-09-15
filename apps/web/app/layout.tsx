@@ -3,7 +3,7 @@ import { Nav } from "@/components/nav";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "E/E Validation Control Tower",
+  title: "E/E Validation Intelligence & Agentic Test Control Tower",
   description: "Risk-based test prioritization, evidence traceability and policy-gated agentic test management (synthetic data).",
 };
 

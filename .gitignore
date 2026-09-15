@@ -14,3 +14,5 @@ node_modules/
 data/synthetic/dataset/
 data/synthetic/ground_truth/
 *.tsbuildinfo
+# wall-clock diagnostics are machine-dependent and excluded from committed, reproducible results
+benchmarks/**/diagnostics.json
