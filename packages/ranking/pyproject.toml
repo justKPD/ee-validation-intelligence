@@ -1,0 +1,19 @@
+[project]
+name = "ee-ranking"
+version = "0.1.0"
+description = "Risk-based E/E test ranking: engineering ranker, baselines, learned defect probability, hybrid"
+requires-python = ">=3.12"
+dependencies = ["ee-domain", "ee-risk", "ee-coverage", "ee-failures", "scikit-learn>=1.5"]
+
+[tool.uv.sources]
+ee-domain = { workspace = true }
+ee-risk = { workspace = true }
+ee-coverage = { workspace = true }
+ee-failures = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ee_ranking"]

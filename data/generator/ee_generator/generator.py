@@ -19,7 +19,7 @@ from typing import Any
 
 from ee_generator import catalog
 
-GENERATOR_VERSION = "1.0.0"
+GENERATOR_VERSION = "1.1.0"
 
 
 @dataclass(frozen=True)
@@ -275,9 +275,12 @@ def generate_programme(seed: int = 42, config: GeneratorConfig | None = None) ->
                     "signal": rng.choice(catalog.SIGNALS),
                     "detected": False,
                     "detected_by": None,
+                    "live_builds": [],
                 }
                 faults.append(f)
                 live.append(f)
+        for f in live:  # hidden: faults present when this build's testing starts (used by the eval oracle)
+            f["live_builds"].append(bid)
 
         # engineer selection: biased to severity, habit, automation (deliberately imperfect)
         pairs: list[tuple[float, str, str]] = []

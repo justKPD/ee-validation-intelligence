@@ -1,0 +1,1877 @@
+{
+ "seed": 42,
+ "generator_version": "1.1.0",
+ "risk_config_version": "risk-1.0",
+ "ranking_config_version": "ranking-1.0",
+ "ks": [
+  5,
+  10,
+  20,
+  50
+ ],
+ "random_repeats": 20,
+ "builds": [
+  {
+   "build_id": "B002",
+   "candidates": 525,
+   "live_faults": 18,
+   "critical_live_faults": 9,
+   "engineer_budget_minutes": 4294.5,
+   "engineer": {
+    "tests_selected": 288,
+    "minutes": 4294.5,
+    "expected_defects": 14.388,
+    "defect_recall": 0.7993,
+    "critical_defect_recall": 0.8886,
+    "critical_risk_coverage": 0.5658,
+    "coverage_gain": 0.4714,
+    "risk_coverage_per_hour": 0.0079,
+    "coverage_gain_per_hour": 0.0066
+   },
+   "at_k": {
+    "risk_based": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 72.2,
+      "expected_defects": 1.5804,
+      "defect_recall": 0.0878,
+      "critical_defect_recall": 0.1756,
+      "critical_risk_coverage": 0.0077,
+      "coverage_gain": 0.025,
+      "risk_coverage_per_hour": 0.0064,
+      "coverage_gain_per_hour": 0.0208,
+      "ndcg": 0.1281,
+      "map": 0.13
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 110.7,
+      "expected_defects": 1.773,
+      "defect_recall": 0.0985,
+      "critical_defect_recall": 0.197,
+      "critical_risk_coverage": 0.0077,
+      "coverage_gain": 0.0536,
+      "risk_coverage_per_hour": 0.0042,
+      "coverage_gain_per_hour": 0.029,
+      "ndcg": 0.105,
+      "map": 0.0983
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 185.1,
+      "expected_defects": 6.4373,
+      "defect_recall": 0.3576,
+      "critical_defect_recall": 0.4197,
+      "critical_risk_coverage": 0.0352,
+      "coverage_gain": 0.1036,
+      "risk_coverage_per_hour": 0.0114,
+      "coverage_gain_per_hour": 0.0336,
+      "ndcg": 0.1749,
+      "map": 0.2011
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 492.7,
+      "expected_defects": 8.4016,
+      "defect_recall": 0.4668,
+      "critical_defect_recall": 0.6189,
+      "critical_risk_coverage": 0.1478,
+      "coverage_gain": 0.2357,
+      "risk_coverage_per_hour": 0.018,
+      "coverage_gain_per_hour": 0.0287,
+      "ndcg": 0.1971,
+      "map": 0.1684
+     }
+    },
+    "hybrid": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 23.7,
+      "expected_defects": 0.4037,
+      "defect_recall": 0.0224,
+      "critical_defect_recall": 0.0449,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.025,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0633,
+      "ndcg": 0.028,
+      "map": 0.04
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 95.5,
+      "expected_defects": 3.0818,
+      "defect_recall": 0.1712,
+      "critical_defect_recall": 0.2809,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0643,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0404,
+      "ndcg": 0.1554,
+      "map": 0.2617
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 246.4,
+      "expected_defects": 4.6212,
+      "defect_recall": 0.2567,
+      "critical_defect_recall": 0.4519,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.1036,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0252,
+      "ndcg": 0.1729,
+      "map": 0.2359
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 730.1,
+      "expected_defects": 8.2746,
+      "defect_recall": 0.4597,
+      "critical_defect_recall": 0.6417,
+      "critical_risk_coverage": 0.1438,
+      "coverage_gain": 0.2393,
+      "risk_coverage_per_hour": 0.0118,
+      "coverage_gain_per_hour": 0.0197,
+      "ndcg": 0.2364,
+      "map": 0.2453
+     }
+    },
+    "severity_baseline": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 65.1,
+      "expected_defects": 2.1433,
+      "defect_recall": 0.1191,
+      "critical_defect_recall": 0.0893,
+      "critical_risk_coverage": 0.0512,
+      "coverage_gain": 0.0143,
+      "risk_coverage_per_hour": 0.0471,
+      "coverage_gain_per_hour": 0.0132,
+      "ndcg": 0.2025,
+      "map": 0.2
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 106.1,
+      "expected_defects": 3.6933,
+      "defect_recall": 0.2052,
+      "critical_defect_recall": 0.0893,
+      "critical_risk_coverage": 0.0739,
+      "coverage_gain": 0.0393,
+      "risk_coverage_per_hour": 0.0418,
+      "coverage_gain_per_hour": 0.0222,
+      "ndcg": 0.1794,
+      "map": 0.2319
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 438.3,
+      "expected_defects": 4.9481,
+      "defect_recall": 0.2749,
+      "critical_defect_recall": 0.2287,
+      "critical_risk_coverage": 0.1449,
+      "coverage_gain": 0.0786,
+      "risk_coverage_per_hour": 0.0198,
+      "coverage_gain_per_hour": 0.0108,
+      "ndcg": 0.1707,
+      "map": 0.1857
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 916.3,
+      "expected_defects": 11.7556,
+      "defect_recall": 0.6531,
+      "critical_defect_recall": 0.7459,
+      "critical_risk_coverage": 0.2364,
+      "coverage_gain": 0.1214,
+      "risk_coverage_per_hour": 0.0155,
+      "coverage_gain_per_hour": 0.008,
+      "ndcg": 0.2694,
+      "map": 0.2589
+     }
+    },
+    "random_baseline": {
+     "5": {
+      "tests_selected": 5.0,
+      "minutes": 109.465,
+      "expected_defects": 1.4432,
+      "defect_recall": 0.0802,
+      "critical_defect_recall": 0.089,
+      "critical_risk_coverage": 0.0168,
+      "coverage_gain": 0.017,
+      "risk_coverage_per_hour": 0.0098,
+      "coverage_gain_per_hour": 0.0104,
+      "ndcg": 0.1124,
+      "map": 0.1835
+     },
+     "10": {
+      "tests_selected": 10.0,
+      "minutes": 199.085,
+      "expected_defects": 2.4411,
+      "defect_recall": 0.1356,
+      "critical_defect_recall": 0.1544,
+      "critical_risk_coverage": 0.034,
+      "coverage_gain": 0.0343,
+      "risk_coverage_per_hour": 0.0107,
+      "coverage_gain_per_hour": 0.0109,
+      "ndcg": 0.1161,
+      "map": 0.1409
+     },
+     "20": {
+      "tests_selected": 20.0,
+      "minutes": 385.89,
+      "expected_defects": 3.9704,
+      "defect_recall": 0.2206,
+      "critical_defect_recall": 0.2419,
+      "critical_risk_coverage": 0.0599,
+      "coverage_gain": 0.0638,
+      "risk_coverage_per_hour": 0.0096,
+      "coverage_gain_per_hour": 0.0103,
+      "ndcg": 0.1199,
+      "map": 0.1121
+     },
+     "50": {
+      "tests_selected": 50.0,
+      "minutes": 957.715,
+      "expected_defects": 7.9929,
+      "defect_recall": 0.4441,
+      "critical_defect_recall": 0.5142,
+      "critical_risk_coverage": 0.138,
+      "coverage_gain": 0.1518,
+      "risk_coverage_per_hour": 0.0087,
+      "coverage_gain_per_hour": 0.0096,
+      "ndcg": 0.1557,
+      "map": 0.0988
+     }
+    }
+   },
+   "at_engineer_budget": {
+    "risk_based": {
+     "tests_selected": 250,
+     "minutes": 4293.5,
+     "expected_defects": 15.6312,
+     "defect_recall": 0.8684,
+     "critical_defect_recall": 0.8707,
+     "critical_risk_coverage": 0.6988,
+     "coverage_gain": 0.75,
+     "risk_coverage_per_hour": 0.0098,
+     "coverage_gain_per_hour": 0.0105,
+     "minutes_to_match_engineer_yield": 2376.8,
+     "minutes_saved_share": 0.4465
+    },
+    "hybrid": {
+     "tests_selected": 255,
+     "minutes": 4293.0,
+     "expected_defects": 15.4116,
+     "defect_recall": 0.8562,
+     "critical_defect_recall": 0.8858,
+     "critical_risk_coverage": 0.6755,
+     "coverage_gain": 0.7286,
+     "risk_coverage_per_hour": 0.0094,
+     "coverage_gain_per_hour": 0.0102,
+     "minutes_to_match_engineer_yield": 3924.5,
+     "minutes_saved_share": 0.0862
+    },
+    "severity_baseline": {
+     "tests_selected": 224,
+     "minutes": 4294.3,
+     "expected_defects": 13.8353,
+     "defect_recall": 0.7686,
+     "critical_defect_recall": 0.8861,
+     "critical_risk_coverage": 0.6121,
+     "coverage_gain": 0.3857,
+     "risk_coverage_per_hour": 0.0086,
+     "coverage_gain_per_hour": 0.0054,
+     "minutes_to_match_engineer_yield": 4680.0,
+     "minutes_saved_share": -0.0898
+    },
+    "random_baseline": {
+     "tests_selected": 230.6,
+     "minutes": 4294.235,
+     "expected_defects": 14.7833,
+     "defect_recall": 0.8213,
+     "critical_defect_recall": 0.8732,
+     "critical_risk_coverage": 0.4636,
+     "coverage_gain": 0.5032,
+     "risk_coverage_per_hour": 0.0065,
+     "coverage_gain_per_hour": 0.007,
+     "minutes_to_match_engineer_yield": 3795.295,
+     "minutes_saved_share": 0.1162,
+     "match_rate": 1.0
+    }
+   },
+   "observed_replay": {
+    "risk_based": 0.6875,
+    "hybrid": 0.6311,
+    "severity_baseline": 0.5152,
+    "random_baseline": 0.4865
+   },
+   "model": {
+    "build_id": "B002",
+    "trained": true,
+    "trained_on_builds": [
+     "B001"
+    ],
+    "n_samples": 278,
+    "n_positive": 44,
+    "prior": 0.1583,
+    "model_version": "hgb-defect-1.0"
+   }
+  },
+  {
+   "build_id": "B003",
+   "candidates": 553,
+   "live_faults": 18,
+   "critical_live_faults": 11,
+   "engineer_budget_minutes": 4680.9,
+   "engineer": {
+    "tests_selected": 304,
+    "minutes": 4680.9,
+    "expected_defects": 14.2819,
+    "defect_recall": 0.7934,
+    "critical_defect_recall": 0.7911,
+    "critical_risk_coverage": 0.4853,
+    "coverage_gain": 0.3977,
+    "risk_coverage_per_hour": 0.0062,
+    "coverage_gain_per_hour": 0.0051
+   },
+   "at_k": {
+    "risk_based": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 25.3,
+      "expected_defects": 2.8272,
+      "defect_recall": 0.1571,
+      "critical_defect_recall": 0.0771,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0303,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0719,
+      "ndcg": 0.3231,
+      "map": 1.0
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 57.5,
+      "expected_defects": 5.7191,
+      "defect_recall": 0.3177,
+      "critical_defect_recall": 0.3389,
+      "critical_risk_coverage": 0.0135,
+      "coverage_gain": 0.0568,
+      "risk_coverage_per_hour": 0.0141,
+      "coverage_gain_per_hour": 0.0593,
+      "ndcg": 0.3563,
+      "map": 0.9
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 151.7,
+      "expected_defects": 7.8886,
+      "defect_recall": 0.4383,
+      "critical_defect_recall": 0.4702,
+      "critical_risk_coverage": 0.1084,
+      "coverage_gain": 0.1136,
+      "risk_coverage_per_hour": 0.0429,
+      "coverage_gain_per_hour": 0.0449,
+      "ndcg": 0.3008,
+      "map": 0.635
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 624.6,
+      "expected_defects": 10.3714,
+      "defect_recall": 0.5762,
+      "critical_defect_recall": 0.6054,
+      "critical_risk_coverage": 0.1974,
+      "coverage_gain": 0.2462,
+      "risk_coverage_per_hour": 0.019,
+      "coverage_gain_per_hour": 0.0237,
+      "ndcg": 0.2823,
+      "map": 0.3894
+     }
+    },
+    "hybrid": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 145.6,
+      "expected_defects": 0.9324,
+      "defect_recall": 0.0518,
+      "critical_defect_recall": 0.0848,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0189,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0078,
+      "ndcg": 0.1427,
+      "map": 0.28
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 370.0,
+      "expected_defects": 1.4948,
+      "defect_recall": 0.083,
+      "critical_defect_recall": 0.088,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0417,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0068,
+      "ndcg": 0.1213,
+      "map": 0.17
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 559.9,
+      "expected_defects": 4.5699,
+      "defect_recall": 0.2539,
+      "critical_defect_recall": 0.1992,
+      "critical_risk_coverage": 0.0616,
+      "coverage_gain": 0.0871,
+      "risk_coverage_per_hour": 0.0066,
+      "coverage_gain_per_hour": 0.0093,
+      "ndcg": 0.14,
+      "map": 0.1447
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 808.4,
+      "expected_defects": 10.4048,
+      "defect_recall": 0.578,
+      "critical_defect_recall": 0.5298,
+      "critical_risk_coverage": 0.1551,
+      "coverage_gain": 0.2424,
+      "risk_coverage_per_hour": 0.0115,
+      "coverage_gain_per_hour": 0.018,
+      "ndcg": 0.2023,
+      "map": 0.2337
+     }
+    },
+    "severity_baseline": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 65.1,
+      "expected_defects": 1.0722,
+      "defect_recall": 0.0596,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0152,
+      "coverage_gain": 0.0076,
+      "risk_coverage_per_hour": 0.014,
+      "coverage_gain_per_hour": 0.007,
+      "ndcg": 0.0321,
+      "map": 0.05
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 106.1,
+      "expected_defects": 2.3895,
+      "defect_recall": 0.1328,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0423,
+      "coverage_gain": 0.0379,
+      "risk_coverage_per_hour": 0.0239,
+      "coverage_gain_per_hour": 0.0214,
+      "ndcg": 0.0436,
+      "map": 0.1855
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 438.3,
+      "expected_defects": 3.0498,
+      "defect_recall": 0.1694,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0836,
+      "coverage_gain": 0.0568,
+      "risk_coverage_per_hour": 0.0115,
+      "coverage_gain_per_hour": 0.0078,
+      "ndcg": 0.0402,
+      "map": 0.1158
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 921.0,
+      "expected_defects": 7.2286,
+      "defect_recall": 0.4016,
+      "critical_defect_recall": 0.2159,
+      "critical_risk_coverage": 0.1825,
+      "coverage_gain": 0.1174,
+      "risk_coverage_per_hour": 0.0119,
+      "coverage_gain_per_hour": 0.0076,
+      "ndcg": 0.0814,
+      "map": 0.0935
+     }
+    },
+    "random_baseline": {
+     "5": {
+      "tests_selected": 5.0,
+      "minutes": 101.1,
+      "expected_defects": 1.4827,
+      "defect_recall": 0.0824,
+      "critical_defect_recall": 0.0616,
+      "critical_risk_coverage": 0.0121,
+      "coverage_gain": 0.0133,
+      "risk_coverage_per_hour": 0.0079,
+      "coverage_gain_per_hour": 0.0088,
+      "ndcg": 0.0914,
+      "map": 0.1935
+     },
+     "10": {
+      "tests_selected": 10.0,
+      "minutes": 182.57,
+      "expected_defects": 2.3646,
+      "defect_recall": 0.1314,
+      "critical_defect_recall": 0.1011,
+      "critical_risk_coverage": 0.0255,
+      "coverage_gain": 0.0248,
+      "risk_coverage_per_hour": 0.009,
+      "coverage_gain_per_hour": 0.0085,
+      "ndcg": 0.0882,
+      "map": 0.1363
+     },
+     "20": {
+      "tests_selected": 20.0,
+      "minutes": 381.165,
+      "expected_defects": 4.3257,
+      "defect_recall": 0.2403,
+      "critical_defect_recall": 0.1741,
+      "critical_risk_coverage": 0.046,
+      "coverage_gain": 0.0496,
+      "risk_coverage_per_hour": 0.0074,
+      "coverage_gain_per_hour": 0.0079,
+      "ndcg": 0.0972,
+      "map": 0.1068
+     },
+     "50": {
+      "tests_selected": 50.0,
+      "minutes": 932.345,
+      "expected_defects": 7.8279,
+      "defect_recall": 0.4349,
+      "critical_defect_recall": 0.3705,
+      "critical_risk_coverage": 0.1115,
+      "coverage_gain": 0.1172,
+      "risk_coverage_per_hour": 0.0073,
+      "coverage_gain_per_hour": 0.0077,
+      "ndcg": 0.1222,
+      "map": 0.0852
+     }
+    }
+   },
+   "at_engineer_budget": {
+    "risk_based": {
+     "tests_selected": 249,
+     "minutes": 4679.5,
+     "expected_defects": 14.8104,
+     "defect_recall": 0.8228,
+     "critical_defect_recall": 0.8029,
+     "critical_risk_coverage": 0.6143,
+     "coverage_gain": 0.7197,
+     "risk_coverage_per_hour": 0.0079,
+     "coverage_gain_per_hour": 0.0092,
+     "minutes_to_match_engineer_yield": 2668.4,
+     "minutes_saved_share": 0.4299
+    },
+    "hybrid": {
+     "tests_selected": 275,
+     "minutes": 4680.9,
+     "expected_defects": 14.8032,
+     "defect_recall": 0.8224,
+     "critical_defect_recall": 0.8024,
+     "critical_risk_coverage": 0.6278,
+     "coverage_gain": 0.7273,
+     "risk_coverage_per_hour": 0.008,
+     "coverage_gain_per_hour": 0.0093,
+     "minutes_to_match_engineer_yield": 3433.9,
+     "minutes_saved_share": 0.2664
+    },
+    "severity_baseline": {
+     "tests_selected": 246,
+     "minutes": 4680.0,
+     "expected_defects": 13.6167,
+     "defect_recall": 0.7565,
+     "critical_defect_recall": 0.7385,
+     "critical_risk_coverage": 0.5398,
+     "coverage_gain": 0.3523,
+     "risk_coverage_per_hour": 0.0069,
+     "coverage_gain_per_hour": 0.0045,
+     "minutes_to_match_engineer_yield": 5072.0,
+     "minutes_saved_share": -0.0836
+    },
+    "random_baseline": {
+     "tests_selected": 245.55,
+     "minutes": 4680.145,
+     "expected_defects": 14.1358,
+     "defect_recall": 0.7853,
+     "critical_defect_recall": 0.7563,
+     "critical_risk_coverage": 0.4081,
+     "coverage_gain": 0.4648,
+     "risk_coverage_per_hour": 0.0052,
+     "coverage_gain_per_hour": 0.006,
+     "minutes_to_match_engineer_yield": 5115.28,
+     "minutes_saved_share": -0.0928,
+     "match_rate": 1.0
+    }
+   },
+   "observed_replay": {
+    "risk_based": 0.8148,
+    "hybrid": 0.7855,
+    "severity_baseline": 0.3962,
+    "random_baseline": 0.4993
+   },
+   "model": {
+    "build_id": "B003",
+    "trained": true,
+    "trained_on_builds": [
+     "B001",
+     "B002"
+    ],
+    "n_samples": 566,
+    "n_positive": 59,
+    "prior": 0.1042,
+    "model_version": "hgb-defect-1.0"
+   }
+  },
+  {
+   "build_id": "B004",
+   "candidates": 577,
+   "live_faults": 24,
+   "critical_live_faults": 15,
+   "engineer_budget_minutes": 4819.0,
+   "engineer": {
+    "tests_selected": 317,
+    "minutes": 4819.0,
+    "expected_defects": 21.292,
+    "defect_recall": 0.8872,
+    "critical_defect_recall": 0.8578,
+    "critical_risk_coverage": 0.538,
+    "coverage_gain": 0.4351,
+    "risk_coverage_per_hour": 0.0067,
+    "coverage_gain_per_hour": 0.0054
+   },
+   "at_k": {
+    "risk_based": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 31.3,
+      "expected_defects": 0.3881,
+      "defect_recall": 0.0162,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.026,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0498,
+      "ndcg": 0.0034,
+      "map": 0.04
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 78.2,
+      "expected_defects": 2.8345,
+      "defect_recall": 0.1181,
+      "critical_defect_recall": 0.099,
+      "critical_risk_coverage": 0.0479,
+      "coverage_gain": 0.0487,
+      "risk_coverage_per_hour": 0.0368,
+      "coverage_gain_per_hour": 0.0374,
+      "ndcg": 0.0853,
+      "map": 0.2617
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 145.5,
+      "expected_defects": 6.8479,
+      "defect_recall": 0.2853,
+      "critical_defect_recall": 0.1338,
+      "critical_risk_coverage": 0.0761,
+      "coverage_gain": 0.0942,
+      "risk_coverage_per_hour": 0.0314,
+      "coverage_gain_per_hour": 0.0388,
+      "ndcg": 0.1128,
+      "map": 0.3848
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 391.5,
+      "expected_defects": 10.3198,
+      "defect_recall": 0.43,
+      "critical_defect_recall": 0.3202,
+      "critical_risk_coverage": 0.1313,
+      "coverage_gain": 0.211,
+      "risk_coverage_per_hour": 0.0201,
+      "coverage_gain_per_hour": 0.0323,
+      "ndcg": 0.1135,
+      "map": 0.2973
+     }
+    },
+    "hybrid": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 31.1,
+      "expected_defects": 0.0,
+      "defect_recall": 0.0,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0104,
+      "coverage_gain": 0.0325,
+      "risk_coverage_per_hour": 0.0201,
+      "coverage_gain_per_hour": 0.0626,
+      "ndcg": 0.0,
+      "map": 0.0
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 123.8,
+      "expected_defects": 2.5568,
+      "defect_recall": 0.1065,
+      "critical_defect_recall": 0.1705,
+      "critical_risk_coverage": 0.0313,
+      "coverage_gain": 0.0552,
+      "risk_coverage_per_hour": 0.0152,
+      "coverage_gain_per_hour": 0.0268,
+      "ndcg": 0.0785,
+      "map": 0.1272
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 259.9,
+      "expected_defects": 6.6758,
+      "defect_recall": 0.2782,
+      "critical_defect_recall": 0.2932,
+      "critical_risk_coverage": 0.0604,
+      "coverage_gain": 0.0974,
+      "risk_coverage_per_hour": 0.014,
+      "coverage_gain_per_hour": 0.0225,
+      "ndcg": 0.1083,
+      "map": 0.2112
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 501.2,
+      "expected_defects": 10.5616,
+      "defect_recall": 0.4401,
+      "critical_defect_recall": 0.3288,
+      "critical_risk_coverage": 0.1535,
+      "coverage_gain": 0.2143,
+      "risk_coverage_per_hour": 0.0184,
+      "coverage_gain_per_hour": 0.0257,
+      "ndcg": 0.1238,
+      "map": 0.275
+     }
+    },
+    "severity_baseline": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 65.1,
+      "expected_defects": 1.8804,
+      "defect_recall": 0.0784,
+      "critical_defect_recall": 0.0836,
+      "critical_risk_coverage": 0.0117,
+      "coverage_gain": 0.0032,
+      "risk_coverage_per_hour": 0.0108,
+      "coverage_gain_per_hour": 0.003,
+      "ndcg": 0.0606,
+      "map": 0.04
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 106.1,
+      "expected_defects": 2.3482,
+      "defect_recall": 0.0978,
+      "critical_defect_recall": 0.1148,
+      "critical_risk_coverage": 0.056,
+      "coverage_gain": 0.026,
+      "risk_coverage_per_hour": 0.0317,
+      "coverage_gain_per_hour": 0.0147,
+      "ndcg": 0.0711,
+      "map": 0.0533
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 438.3,
+      "expected_defects": 2.3482,
+      "defect_recall": 0.0978,
+      "critical_defect_recall": 0.1148,
+      "critical_risk_coverage": 0.0758,
+      "coverage_gain": 0.0422,
+      "risk_coverage_per_hour": 0.0104,
+      "coverage_gain_per_hour": 0.0058,
+      "ndcg": 0.0514,
+      "map": 0.0267
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 1042.5,
+      "expected_defects": 11.337,
+      "defect_recall": 0.4724,
+      "critical_defect_recall": 0.517,
+      "critical_risk_coverage": 0.2233,
+      "coverage_gain": 0.1201,
+      "risk_coverage_per_hour": 0.0129,
+      "coverage_gain_per_hour": 0.0069,
+      "ndcg": 0.223,
+      "map": 0.1169
+     }
+    },
+    "random_baseline": {
+     "5": {
+      "tests_selected": 5.0,
+      "minutes": 95.98,
+      "expected_defects": 1.7128,
+      "defect_recall": 0.0714,
+      "critical_defect_recall": 0.0635,
+      "critical_risk_coverage": 0.0108,
+      "coverage_gain": 0.0126,
+      "risk_coverage_per_hour": 0.0083,
+      "coverage_gain_per_hour": 0.0099,
+      "ndcg": 0.0844,
+      "map": 0.1988
+     },
+     "10": {
+      "tests_selected": 10.0,
+      "minutes": 202.18,
+      "expected_defects": 3.3567,
+      "defect_recall": 0.1399,
+      "critical_defect_recall": 0.1332,
+      "critical_risk_coverage": 0.025,
+      "coverage_gain": 0.0266,
+      "risk_coverage_per_hour": 0.0086,
+      "coverage_gain_per_hour": 0.0089,
+      "ndcg": 0.0936,
+      "map": 0.1614
+     },
+     "20": {
+      "tests_selected": 20.0,
+      "minutes": 390.32,
+      "expected_defects": 6.6639,
+      "defect_recall": 0.2777,
+      "critical_defect_recall": 0.2612,
+      "critical_risk_coverage": 0.0483,
+      "coverage_gain": 0.0533,
+      "risk_coverage_per_hour": 0.0078,
+      "coverage_gain_per_hour": 0.0085,
+      "ndcg": 0.1183,
+      "map": 0.1453
+     },
+     "50": {
+      "tests_selected": 50.0,
+      "minutes": 994.19,
+      "expected_defects": 13.0811,
+      "defect_recall": 0.5451,
+      "critical_defect_recall": 0.5145,
+      "critical_risk_coverage": 0.1127,
+      "coverage_gain": 0.1294,
+      "risk_coverage_per_hour": 0.0069,
+      "coverage_gain_per_hour": 0.0079,
+      "ndcg": 0.1686,
+      "map": 0.1467
+     }
+    }
+   },
+   "at_engineer_budget": {
+    "risk_based": {
+     "tests_selected": 289,
+     "minutes": 4818.1,
+     "expected_defects": 21.4304,
+     "defect_recall": 0.8929,
+     "critical_defect_recall": 0.8545,
+     "critical_risk_coverage": 0.674,
+     "coverage_gain": 0.7435,
+     "risk_coverage_per_hour": 0.0084,
+     "coverage_gain_per_hour": 0.0093,
+     "minutes_to_match_engineer_yield": 4495.4,
+     "minutes_saved_share": 0.0672
+    },
+    "hybrid": {
+     "tests_selected": 297,
+     "minutes": 4817.2,
+     "expected_defects": 21.736,
+     "defect_recall": 0.9057,
+     "critical_defect_recall": 0.8609,
+     "critical_risk_coverage": 0.7103,
+     "coverage_gain": 0.7565,
+     "risk_coverage_per_hour": 0.0088,
+     "coverage_gain_per_hour": 0.0094,
+     "minutes_to_match_engineer_yield": 2884.2,
+     "minutes_saved_share": 0.4015
+    },
+    "severity_baseline": {
+     "tests_selected": 254,
+     "minutes": 4817.9,
+     "expected_defects": 19.7357,
+     "defect_recall": 0.8223,
+     "critical_defect_recall": 0.8445,
+     "critical_risk_coverage": 0.6019,
+     "coverage_gain": 0.3799,
+     "risk_coverage_per_hour": 0.0075,
+     "coverage_gain_per_hour": 0.0047,
+     "minutes_to_match_engineer_yield": 7636.3,
+     "minutes_saved_share": -0.5846
+    },
+    "random_baseline": {
+     "tests_selected": 245.45,
+     "minutes": 4818.065,
+     "expected_defects": 21.1402,
+     "defect_recall": 0.8808,
+     "critical_defect_recall": 0.8382,
+     "critical_risk_coverage": 0.4421,
+     "coverage_gain": 0.4776,
+     "risk_coverage_per_hour": 0.0055,
+     "coverage_gain_per_hour": 0.0059,
+     "minutes_to_match_engineer_yield": 5112.47,
+     "minutes_saved_share": -0.0609,
+     "match_rate": 1.0
+    }
+   },
+   "observed_replay": {
+    "risk_based": 0.7298,
+    "hybrid": 0.7658,
+    "severity_baseline": 0.4748,
+    "random_baseline": 0.4985
+   },
+   "model": {
+    "build_id": "B004",
+    "trained": true,
+    "trained_on_builds": [
+     "B001",
+     "B002",
+     "B003"
+    ],
+    "n_samples": 870,
+    "n_positive": 73,
+    "prior": 0.0839,
+    "model_version": "hgb-defect-1.0"
+   }
+  },
+  {
+   "build_id": "B005",
+   "candidates": 577,
+   "live_faults": 6,
+   "critical_live_faults": 1,
+   "engineer_budget_minutes": 4851.0,
+   "engineer": {
+    "tests_selected": 317,
+    "minutes": 4851.0,
+    "expected_defects": 4.7077,
+    "defect_recall": 0.7846,
+    "critical_defect_recall": 0.0,
+    "critical_risk_coverage": 0.5047,
+    "coverage_gain": 0.368,
+    "risk_coverage_per_hour": 0.0062,
+    "coverage_gain_per_hour": 0.0046
+   },
+   "at_k": {
+    "risk_based": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 22.8,
+      "expected_defects": 0.0,
+      "defect_recall": 0.0,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.019,
+      "coverage_gain": 0.0297,
+      "risk_coverage_per_hour": 0.0499,
+      "coverage_gain_per_hour": 0.0783,
+      "ndcg": 0.0,
+      "map": 0.0
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 45.9,
+      "expected_defects": 1.2972,
+      "defect_recall": 0.2162,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.019,
+      "coverage_gain": 0.0483,
+      "risk_coverage_per_hour": 0.0248,
+      "coverage_gain_per_hour": 0.0632,
+      "ndcg": 0.0752,
+      "map": 0.0827
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 85.4,
+      "expected_defects": 1.6866,
+      "defect_recall": 0.2811,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0296,
+      "coverage_gain": 0.0967,
+      "risk_coverage_per_hour": 0.0208,
+      "coverage_gain_per_hour": 0.0679,
+      "ndcg": 0.0797,
+      "map": 0.0514
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 738.9,
+      "expected_defects": 3.9411,
+      "defect_recall": 0.6569,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.1583,
+      "coverage_gain": 0.2454,
+      "risk_coverage_per_hour": 0.0129,
+      "coverage_gain_per_hour": 0.0199,
+      "ndcg": 0.1796,
+      "map": 0.0885
+     }
+    },
+    "hybrid": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 25.2,
+      "expected_defects": 0.0,
+      "defect_recall": 0.0,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0223,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0531,
+      "ndcg": 0.0,
+      "map": 0.0
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 45.3,
+      "expected_defects": 0.9224,
+      "defect_recall": 0.1537,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.019,
+      "coverage_gain": 0.0483,
+      "risk_coverage_per_hour": 0.0251,
+      "coverage_gain_per_hour": 0.064,
+      "ndcg": 0.0464,
+      "map": 0.0452
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 209.3,
+      "expected_defects": 2.2962,
+      "defect_recall": 0.3827,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0545,
+      "coverage_gain": 0.0892,
+      "risk_coverage_per_hour": 0.0156,
+      "coverage_gain_per_hour": 0.0256,
+      "ndcg": 0.112,
+      "map": 0.0748
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 766.7,
+      "expected_defects": 3.9233,
+      "defect_recall": 0.6539,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.147,
+      "coverage_gain": 0.223,
+      "risk_coverage_per_hour": 0.0115,
+      "coverage_gain_per_hour": 0.0175,
+      "ndcg": 0.166,
+      "map": 0.0842
+     }
+    },
+    "severity_baseline": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 65.1,
+      "expected_defects": 0.0,
+      "defect_recall": 0.0,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0133,
+      "coverage_gain": 0.0074,
+      "risk_coverage_per_hour": 0.0123,
+      "coverage_gain_per_hour": 0.0069,
+      "ndcg": 0.0,
+      "map": 0.0
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 106.1,
+      "expected_defects": 0.0,
+      "defect_recall": 0.0,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0489,
+      "coverage_gain": 0.0186,
+      "risk_coverage_per_hour": 0.0277,
+      "coverage_gain_per_hour": 0.0105,
+      "ndcg": 0.0,
+      "map": 0.0
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 438.3,
+      "expected_defects": 0.0,
+      "defect_recall": 0.0,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0771,
+      "coverage_gain": 0.0372,
+      "risk_coverage_per_hour": 0.0105,
+      "coverage_gain_per_hour": 0.0051,
+      "ndcg": 0.0,
+      "map": 0.0
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 1042.5,
+      "expected_defects": 0.9752,
+      "defect_recall": 0.1625,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.1515,
+      "coverage_gain": 0.0818,
+      "risk_coverage_per_hour": 0.0087,
+      "coverage_gain_per_hour": 0.0047,
+      "ndcg": 0.0198,
+      "map": 0.0051
+     }
+    },
+    "random_baseline": {
+     "5": {
+      "tests_selected": 5.0,
+      "minutes": 95.98,
+      "expected_defects": 0.887,
+      "defect_recall": 0.1478,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0127,
+      "coverage_gain": 0.0117,
+      "risk_coverage_per_hour": 0.0098,
+      "coverage_gain_per_hour": 0.0085,
+      "ndcg": 0.0859,
+      "map": 0.1398
+     },
+     "10": {
+      "tests_selected": 10.0,
+      "minutes": 202.18,
+      "expected_defects": 1.2503,
+      "defect_recall": 0.2084,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0256,
+      "coverage_gain": 0.0244,
+      "risk_coverage_per_hour": 0.0088,
+      "coverage_gain_per_hour": 0.0077,
+      "ndcg": 0.0825,
+      "map": 0.0939
+     },
+     "20": {
+      "tests_selected": 20.0,
+      "minutes": 390.32,
+      "expected_defects": 2.1281,
+      "defect_recall": 0.3547,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.0498,
+      "coverage_gain": 0.0468,
+      "risk_coverage_per_hour": 0.0078,
+      "coverage_gain_per_hour": 0.0074,
+      "ndcg": 0.0883,
+      "map": 0.0647
+     },
+     "50": {
+      "tests_selected": 50.0,
+      "minutes": 994.19,
+      "expected_defects": 3.5729,
+      "defect_recall": 0.5955,
+      "critical_defect_recall": 0.0,
+      "critical_risk_coverage": 0.1146,
+      "coverage_gain": 0.1182,
+      "risk_coverage_per_hour": 0.007,
+      "coverage_gain_per_hour": 0.0072,
+      "ndcg": 0.108,
+      "map": 0.0439
+     }
+    }
+   },
+   "at_engineer_budget": {
+    "risk_based": {
+     "tests_selected": 256,
+     "minutes": 4849.9,
+     "expected_defects": 4.829,
+     "defect_recall": 0.8048,
+     "critical_defect_recall": 0.0,
+     "critical_risk_coverage": 0.6663,
+     "coverage_gain": 0.7249,
+     "risk_coverage_per_hour": 0.0082,
+     "coverage_gain_per_hour": 0.009,
+     "minutes_to_match_engineer_yield": 1463.7,
+     "minutes_saved_share": 0.6983
+    },
+    "hybrid": {
+     "tests_selected": 279,
+     "minutes": 4850.9,
+     "expected_defects": 4.829,
+     "defect_recall": 0.8048,
+     "critical_defect_recall": 0.0,
+     "critical_risk_coverage": 0.6663,
+     "coverage_gain": 0.7175,
+     "risk_coverage_per_hour": 0.0082,
+     "coverage_gain_per_hour": 0.0089,
+     "minutes_to_match_engineer_yield": 1108.8,
+     "minutes_saved_share": 0.7714
+    },
+    "severity_baseline": {
+     "tests_selected": 260,
+     "minutes": 4850.2,
+     "expected_defects": 3.9859,
+     "defect_recall": 0.6643,
+     "critical_defect_recall": 0.0,
+     "critical_risk_coverage": 0.5605,
+     "coverage_gain": 0.3606,
+     "risk_coverage_per_hour": 0.0069,
+     "coverage_gain_per_hour": 0.0045,
+     "minutes_to_match_engineer_yield": 8333.9,
+     "minutes_saved_share": -0.718
+    },
+    "random_baseline": {
+     "tests_selected": 247.4,
+     "minutes": 4850.305,
+     "expected_defects": 4.7015,
+     "defect_recall": 0.7836,
+     "critical_defect_recall": 0.0,
+     "critical_risk_coverage": 0.4323,
+     "coverage_gain": 0.4518,
+     "risk_coverage_per_hour": 0.0053,
+     "coverage_gain_per_hour": 0.0056,
+     "minutes_to_match_engineer_yield": 4949.025,
+     "minutes_saved_share": -0.0202,
+     "match_rate": 1.0
+    }
+   },
+   "observed_replay": {
+    "risk_based": 0.6577,
+    "hybrid": 0.627,
+    "severity_baseline": 0.2318,
+    "random_baseline": 0.543
+   },
+   "model": {
+    "build_id": "B005",
+    "trained": true,
+    "trained_on_builds": [
+     "B001",
+     "B002",
+     "B003",
+     "B004"
+    ],
+    "n_samples": 1187,
+    "n_positive": 94,
+    "prior": 0.0792,
+    "model_version": "hgb-defect-1.0"
+   }
+  },
+  {
+   "build_id": "B006",
+   "candidates": 577,
+   "live_faults": 30,
+   "critical_live_faults": 13,
+   "engineer_budget_minutes": 4950.2,
+   "engineer": {
+    "tests_selected": 317,
+    "minutes": 4950.2,
+    "expected_defects": 25.6243,
+    "defect_recall": 0.8541,
+    "critical_defect_recall": 0.9217,
+    "critical_risk_coverage": 0.3716,
+    "coverage_gain": 0.375,
+    "risk_coverage_per_hour": 0.0045,
+    "coverage_gain_per_hour": 0.0045
+   },
+   "at_k": {
+    "risk_based": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 27.4,
+      "expected_defects": 5.203,
+      "defect_recall": 0.1734,
+      "critical_defect_recall": 0.1653,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0286,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0626,
+      "ndcg": 0.1858,
+      "map": 0.2867
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 50.3,
+      "expected_defects": 8.3487,
+      "defect_recall": 0.2783,
+      "critical_defect_recall": 0.2413,
+      "critical_risk_coverage": 0.012,
+      "coverage_gain": 0.0607,
+      "risk_coverage_per_hour": 0.0144,
+      "coverage_gain_per_hour": 0.0724,
+      "ndcg": 0.2208,
+      "map": 0.4264
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 171.9,
+      "expected_defects": 11.7867,
+      "defect_recall": 0.3929,
+      "critical_defect_recall": 0.2812,
+      "critical_risk_coverage": 0.0602,
+      "coverage_gain": 0.1107,
+      "risk_coverage_per_hour": 0.021,
+      "coverage_gain_per_hour": 0.0386,
+      "ndcg": 0.2148,
+      "map": 0.3615
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 588.1,
+      "expected_defects": 12.6853,
+      "defect_recall": 0.4228,
+      "critical_defect_recall": 0.3379,
+      "critical_risk_coverage": 0.1542,
+      "coverage_gain": 0.2607,
+      "risk_coverage_per_hour": 0.0157,
+      "coverage_gain_per_hour": 0.0266,
+      "ndcg": 0.1832,
+      "map": 0.2284
+     }
+    },
+    "hybrid": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 57.4,
+      "expected_defects": 2.6064,
+      "defect_recall": 0.0869,
+      "critical_defect_recall": 0.048,
+      "critical_risk_coverage": 0.015,
+      "coverage_gain": 0.025,
+      "risk_coverage_per_hour": 0.0157,
+      "coverage_gain_per_hour": 0.0261,
+      "ndcg": 0.15,
+      "map": 0.71
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 173.6,
+      "expected_defects": 5.0354,
+      "defect_recall": 0.1678,
+      "critical_defect_recall": 0.1208,
+      "critical_risk_coverage": 0.015,
+      "coverage_gain": 0.0429,
+      "risk_coverage_per_hour": 0.0052,
+      "coverage_gain_per_hour": 0.0148,
+      "ndcg": 0.1877,
+      "map": 0.524
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 380.4,
+      "expected_defects": 5.298,
+      "defect_recall": 0.1766,
+      "critical_defect_recall": 0.1316,
+      "critical_risk_coverage": 0.0286,
+      "coverage_gain": 0.0857,
+      "risk_coverage_per_hour": 0.0045,
+      "coverage_gain_per_hour": 0.0135,
+      "ndcg": 0.1568,
+      "map": 0.2938
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 923.4,
+      "expected_defects": 12.3095,
+      "defect_recall": 0.4103,
+      "critical_defect_recall": 0.2595,
+      "critical_risk_coverage": 0.0662,
+      "coverage_gain": 0.2107,
+      "risk_coverage_per_hour": 0.0043,
+      "coverage_gain_per_hour": 0.0137,
+      "ndcg": 0.1717,
+      "map": 0.2387
+     }
+    },
+    "severity_baseline": {
+     "5": {
+      "tests_selected": 5,
+      "minutes": 65.1,
+      "expected_defects": 3.3182,
+      "defect_recall": 0.1106,
+      "critical_defect_recall": 0.0482,
+      "critical_risk_coverage": 0.0,
+      "coverage_gain": 0.0071,
+      "risk_coverage_per_hour": 0.0,
+      "coverage_gain_per_hour": 0.0066,
+      "ndcg": 0.1122,
+      "map": 1.0
+     },
+     "10": {
+      "tests_selected": 10,
+      "minutes": 106.1,
+      "expected_defects": 4.6957,
+      "defect_recall": 0.1565,
+      "critical_defect_recall": 0.1542,
+      "critical_risk_coverage": 0.0451,
+      "coverage_gain": 0.0357,
+      "risk_coverage_per_hour": 0.0255,
+      "coverage_gain_per_hour": 0.0202,
+      "ndcg": 0.1311,
+      "map": 1.0
+     },
+     "20": {
+      "tests_selected": 20,
+      "minutes": 438.3,
+      "expected_defects": 6.441,
+      "defect_recall": 0.2147,
+      "critical_defect_recall": 0.212,
+      "critical_risk_coverage": 0.0564,
+      "coverage_gain": 0.0464,
+      "risk_coverage_per_hour": 0.0077,
+      "coverage_gain_per_hour": 0.0064,
+      "ndcg": 0.1252,
+      "map": 0.6894
+     },
+     "50": {
+      "tests_selected": 50,
+      "minutes": 1042.5,
+      "expected_defects": 16.7756,
+      "defect_recall": 0.5592,
+      "critical_defect_recall": 0.6521,
+      "critical_risk_coverage": 0.1613,
+      "coverage_gain": 0.1036,
+      "risk_coverage_per_hour": 0.0093,
+      "coverage_gain_per_hour": 0.006,
+      "ndcg": 0.1898,
+      "map": 0.5078
+     }
+    },
+    "random_baseline": {
+     "5": {
+      "tests_selected": 5.0,
+      "minutes": 95.98,
+      "expected_defects": 2.0541,
+      "defect_recall": 0.0685,
+      "critical_defect_recall": 0.0632,
+      "critical_risk_coverage": 0.0103,
+      "coverage_gain": 0.0113,
+      "risk_coverage_per_hour": 0.008,
+      "coverage_gain_per_hour": 0.0091,
+      "ndcg": 0.0795,
+      "map": 0.2652
+     },
+     "10": {
+      "tests_selected": 10.0,
+      "minutes": 202.18,
+      "expected_defects": 4.4885,
+      "defect_recall": 0.1496,
+      "critical_defect_recall": 0.1318,
+      "critical_risk_coverage": 0.021,
+      "coverage_gain": 0.0252,
+      "risk_coverage_per_hour": 0.0069,
+      "coverage_gain_per_hour": 0.0083,
+      "ndcg": 0.099,
+      "map": 0.2396
+     },
+     "20": {
+      "tests_selected": 20.0,
+      "minutes": 390.32,
+      "expected_defects": 7.9527,
+      "defect_recall": 0.2651,
+      "critical_defect_recall": 0.2345,
+      "critical_risk_coverage": 0.0415,
+      "coverage_gain": 0.0505,
+      "risk_coverage_per_hour": 0.0064,
+      "coverage_gain_per_hour": 0.008,
+      "ndcg": 0.1165,
+      "map": 0.2123
+     },
+     "50": {
+      "tests_selected": 50.0,
+      "minutes": 994.19,
+      "expected_defects": 14.9582,
+      "defect_recall": 0.4986,
+      "critical_defect_recall": 0.4756,
+      "critical_risk_coverage": 0.0916,
+      "coverage_gain": 0.1234,
+      "risk_coverage_per_hour": 0.0055,
+      "coverage_gain_per_hour": 0.0075,
+      "ndcg": 0.1551,
+      "map": 0.1969
+     }
+    }
+   },
+   "at_engineer_budget": {
+    "risk_based": {
+     "tests_selected": 270,
+     "minutes": 4950.1,
+     "expected_defects": 27.1058,
+     "defect_recall": 0.9035,
+     "critical_defect_recall": 0.8963,
+     "critical_risk_coverage": 0.5765,
+     "coverage_gain": 0.7321,
+     "risk_coverage_per_hour": 0.007,
+     "coverage_gain_per_hour": 0.0089,
+     "minutes_to_match_engineer_yield": 3049.3,
+     "minutes_saved_share": 0.384
+    },
+    "hybrid": {
+     "tests_selected": 256,
+     "minutes": 4948.6,
+     "expected_defects": 27.3204,
+     "defect_recall": 0.9107,
+     "critical_defect_recall": 0.9058,
+     "critical_risk_coverage": 0.5765,
+     "coverage_gain": 0.7321,
+     "risk_coverage_per_hour": 0.007,
+     "coverage_gain_per_hour": 0.0089,
+     "minutes_to_match_engineer_yield": 3349.6,
+     "minutes_saved_share": 0.3233
+    },
+    "severity_baseline": {
+     "tests_selected": 263,
+     "minutes": 4950.2,
+     "expected_defects": 24.2171,
+     "defect_recall": 0.8072,
+     "critical_defect_recall": 0.9021,
+     "critical_risk_coverage": 0.4697,
+     "coverage_gain": 0.3643,
+     "risk_coverage_per_hour": 0.0057,
+     "coverage_gain_per_hour": 0.0044,
+     "minutes_to_match_engineer_yield": 8333.9,
+     "minutes_saved_share": -0.6835
+    },
+    "random_baseline": {
+     "tests_selected": 252.15,
+     "minutes": 4949.235,
+     "expected_defects": 25.6287,
+     "defect_recall": 0.8543,
+     "critical_defect_recall": 0.8884,
+     "critical_risk_coverage": 0.3512,
+     "coverage_gain": 0.4584,
+     "risk_coverage_per_hour": 0.0043,
+     "coverage_gain_per_hour": 0.0056,
+     "minutes_to_match_engineer_yield": 4901.945,
+     "minutes_saved_share": 0.0098,
+     "match_rate": 1.0
+    }
+   },
+   "observed_replay": {
+    "risk_based": 0.6912,
+    "hybrid": 0.6932,
+    "severity_baseline": 0.5385,
+    "random_baseline": 0.4894
+   },
+   "model": {
+    "build_id": "B006",
+    "trained": true,
+    "trained_on_builds": [
+     "B001",
+     "B002",
+     "B003",
+     "B004",
+     "B005"
+    ],
+    "n_samples": 1504,
+    "n_positive": 98,
+    "prior": 0.0652,
+    "model_version": "hgb-defect-1.0"
+   }
+  }
+ ],
+ "aggregate": {
+  "at_k": {
+   "risk_based": {
+    "5": {
+     "tests_selected": 5.0,
+     "minutes": 35.8,
+     "expected_defects": 1.9997,
+     "defect_recall": 0.0869,
+     "critical_defect_recall": 0.0836,
+     "critical_risk_coverage": 0.0053,
+     "coverage_gain": 0.0279,
+     "risk_coverage_per_hour": 0.0113,
+     "coverage_gain_per_hour": 0.0567,
+     "ndcg": 0.1281,
+     "map": 0.2913
+    },
+    "10": {
+     "tests_selected": 10.0,
+     "minutes": 68.52,
+     "expected_defects": 3.9945,
+     "defect_recall": 0.2058,
+     "critical_defect_recall": 0.1752,
+     "critical_risk_coverage": 0.02,
+     "coverage_gain": 0.0536,
+     "risk_coverage_per_hour": 0.0189,
+     "coverage_gain_per_hour": 0.0523,
+     "ndcg": 0.1685,
+     "map": 0.3538
+    },
+    "20": {
+     "tests_selected": 20.0,
+     "minutes": 147.92,
+     "expected_defects": 6.9294,
+     "defect_recall": 0.351,
+     "critical_defect_recall": 0.261,
+     "critical_risk_coverage": 0.0619,
+     "coverage_gain": 0.1038,
+     "risk_coverage_per_hour": 0.0255,
+     "coverage_gain_per_hour": 0.0448,
+     "ndcg": 0.1766,
+     "map": 0.3268
+    },
+    "50": {
+     "tests_selected": 50.0,
+     "minutes": 567.16,
+     "expected_defects": 9.1438,
+     "defect_recall": 0.5105,
+     "critical_defect_recall": 0.3765,
+     "critical_risk_coverage": 0.1578,
+     "coverage_gain": 0.2398,
+     "risk_coverage_per_hour": 0.0171,
+     "coverage_gain_per_hour": 0.0262,
+     "ndcg": 0.1911,
+     "map": 0.2344
+    }
+   },
+   "hybrid": {
+    "5": {
+     "tests_selected": 5.0,
+     "minutes": 56.6,
+     "expected_defects": 0.7885,
+     "defect_recall": 0.0322,
+     "critical_defect_recall": 0.0355,
+     "critical_risk_coverage": 0.0051,
+     "coverage_gain": 0.0247,
+     "risk_coverage_per_hour": 0.0072,
+     "coverage_gain_per_hour": 0.0426,
+     "ndcg": 0.0641,
+     "map": 0.206
+    },
+    "10": {
+     "tests_selected": 10.0,
+     "minutes": 161.64,
+     "expected_defects": 2.6182,
+     "defect_recall": 0.1364,
+     "critical_defect_recall": 0.132,
+     "critical_risk_coverage": 0.0131,
+     "coverage_gain": 0.0505,
+     "risk_coverage_per_hour": 0.0091,
+     "coverage_gain_per_hour": 0.0306,
+     "ndcg": 0.1179,
+     "map": 0.2256
+    },
+    "20": {
+     "tests_selected": 20.0,
+     "minutes": 331.18,
+     "expected_defects": 4.6922,
+     "defect_recall": 0.2696,
+     "critical_defect_recall": 0.2152,
+     "critical_risk_coverage": 0.041,
+     "coverage_gain": 0.0926,
+     "risk_coverage_per_hour": 0.0081,
+     "coverage_gain_per_hour": 0.0192,
+     "ndcg": 0.138,
+     "map": 0.1921
+    },
+    "50": {
+     "tests_selected": 50.0,
+     "minutes": 745.96,
+     "expected_defects": 9.0948,
+     "defect_recall": 0.5084,
+     "critical_defect_recall": 0.352,
+     "critical_risk_coverage": 0.1331,
+     "coverage_gain": 0.2259,
+     "risk_coverage_per_hour": 0.0115,
+     "coverage_gain_per_hour": 0.0189,
+     "ndcg": 0.18,
+     "map": 0.2154
+    }
+   },
+   "severity_baseline": {
+    "5": {
+     "tests_selected": 5.0,
+     "minutes": 65.1,
+     "expected_defects": 1.6828,
+     "defect_recall": 0.0735,
+     "critical_defect_recall": 0.0442,
+     "critical_risk_coverage": 0.0183,
+     "coverage_gain": 0.0079,
+     "risk_coverage_per_hour": 0.0168,
+     "coverage_gain_per_hour": 0.0073,
+     "ndcg": 0.0815,
+     "map": 0.258
+    },
+    "10": {
+     "tests_selected": 10.0,
+     "minutes": 106.1,
+     "expected_defects": 2.6253,
+     "defect_recall": 0.1185,
+     "critical_defect_recall": 0.0717,
+     "critical_risk_coverage": 0.0532,
+     "coverage_gain": 0.0315,
+     "risk_coverage_per_hour": 0.0301,
+     "coverage_gain_per_hour": 0.0178,
+     "ndcg": 0.085,
+     "map": 0.2941
+    },
+    "20": {
+     "tests_selected": 20.0,
+     "minutes": 438.3,
+     "expected_defects": 3.3574,
+     "defect_recall": 0.1514,
+     "critical_defect_recall": 0.1111,
+     "critical_risk_coverage": 0.0876,
+     "coverage_gain": 0.0522,
+     "risk_coverage_per_hour": 0.012,
+     "coverage_gain_per_hour": 0.0072,
+     "ndcg": 0.0775,
+     "map": 0.2035
+    },
+    "50": {
+     "tests_selected": 50.0,
+     "minutes": 992.96,
+     "expected_defects": 9.6144,
+     "defect_recall": 0.4498,
+     "critical_defect_recall": 0.4262,
+     "critical_risk_coverage": 0.191,
+     "coverage_gain": 0.1089,
+     "risk_coverage_per_hour": 0.0117,
+     "coverage_gain_per_hour": 0.0066,
+     "ndcg": 0.1567,
+     "map": 0.1964
+    }
+   },
+   "random_baseline": {
+    "5": {
+     "tests_selected": 5.0,
+     "minutes": 99.701,
+     "expected_defects": 1.516,
+     "defect_recall": 0.0901,
+     "critical_defect_recall": 0.0555,
+     "critical_risk_coverage": 0.0125,
+     "coverage_gain": 0.0132,
+     "risk_coverage_per_hour": 0.0088,
+     "coverage_gain_per_hour": 0.0093,
+     "ndcg": 0.0907,
+     "map": 0.1962
+    },
+    "10": {
+     "tests_selected": 10.0,
+     "minutes": 197.639,
+     "expected_defects": 2.7802,
+     "defect_recall": 0.153,
+     "critical_defect_recall": 0.1041,
+     "critical_risk_coverage": 0.0262,
+     "coverage_gain": 0.0271,
+     "risk_coverage_per_hour": 0.0088,
+     "coverage_gain_per_hour": 0.0089,
+     "ndcg": 0.0959,
+     "map": 0.1544
+    },
+    "20": {
+     "tests_selected": 20.0,
+     "minutes": 387.603,
+     "expected_defects": 5.0082,
+     "defect_recall": 0.2717,
+     "critical_defect_recall": 0.1823,
+     "critical_risk_coverage": 0.0491,
+     "coverage_gain": 0.0528,
+     "risk_coverage_per_hour": 0.0078,
+     "coverage_gain_per_hour": 0.0084,
+     "ndcg": 0.108,
+     "map": 0.1282
+    },
+    "50": {
+     "tests_selected": 50.0,
+     "minutes": 974.526,
+     "expected_defects": 9.4866,
+     "defect_recall": 0.5036,
+     "critical_defect_recall": 0.375,
+     "critical_risk_coverage": 0.1137,
+     "coverage_gain": 0.128,
+     "risk_coverage_per_hour": 0.0071,
+     "coverage_gain_per_hour": 0.008,
+     "ndcg": 0.1419,
+     "map": 0.1143
+    }
+   }
+  },
+  "at_engineer_budget": {
+   "risk_based": {
+    "tests_selected": 262.8,
+    "minutes": 4718.22,
+    "expected_defects": 16.7614,
+    "defect_recall": 0.8585,
+    "critical_defect_recall": 0.6849,
+    "critical_risk_coverage": 0.646,
+    "coverage_gain": 0.734,
+    "risk_coverage_per_hour": 0.0083,
+    "coverage_gain_per_hour": 0.0094,
+    "minutes_to_match_engineer_yield": 2810.72,
+    "minutes_saved_share": 0.4052,
+    "match_rate": 1.0
+   },
+   "hybrid": {
+    "tests_selected": 272.4,
+    "minutes": 4718.12,
+    "expected_defects": 16.82,
+    "defect_recall": 0.86,
+    "critical_defect_recall": 0.691,
+    "critical_risk_coverage": 0.6513,
+    "coverage_gain": 0.7324,
+    "risk_coverage_per_hour": 0.0083,
+    "coverage_gain_per_hour": 0.0093,
+    "minutes_to_match_engineer_yield": 2940.2,
+    "minutes_saved_share": 0.3698,
+    "match_rate": 1.0
+   },
+   "severity_baseline": {
+    "tests_selected": 249.4,
+    "minutes": 4718.52,
+    "expected_defects": 15.0781,
+    "defect_recall": 0.7638,
+    "critical_defect_recall": 0.6742,
+    "critical_risk_coverage": 0.5568,
+    "coverage_gain": 0.3686,
+    "risk_coverage_per_hour": 0.0071,
+    "coverage_gain_per_hour": 0.0047,
+    "minutes_to_match_engineer_yield": 6811.22,
+    "minutes_saved_share": -0.4319,
+    "match_rate": 1.0
+   },
+   "random_baseline": {
+    "tests_selected": 244.23,
+    "minutes": 4718.397,
+    "expected_defects": 16.0779,
+    "defect_recall": 0.8251,
+    "critical_defect_recall": 0.6712,
+    "critical_risk_coverage": 0.4195,
+    "coverage_gain": 0.4712,
+    "risk_coverage_per_hour": 0.0054,
+    "coverage_gain_per_hour": 0.006,
+    "minutes_to_match_engineer_yield": 4774.803,
+    "minutes_saved_share": -0.0096,
+    "match_rate": 1.0
+   }
+  },
+  "observed_replay": {
+   "risk_based": 0.7162,
+   "hybrid": 0.7005,
+   "severity_baseline": 0.4313,
+   "random_baseline": 0.5033
+  },
+  "engineer": {
+   "tests_selected": 308.6,
+   "minutes": 4719.12,
+   "expected_defects": 16.0588,
+   "defect_recall": 0.8237,
+   "critical_defect_recall": 0.6918,
+   "critical_risk_coverage": 0.4931,
+   "coverage_gain": 0.4094,
+   "risk_coverage_per_hour": 0.0063,
+   "coverage_gain_per_hour": 0.0052
+  },
+  "engineer_budget_minutes": 4719.1
+ },
+ "sentence": "On the synthetic benchmark (seed 42, builds B002\u2013B006), at the historical engineers' own budget (4,719 test-minutes per build) risk-based selection covered 64.6% of critical risk versus 49.3% for the engineers' actual selection, and recalled 68.5% of critical hidden defects versus 69.2%. It matched the engineers' expected defect yield using 41% fewer test-minutes (in 100% of builds). At K=10 it recalled 17.5% of critical hidden defects versus 7.2% for severity-first and 10.4% for random selection.",
+ "findings": [
+  "risk_based is best or within 0.005 on 68 of 79 comparisons",
+  "severity_baseline beats risk_based on critical_risk_coverage at K=5 (0.018 vs 0.005)",
+  "random_baseline beats risk_based on critical_risk_coverage at K=5 (0.013 vs 0.005)",
+  "severity_baseline beats risk_based on critical_risk_coverage at K=10 (0.053 vs 0.020)",
+  "random_baseline beats risk_based on critical_risk_coverage at K=10 (0.026 vs 0.020)",
+  "severity_baseline beats risk_based on critical_risk_coverage at K=20 (0.088 vs 0.062)",
+  "severity_baseline beats risk_based on critical_risk_coverage at K=50 (0.191 vs 0.158)",
+  "severity_baseline beats risk_based on critical_defect_recall at K=50 (0.426 vs 0.377)",
+  "historical_engineer beats risk_based on critical_defect_recall at the engineers' budget (0.692 vs 0.685)",
+  "hybrid beats risk_based on critical_risk_coverage at the engineers' budget (0.651 vs 0.646)",
+  "hybrid beats risk_based on critical_defect_recall at the engineers' budget (0.691 vs 0.685)",
+  "hybrid beats risk_based on expected_defects at the engineers' budget (16.820 vs 16.761)"
+ ],
+ "disclaimer": "Synthetic benchmark on entirely fictional data from an independent portfolio project. Results must not be interpreted as performance of any real or BMW Group validation process."
+}

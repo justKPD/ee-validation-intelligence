@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
-from ee_domain.db import get_engine
+from ee_domain.db import REPO_ROOT, get_engine
 from ee_domain.telemetry import configure_tracing
 from fastapi import FastAPI
 from sqlalchemy import Engine, text
 
-from ee_api.routes import catalog, intelligence
+from ee_api.routes import catalog, intelligence, ranking
 
 DISCLAIMER = (
     "Independent portfolio project using entirely synthetic data. "
@@ -15,7 +16,7 @@ DISCLAIMER = (
 )
 
 
-def create_app(engine: Engine | None = None) -> FastAPI:
+def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) -> FastAPI:
     app = FastAPI(
         title="E/E Validation Intelligence API",
         version="0.1.0",
@@ -29,9 +30,16 @@ def create_app(engine: Engine | None = None) -> FastAPI:
             conn.execute(text("SELECT 1"))
         return {"status": "ok", "disclaimer": DISCLAIMER}
 
-    app.state.snapshots = {}  # build_id -> ValidationSnapshot; authoritative data changes only via ETL
+    # per-process caches; authoritative data changes only through the ETL import
+    app.state.snapshots = {}
+    app.state.contexts = {}
+    app.state.rankings = {}
+    app.state.models = {}
+    app.state.dataset_view = None
+    app.state.benchmark_dir = benchmark_dir or REPO_ROOT / "benchmarks" / "shadow-planning" / "results"
     app.include_router(catalog.router)
     app.include_router(intelligence.router)
+    app.include_router(ranking.router)
 
     configure_tracing("ee-api")
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor

@@ -9,6 +9,7 @@ dependencies = [
     "ee-risk",
     "ee-coverage",
     "ee-failures",
+    "ee-ranking",
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
     "opentelemetry-instrumentation-fastapi>=0.46b0",
@@ -23,6 +24,7 @@ ee-etl = { workspace = true }
 ee-risk = { workspace = true }
 ee-coverage = { workspace = true }
 ee-failures = { workspace = true }
+ee-ranking = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

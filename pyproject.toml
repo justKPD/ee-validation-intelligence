@@ -11,6 +11,8 @@ dependencies = [
     "ee-risk",
     "ee-coverage",
     "ee-failures",
+    "ee-ranking",
+    "ee-evaluation",
 ]
 
 [project.optional-dependencies]
@@ -39,6 +41,8 @@ ee-api = { workspace = true }
 ee-risk = { workspace = true }
 ee-coverage = { workspace = true }
 ee-failures = { workspace = true }
+ee-ranking = { workspace = true }
+ee-evaluation = { workspace = true }
 
 [tool.ruff]
 line-length = 110
