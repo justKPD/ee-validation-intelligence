@@ -1,0 +1,3467 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "E/E Validation Intelligence API",
+  "description": "Risk-based E/E validation intelligence. Independent portfolio project using entirely synthetic data. Not affiliated with, and does not represent, any BMW Group system.",
+  "version": "0.1.0"
+ },
+ "paths": {
+  "/health": {
+   "get": {
+    "tags": [
+     "ops"
+    ],
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "type": "string"
+         },
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/components": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Components",
+    "operationId": "list_components_components_get",
+    "parameters": [
+     {
+      "name": "domain",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Domain"
+      }
+     },
+     {
+      "name": "asil",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Asil"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page_ComponentIn_"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/components/{component_id}": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "Get Component",
+    "operationId": "get_component_components__component_id__get",
+    "parameters": [
+     {
+      "name": "component_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Component Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ComponentDetail"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/requirements": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Requirements",
+    "operationId": "list_requirements_requirements_get",
+    "parameters": [
+     {
+      "name": "component_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Component Id"
+      }
+     },
+     {
+      "name": "category",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Category"
+      }
+     },
+     {
+      "name": "min_severity",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "maximum": 5,
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Min Severity"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page_RequirementIn_"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/requirements/{requirement_id}": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "Get Requirement",
+    "operationId": "get_requirement_requirements__requirement_id__get",
+    "parameters": [
+     {
+      "name": "requirement_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Requirement Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RequirementDetail"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Builds",
+    "operationId": "list_builds_builds_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/SoftwareBuildIn"
+         },
+         "type": "array",
+         "title": "Response List Builds Builds Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "Get Build",
+    "operationId": "get_build_builds__build_id__get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BuildDetail"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/variants": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Variants",
+    "operationId": "list_variants_variants_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/VehicleVariantIn"
+         },
+         "type": "array",
+         "title": "Response List Variants Variants Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/tests": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Tests",
+    "operationId": "list_tests_tests_get",
+    "parameters": [
+     {
+      "name": "component_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Component Id"
+      }
+     },
+     {
+      "name": "requirement_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Requirement Id"
+      }
+     },
+     {
+      "name": "level",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Level"
+      }
+     },
+     {
+      "name": "family",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Family"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page_TestCaseIn_"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/tests/{test_id}": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "Get Test",
+    "operationId": "get_test_tests__test_id__get",
+    "parameters": [
+     {
+      "name": "test_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Test Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TestCaseDetail"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/executions": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Executions",
+    "operationId": "list_executions_executions_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "variant_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Variant Id"
+      }
+     },
+     {
+      "name": "test_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Test Id"
+      }
+     },
+     {
+      "name": "verdict",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Verdict"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page_TestExecutionIn_"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/defects": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "List Defects",
+    "operationId": "list_defects_defects_get",
+    "parameters": [
+     {
+      "name": "component_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Component Id"
+      }
+     },
+     {
+      "name": "build_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "min_severity",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "maximum": 5,
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Min Severity"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page_DefectIn_"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/stats": {
+   "get": {
+    "tags": [
+     "catalog"
+    ],
+    "summary": "Stats",
+    "operationId": "stats_stats_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "type": "integer"
+         },
+         "type": "object",
+         "title": "Response Stats Stats Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/risk/components": {
+   "get": {
+    "tags": [
+     "intelligence"
+    ],
+    "summary": "Component Risk",
+    "operationId": "component_risk_builds__build_id__risk_components_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ComponentRisk"
+         },
+         "title": "Response Component Risk Builds  Build Id  Risk Components Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/risk/components/{component_id}": {
+   "get": {
+    "tags": [
+     "intelligence"
+    ],
+    "summary": "Component Risk Detail",
+    "operationId": "component_risk_detail_builds__build_id__risk_components__component_id__get",
+    "parameters": [
+     {
+      "name": "component_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Component Id"
+      }
+     },
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ComponentRisk"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/risk/requirements": {
+   "get": {
+    "tags": [
+     "intelligence"
+    ],
+    "summary": "Requirement Risk",
+    "operationId": "requirement_risk_builds__build_id__risk_requirements_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "critical_only",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Critical Only"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/RequirementRisk"
+         },
+         "title": "Response Requirement Risk Builds  Build Id  Risk Requirements Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/coverage": {
+   "get": {
+    "tags": [
+     "intelligence"
+    ],
+    "summary": "Coverage Summary",
+    "operationId": "coverage_summary_builds__build_id__coverage_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CoverageSummary"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/evidence": {
+   "get": {
+    "tags": [
+     "intelligence"
+    ],
+    "summary": "Evidence",
+    "operationId": "evidence_builds__build_id__evidence_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "$ref": "#/components/schemas/EvidenceStatus"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "variant_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Variant Id"
+      }
+     },
+     {
+      "name": "requirement_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Requirement Id"
+      }
+     },
+     {
+      "name": "component_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Component Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/EvidenceRecord"
+         },
+         "title": "Response Evidence Builds  Build Id  Evidence Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/failure-families": {
+   "get": {
+    "tags": [
+     "intelligence"
+    ],
+    "summary": "Failure Families",
+    "operationId": "failure_families_builds__build_id__failure_families_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "component_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Component Id"
+      }
+     },
+     {
+      "name": "recurring_only",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Recurring Only"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/FailureFamily"
+         },
+         "title": "Response Failure Families Builds  Build Id  Failure Families Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/ranking": {
+   "get": {
+    "tags": [
+     "ranking"
+    ],
+    "summary": "Ranking",
+    "operationId": "ranking_builds__build_id__ranking_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "strategy",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "risk_based",
+        "hybrid",
+        "severity_baseline",
+        "random_baseline"
+       ],
+       "type": "string",
+       "default": "risk_based",
+       "title": "Strategy"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 20,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "variant_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Variant Id"
+      }
+     },
+     {
+      "name": "budget_minutes",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "number",
+         "exclusiveMinimum": 0
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Budget Minutes"
+      }
+     },
+     {
+      "name": "seed",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 0,
+       "title": "Seed"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/RankedTest"
+         },
+         "title": "Response Ranking Builds  Build Id  Ranking Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/builds/{build_id}/ranking/model": {
+   "get": {
+    "tags": [
+     "ranking"
+    ],
+    "summary": "Ranking Model",
+    "operationId": "ranking_model_builds__build_id__ranking_model_get",
+    "parameters": [
+     {
+      "name": "build_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Build Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Ranking Model Builds  Build Id  Ranking Model Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/benchmarks/shadow": {
+   "get": {
+    "tags": [
+     "ranking"
+    ],
+    "summary": "Shadow Benchmark",
+    "operationId": "shadow_benchmark_benchmarks_shadow_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Shadow Benchmark Benchmarks Shadow Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/agent/plan": {
+   "post": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Plan",
+    "operationId": "plan_agent_plan_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PlanRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Plan Agent Plan Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/agent/runs": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Runs",
+    "operationId": "runs_agent_runs_get",
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 500,
+       "minimum": 1,
+       "default": 50,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response Runs Agent Runs Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/agent/runs/{run_id}": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Run Detail",
+    "operationId": "run_detail_agent_runs__run_id__get",
+    "parameters": [
+     {
+      "name": "run_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Run Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Run Detail Agent Runs  Run Id  Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/agent/tools": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Agent Tools",
+    "operationId": "agent_tools_agent_tools_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "type": "array",
+         "title": "Response Agent Tools Agent Tools Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recommendations": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Recommendations",
+    "operationId": "recommendations_recommendations_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "build_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Build Id"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response Recommendations Recommendations Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recommendations/{recommendation_id}": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Recommendation Record",
+    "operationId": "recommendation_record_recommendations__recommendation_id__get",
+    "parameters": [
+     {
+      "name": "recommendation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Recommendation Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Recommendation Record Recommendations  Recommendation Id  Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recommendations/{recommendation_id}/decision": {
+   "post": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Decide",
+    "operationId": "decide_recommendations__recommendation_id__decision_post",
+    "parameters": [
+     {
+      "name": "recommendation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Recommendation Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecisionRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Decide Recommendations  Recommendation Id  Decision Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/provenance/ledger": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Ledger",
+    "operationId": "ledger_provenance_ledger_get",
+    "parameters": [
+     {
+      "name": "entry_type",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Entry Type"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response Ledger Provenance Ledger Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/provenance/verify": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Verify",
+    "operationId": "verify_provenance_verify_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Verify Provenance Verify Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/policy": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Policy",
+    "operationId": "policy_policy_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Policy Policy Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/policy/decisions": {
+   "get": {
+    "tags": [
+     "agent"
+    ],
+    "summary": "Policy Decisions",
+    "operationId": "policy_decisions_policy_decisions_get",
+    "parameters": [
+     {
+      "name": "decision",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Decision"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 1000,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response Policy Decisions Policy Decisions Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/benchmarks/reliability": {
+   "get": {
+    "tags": [
+     "reliability"
+    ],
+    "summary": "Reliability",
+    "operationId": "reliability_benchmarks_reliability_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Reliability Benchmarks Reliability Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/benchmarks/adversarial": {
+   "get": {
+    "tags": [
+     "reliability"
+    ],
+    "summary": "Adversarial",
+    "operationId": "adversarial_benchmarks_adversarial_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Adversarial Benchmarks Adversarial Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/config": {
+   "get": {
+    "tags": [
+     "admin"
+    ],
+    "summary": "Config",
+    "operationId": "config_config_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Config Config Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "BuildChangeIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "build_id": {
+      "type": "string",
+      "title": "Build Id"
+     },
+     "target_type": {
+      "type": "string",
+      "enum": [
+       "component",
+       "requirement"
+      ],
+      "title": "Target Type"
+     },
+     "target_id": {
+      "type": "string",
+      "title": "Target Id"
+     },
+     "change_kind": {
+      "type": "string",
+      "title": "Change Kind"
+     },
+     "magnitude": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Magnitude"
+     },
+     "new_revision": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "New Revision"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "build_id",
+     "target_type",
+     "target_id",
+     "change_kind",
+     "magnitude"
+    ],
+    "title": "BuildChangeIn"
+   },
+   "BuildDetail": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "sequence": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Sequence"
+     },
+     "release_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Release Date"
+     },
+     "build_family": {
+      "type": "string",
+      "title": "Build Family"
+     },
+     "changes": {
+      "items": {
+       "$ref": "#/components/schemas/BuildChangeIn"
+      },
+      "type": "array",
+      "title": "Changes"
+     },
+     "execution_count": {
+      "type": "integer",
+      "title": "Execution Count"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "sequence",
+     "release_date",
+     "build_family",
+     "changes",
+     "execution_count"
+    ],
+    "title": "BuildDetail"
+   },
+   "ComponentDetail": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "domain": {
+      "type": "string",
+      "title": "Domain"
+     },
+     "asil": {
+      "type": "string",
+      "enum": [
+       "QM",
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "title": "Asil"
+     },
+     "supplier": {
+      "type": "string",
+      "title": "Supplier"
+     },
+     "fictional": {
+      "type": "boolean",
+      "title": "Fictional",
+      "default": true
+     },
+     "upstream": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Upstream"
+     },
+     "downstream": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Downstream"
+     },
+     "requirement_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Requirement Ids"
+     },
+     "test_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Test Ids"
+     },
+     "defect_count": {
+      "type": "integer",
+      "title": "Defect Count"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "domain",
+     "asil",
+     "supplier",
+     "upstream",
+     "downstream",
+     "requirement_ids",
+     "test_ids",
+     "defect_count"
+    ],
+    "title": "ComponentDetail"
+   },
+   "ComponentIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "domain": {
+      "type": "string",
+      "title": "Domain"
+     },
+     "asil": {
+      "type": "string",
+      "enum": [
+       "QM",
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "title": "Asil"
+     },
+     "supplier": {
+      "type": "string",
+      "title": "Supplier"
+     },
+     "fictional": {
+      "type": "boolean",
+      "title": "Fictional",
+      "default": true
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "domain",
+     "asil",
+     "supplier"
+    ],
+    "title": "ComponentIn"
+   },
+   "ComponentRisk": {
+    "properties": {
+     "component_id": {
+      "type": "string",
+      "title": "Component Id"
+     },
+     "build_id": {
+      "type": "string",
+      "title": "Build Id"
+     },
+     "score": {
+      "type": "number",
+      "title": "Score"
+     },
+     "base": {
+      "type": "number",
+      "title": "Base"
+     },
+     "impact": {
+      "type": "number",
+      "title": "Impact"
+     },
+     "occurrence": {
+      "type": "number",
+      "title": "Occurrence"
+     },
+     "detectability": {
+      "type": "number",
+      "title": "Detectability"
+     },
+     "factors": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "type": "object",
+      "title": "Factors"
+     },
+     "contributions": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "type": "object",
+      "title": "Contributions"
+     },
+     "confidence": {
+      "type": "number",
+      "title": "Confidence"
+     },
+     "past_executions": {
+      "type": "integer",
+      "title": "Past Executions"
+     },
+     "past_defects": {
+      "type": "integer",
+      "title": "Past Defects"
+     },
+     "flags": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Flags"
+     },
+     "evidence": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Evidence"
+     },
+     "config_version": {
+      "type": "string",
+      "title": "Config Version"
+     }
+    },
+    "type": "object",
+    "required": [
+     "component_id",
+     "build_id",
+     "score",
+     "base",
+     "impact",
+     "occurrence",
+     "detectability",
+     "factors",
+     "contributions",
+     "confidence",
+     "past_executions",
+     "past_defects",
+     "flags",
+     "evidence",
+     "config_version"
+    ],
+    "title": "ComponentRisk"
+   },
+   "CoverageSummary": {
+    "properties": {
+     "build_id": {
+      "type": "string",
+      "title": "Build Id"
+     },
+     "requirements_total": {
+      "type": "integer",
+      "title": "Requirements Total"
+     },
+     "requirements_with_tests": {
+      "type": "integer",
+      "title": "Requirements With Tests"
+     },
+     "structural_coverage": {
+      "type": "number",
+      "title": "Structural Coverage"
+     },
+     "evidence_pairs": {
+      "type": "integer",
+      "title": "Evidence Pairs"
+     },
+     "evidence_coverage": {
+      "type": "number",
+      "title": "Evidence Coverage"
+     },
+     "status_counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Status Counts"
+     },
+     "by_component": {
+      "additionalProperties": {
+       "additionalProperties": {
+        "type": "integer"
+       },
+       "type": "object"
+      },
+      "type": "object",
+      "title": "By Component"
+     }
+    },
+    "type": "object",
+    "required": [
+     "build_id",
+     "requirements_total",
+     "requirements_with_tests",
+     "structural_coverage",
+     "evidence_pairs",
+     "evidence_coverage",
+     "status_counts"
+    ],
+    "title": "CoverageSummary"
+   },
+   "DecisionRequest": {
+    "properties": {
+     "decision": {
+      "type": "string",
+      "enum": [
+       "APPROVED",
+       "REJECTED",
+       "EXECUTED"
+      ],
+      "title": "Decision"
+     },
+     "reviewer": {
+      "type": "string",
+      "maxLength": 60,
+      "minLength": 1,
+      "title": "Reviewer"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason",
+      "default": ""
+     },
+     "execution_reference": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Execution Reference"
+     }
+    },
+    "type": "object",
+    "required": [
+     "decision",
+     "reviewer"
+    ],
+    "title": "DecisionRequest"
+   },
+   "DefectIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "execution_id": {
+      "type": "string",
+      "title": "Execution Id"
+     },
+     "component_id": {
+      "type": "string",
+      "title": "Component Id"
+     },
+     "severity": {
+      "type": "integer",
+      "maximum": 5.0,
+      "minimum": 1.0,
+      "title": "Severity"
+     },
+     "error_code": {
+      "type": "string",
+      "title": "Error Code"
+     },
+     "failure_stage": {
+      "type": "string",
+      "title": "Failure Stage"
+     },
+     "signal_signature": {
+      "type": "string",
+      "title": "Signal Signature"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "OPEN",
+       "RESOLVED"
+      ],
+      "title": "Status"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "execution_id",
+     "component_id",
+     "severity",
+     "error_code",
+     "failure_stage",
+     "signal_signature",
+     "status",
+     "title"
+    ],
+    "title": "DefectIn"
+   },
+   "EvidenceRecord": {
+    "properties": {
+     "requirement_id": {
+      "type": "string",
+      "title": "Requirement Id"
+     },
+     "variant_id": {
+      "type": "string",
+      "title": "Variant Id"
+     },
+     "status": {
+      "$ref": "#/components/schemas/EvidenceStatus"
+     },
+     "test_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Test Id"
+     },
+     "execution_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Execution Id"
+     },
+     "evidence_build_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Evidence Build Id"
+     },
+     "age_days": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Age Days"
+     },
+     "reasons": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Reasons"
+     }
+    },
+    "type": "object",
+    "required": [
+     "requirement_id",
+     "variant_id",
+     "status",
+     "test_id",
+     "execution_id",
+     "evidence_build_id",
+     "age_days",
+     "reasons"
+    ],
+    "title": "EvidenceRecord"
+   },
+   "EvidenceStatus": {
+    "type": "string",
+    "enum": [
+     "CURRENT",
+     "STALE",
+     "MISSING",
+     "INCOMPATIBLE",
+     "FAILED"
+    ],
+    "title": "EvidenceStatus"
+   },
+   "FailureFamily": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "fingerprint": {
+      "type": "string",
+      "title": "Fingerprint"
+     },
+     "component_id": {
+      "type": "string",
+      "title": "Component Id"
+     },
+     "test_family": {
+      "type": "string",
+      "title": "Test Family"
+     },
+     "error_code": {
+      "type": "string",
+      "title": "Error Code"
+     },
+     "failure_stage": {
+      "type": "string",
+      "title": "Failure Stage"
+     },
+     "occurrences": {
+      "type": "integer",
+      "title": "Occurrences"
+     },
+     "defect_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Defect Ids"
+     },
+     "execution_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Execution Ids"
+     },
+     "build_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Build Ids"
+     },
+     "variant_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Variant Ids"
+     },
+     "signal_signatures": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Signal Signatures"
+     },
+     "representative_title": {
+      "type": "string",
+      "title": "Representative Title"
+     },
+     "first_seen_build": {
+      "type": "string",
+      "title": "First Seen Build"
+     },
+     "last_seen_build": {
+      "type": "string",
+      "title": "Last Seen Build"
+     },
+     "max_severity": {
+      "type": "integer",
+      "title": "Max Severity"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "recurring": {
+      "type": "boolean",
+      "title": "Recurring"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "fingerprint",
+     "component_id",
+     "test_family",
+     "error_code",
+     "failure_stage",
+     "occurrences",
+     "defect_ids",
+     "execution_ids",
+     "build_ids",
+     "variant_ids",
+     "signal_signatures",
+     "representative_title",
+     "first_seen_build",
+     "last_seen_build",
+     "max_severity",
+     "status",
+     "recurring"
+    ],
+    "title": "FailureFamily"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "Page_ComponentIn_": {
+    "properties": {
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "limit": {
+      "type": "integer",
+      "title": "Limit"
+     },
+     "offset": {
+      "type": "integer",
+      "title": "Offset"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/ComponentIn"
+      },
+      "type": "array",
+      "title": "Items"
+     }
+    },
+    "type": "object",
+    "required": [
+     "total",
+     "limit",
+     "offset",
+     "items"
+    ],
+    "title": "Page[ComponentIn]"
+   },
+   "Page_DefectIn_": {
+    "properties": {
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "limit": {
+      "type": "integer",
+      "title": "Limit"
+     },
+     "offset": {
+      "type": "integer",
+      "title": "Offset"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/DefectIn"
+      },
+      "type": "array",
+      "title": "Items"
+     }
+    },
+    "type": "object",
+    "required": [
+     "total",
+     "limit",
+     "offset",
+     "items"
+    ],
+    "title": "Page[DefectIn]"
+   },
+   "Page_RequirementIn_": {
+    "properties": {
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "limit": {
+      "type": "integer",
+      "title": "Limit"
+     },
+     "offset": {
+      "type": "integer",
+      "title": "Offset"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/RequirementIn"
+      },
+      "type": "array",
+      "title": "Items"
+     }
+    },
+    "type": "object",
+    "required": [
+     "total",
+     "limit",
+     "offset",
+     "items"
+    ],
+    "title": "Page[RequirementIn]"
+   },
+   "Page_TestCaseIn_": {
+    "properties": {
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "limit": {
+      "type": "integer",
+      "title": "Limit"
+     },
+     "offset": {
+      "type": "integer",
+      "title": "Offset"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/TestCaseIn"
+      },
+      "type": "array",
+      "title": "Items"
+     }
+    },
+    "type": "object",
+    "required": [
+     "total",
+     "limit",
+     "offset",
+     "items"
+    ],
+    "title": "Page[TestCaseIn]"
+   },
+   "Page_TestExecutionIn_": {
+    "properties": {
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     },
+     "limit": {
+      "type": "integer",
+      "title": "Limit"
+     },
+     "offset": {
+      "type": "integer",
+      "title": "Offset"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/TestExecutionIn"
+      },
+      "type": "array",
+      "title": "Items"
+     }
+    },
+    "type": "object",
+    "required": [
+     "total",
+     "limit",
+     "offset",
+     "items"
+    ],
+    "title": "Page[TestExecutionIn]"
+   },
+   "PlanRequest": {
+    "properties": {
+     "request": {
+      "type": "string",
+      "maxLength": 2000,
+      "minLength": 3,
+      "title": "Request"
+     },
+     "actor": {
+      "type": "string",
+      "maxLength": 60,
+      "minLength": 1,
+      "title": "Actor",
+      "default": "engineer"
+     }
+    },
+    "type": "object",
+    "required": [
+     "request"
+    ],
+    "title": "PlanRequest"
+   },
+   "RankedTest": {
+    "properties": {
+     "rank": {
+      "type": "integer",
+      "title": "Rank"
+     },
+     "test_id": {
+      "type": "string",
+      "title": "Test Id"
+     },
+     "variant_id": {
+      "type": "string",
+      "title": "Variant Id"
+     },
+     "strategy": {
+      "type": "string",
+      "title": "Strategy"
+     },
+     "score": {
+      "type": "number",
+      "title": "Score"
+     },
+     "value": {
+      "type": "number",
+      "title": "Value"
+     },
+     "cost_penalty": {
+      "type": "number",
+      "title": "Cost Penalty"
+     },
+     "duplicate_penalty": {
+      "type": "number",
+      "title": "Duplicate Penalty"
+     },
+     "duration_min": {
+      "type": "number",
+      "title": "Duration Min"
+     },
+     "cumulative_minutes": {
+      "type": "number",
+      "title": "Cumulative Minutes"
+     },
+     "contributions": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "type": "object",
+      "title": "Contributions"
+     },
+     "learned_probability": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Learned Probability"
+     },
+     "critical": {
+      "type": "boolean",
+      "title": "Critical"
+     },
+     "requirement_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Requirement Ids"
+     },
+     "component_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Component Ids"
+     },
+     "reasons": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Reasons"
+     },
+     "evidence_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Evidence Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "rank",
+     "test_id",
+     "variant_id",
+     "strategy",
+     "score",
+     "value",
+     "cost_penalty",
+     "duplicate_penalty",
+     "duration_min",
+     "cumulative_minutes",
+     "contributions",
+     "learned_probability",
+     "critical",
+     "requirement_ids",
+     "component_ids",
+     "reasons",
+     "evidence_ids"
+    ],
+    "title": "RankedTest"
+   },
+   "RequirementDetail": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "category": {
+      "type": "string",
+      "title": "Category"
+     },
+     "severity": {
+      "type": "integer",
+      "maximum": 5.0,
+      "minimum": 1.0,
+      "title": "Severity"
+     },
+     "fmea_impact": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": 1.0,
+      "title": "Fmea Impact"
+     },
+     "fmea_occurrence": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": 1.0,
+      "title": "Fmea Occurrence"
+     },
+     "fmea_detectability": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": 1.0,
+      "title": "Fmea Detectability"
+     },
+     "revision": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Revision"
+     },
+     "created_build_id": {
+      "type": "string",
+      "title": "Created Build Id"
+     },
+     "component_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Component Ids"
+     },
+     "test_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Test Ids"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "category",
+     "severity",
+     "fmea_impact",
+     "fmea_occurrence",
+     "fmea_detectability",
+     "revision",
+     "created_build_id",
+     "component_ids",
+     "test_ids"
+    ],
+    "title": "RequirementDetail"
+   },
+   "RequirementIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "category": {
+      "type": "string",
+      "title": "Category"
+     },
+     "severity": {
+      "type": "integer",
+      "maximum": 5.0,
+      "minimum": 1.0,
+      "title": "Severity"
+     },
+     "fmea_impact": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": 1.0,
+      "title": "Fmea Impact"
+     },
+     "fmea_occurrence": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": 1.0,
+      "title": "Fmea Occurrence"
+     },
+     "fmea_detectability": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": 1.0,
+      "title": "Fmea Detectability"
+     },
+     "revision": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Revision"
+     },
+     "created_build_id": {
+      "type": "string",
+      "title": "Created Build Id"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "category",
+     "severity",
+     "fmea_impact",
+     "fmea_occurrence",
+     "fmea_detectability",
+     "revision",
+     "created_build_id"
+    ],
+    "title": "RequirementIn"
+   },
+   "RequirementRisk": {
+    "properties": {
+     "requirement_id": {
+      "type": "string",
+      "title": "Requirement Id"
+     },
+     "build_id": {
+      "type": "string",
+      "title": "Build Id"
+     },
+     "score": {
+      "type": "number",
+      "title": "Score"
+     },
+     "fmea_base": {
+      "type": "number",
+      "title": "Fmea Base"
+     },
+     "component_risk": {
+      "type": "number",
+      "title": "Component Risk"
+     },
+     "revised_in_build": {
+      "type": "boolean",
+      "title": "Revised In Build"
+     },
+     "critical": {
+      "type": "boolean",
+      "title": "Critical"
+     },
+     "component_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Component Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "requirement_id",
+     "build_id",
+     "score",
+     "fmea_base",
+     "component_risk",
+     "revised_in_build",
+     "critical",
+     "component_ids"
+    ],
+    "title": "RequirementRisk"
+   },
+   "SoftwareBuildIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "sequence": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Sequence"
+     },
+     "release_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Release Date"
+     },
+     "build_family": {
+      "type": "string",
+      "title": "Build Family"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "sequence",
+     "release_date",
+     "build_family"
+    ],
+    "title": "SoftwareBuildIn"
+   },
+   "TestCaseDetail": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "test_family": {
+      "type": "string",
+      "title": "Test Family"
+     },
+     "level": {
+      "type": "string",
+      "enum": [
+       "SIL",
+       "HIL",
+       "VEHICLE"
+      ],
+      "title": "Level"
+     },
+     "duration_min": {
+      "type": "number",
+      "exclusiveMinimum": 0.0,
+      "title": "Duration Min"
+     },
+     "automated": {
+      "type": "boolean",
+      "title": "Automated"
+     },
+     "requirement_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Requirement Ids"
+     },
+     "component_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Component Ids"
+     },
+     "variant_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Variant Ids"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "test_family",
+     "level",
+     "duration_min",
+     "automated",
+     "requirement_ids",
+     "component_ids",
+     "variant_ids"
+    ],
+    "title": "TestCaseDetail"
+   },
+   "TestCaseIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "test_family": {
+      "type": "string",
+      "title": "Test Family"
+     },
+     "level": {
+      "type": "string",
+      "enum": [
+       "SIL",
+       "HIL",
+       "VEHICLE"
+      ],
+      "title": "Level"
+     },
+     "duration_min": {
+      "type": "number",
+      "exclusiveMinimum": 0.0,
+      "title": "Duration Min"
+     },
+     "automated": {
+      "type": "boolean",
+      "title": "Automated"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "test_family",
+     "level",
+     "duration_min",
+     "automated"
+    ],
+    "title": "TestCaseIn"
+   },
+   "TestExecutionIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "test_id": {
+      "type": "string",
+      "title": "Test Id"
+     },
+     "build_id": {
+      "type": "string",
+      "title": "Build Id"
+     },
+     "variant_id": {
+      "type": "string",
+      "title": "Variant Id"
+     },
+     "attempt": {
+      "type": "integer",
+      "title": "Attempt",
+      "default": 1
+     },
+     "verdict": {
+      "type": "string",
+      "enum": [
+       "PASS",
+       "FAIL",
+       "BLOCKED"
+      ],
+      "title": "Verdict"
+     },
+     "duration_min": {
+      "type": "number",
+      "exclusiveMinimum": 0.0,
+      "title": "Duration Min"
+     },
+     "executed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Executed At"
+     },
+     "requirement_revision": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Requirement Revision"
+     },
+     "selected_by": {
+      "type": "string",
+      "title": "Selected By"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "test_id",
+     "build_id",
+     "variant_id",
+     "verdict",
+     "duration_min",
+     "executed_at",
+     "requirement_revision",
+     "selected_by"
+    ],
+    "title": "TestExecutionIn"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "VehicleVariantIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "powertrain": {
+      "type": "string",
+      "title": "Powertrain"
+     },
+     "market": {
+      "type": "string",
+      "title": "Market"
+     },
+     "features": {
+      "type": "string",
+      "title": "Features"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "powertrain",
+     "market",
+     "features"
+    ],
+    "title": "VehicleVariantIn"
+   }
+  }
+ }
+}

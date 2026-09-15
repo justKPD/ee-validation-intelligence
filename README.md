@@ -11,71 +11,79 @@
 When a new software build arrives and validation time is limited, **which E/E tests should engineers run first?**
 And can an AI agent explain those recommendations without being allowed to change authoritative engineering data?
 
-## Platform pillars
+**Results at a glance:** [executive brief](docs/outreach/executive-brief.md). Every number in it is generated from
+the benchmark runs by `scripts/build_brief.py`, including what the results do *not* show.
 
-1. **Validation Intelligence**: risk, evidence-aware coverage, failure fingerprints, test ranking
-2. **Agentic Test Management**: planning, evidence reasoning, clarification, policy gate, human approval
-3. **AI Assurance**: shadow test planning, Pass^k reliability, adversarial testing, provenance
+## Three pillars
 
-## Quick start (local, SQLite)
+| Pillar | What it does | Results |
+|---|---|---|
+| **Validation Intelligence** | explainable risk, evidence-aware coverage (CURRENT/STALE/INCOMPATIBLE/MISSING/FAILED), failure fingerprints, risk-based test ranking | [shadow planning](benchmarks/shadow-planning/results/latest.md) |
+| **Agentic Test Management** | LangGraph planner, MCP-compatible tools, default-deny policy gate, human approval, hash-chained provenance ledger | [policy & provenance](docs/methodology/agent-policy-and-provenance.md) |
+| **AI Assurance** | leakage-safe shadow replay, reliability lab (Pass^k), adversarial search, calibration and dev-seed tuning | [reliability](benchmarks/agent-reliability/results/latest.md) · [adversarial](benchmarks/agent-reliability/results/adversarial.md) · [calibration](benchmarks/calibration/results/latest.md) |
+
+## Quick start
 
 ```bash
 pip install uv
 uv sync
-uv run ee-seed --seed 42      # migrate + generate + validate + import + summary report
-uv run ee-api                 # http://127.0.0.1:8000/docs
-bash scripts/check.sh         # ruff + format + mypy + pytest (same as CI)
+uv run ee-seed --seed 42              # migrate + generate + validate + import + dataset summary
+uv run ee-api                         # API on http://127.0.0.1:8000 (docs at /docs)
+npm --prefix apps/web install
+npm --prefix apps/web run dev         # UI on http://localhost:3000
+bash scripts/check.sh                 # ruff + format + mypy + pytest (same as CI)
 ```
 
-## Docker (PostgreSQL 16 + pgvector)
+Reproduce every result from the seed:
 
 ```bash
-docker compose up --build     # API on :8000, seeded from seed 42
+uv run ee-shadow                      # shadow test planning benchmark
+uv run ee-reliability -k 3            # agent reliability lab
+uv run ee-adversarial                 # adversarial search + regression suite
+uv run ee-calibration                 # calibration, dev-seed tuning, overrides, bootstrap CIs (several minutes)
+uv run python scripts/build_brief.py  # regenerate outreach documents from results
 ```
 
-## Repository
+Docker (PostgreSQL 16 + pgvector, API, web): `docker compose up --build`.
+Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The default is a deterministic offline explainer.
 
-| Path | Purpose |
+## UI routes
+
+`/dashboard` Control Tower · `/risk` Risk & Coverage · `/planner` Agentic Test Planner · `/shadow` Shadow Planning ·
+`/failures` Failure Intelligence · `/provenance` Provenance Ledger · `/reliability` Agent Reliability Lab · `/admin` Policy & Config
+
+## Phase status
+
+| Phase | Status |
 |---|---|
-| `packages/domain` | canonical schema, DTOs, DB session, OpenTelemetry |
-| `data/generator` | seeded synthetic programme generator with a hidden fault model |
-| `packages/etl` | validated import, data-quality checks, dataset summary |
-| `apps/api` | FastAPI service |
-| `apps/web` | Next.js UI |
-| `migrations` | Alembic migrations |
-| `docs/adr` | architecture decision records |
+| 0 Project foundation | done: uv workspace, ruff/mypy/pytest, CI workflow, Docker, OpenTelemetry, ADRs |
+| 1 Data foundation | done: schema + migrations, seeded generator with hidden fault model, ETL + data quality, browse API |
+| 2 Validation intelligence core | done: risk, evidence coverage, failure fingerprints, as-of snapshots |
+| 3 Test ranking | done: engineering ranker, severity/random baselines, learned model, hybrid |
+| 4 Shadow test planning | done: counterfactual oracle scoring, equal-budget comparison, observed replay |
+| 5 Full UI | done: eight routes, verified against the running API |
+| 6–8 Agent, authority, provenance | done: LangGraph planner, policy gate, approval lifecycle, hash-chained ledger |
+| 9 Reliability lab | done: 25 scenarios × k runs, Pass^k and grounding metrics |
+| 10 Adversarial testing | done: 14 mutators, failure classes, open → fixed regression suite |
+| 11 Learning & calibration | done: calibration, dev-seed tuning with held-out check, overrides, bootstrap CIs |
+| 12 Deployment | authored: Docker, GitHub Actions, Terraform for AWS. **Not executed**: no Docker, CI remote or AWS credentials in the build environment |
+| 13 Documentation | done: architecture, methodology, ADRs, API reference, limitations, threat model |
+| 14 Portfolio / outreach | done: generated executive brief, recruiter and researcher summaries, demo script |
 
-## Key design decisions
+## Documentation
 
-- **Deterministic engines own truth; agents only recommend and explain** ([ADR-002](docs/adr/ADR-002-authority-boundary.md)).
-- **Hidden ground truth.** Defects come from latent component fragility and change-induced faults that the
-  observable FMEA scores only partly reflect. The ranker never sees this, so benchmark results are not circular
-  ([synthetic data methodology](docs/methodology/synthetic-data.md)).
-- **Imperfect historical engineer selection** is recorded and used as the shadow-planning baseline.
-- **No hard-coded metrics.** Every number in reports comes from an actual run.
+- [Architecture](docs/architecture/architecture.md) · [ADRs](docs/adr) · [API reference](docs/api/api-reference.md)
+- Methodology: [synthetic data](docs/methodology/synthetic-data.md) · [risk & evidence](docs/methodology/risk-and-evidence.md) ·
+  [ranking & shadow planning](docs/methodology/ranking-and-shadow-planning.md) · [agent policy & provenance](docs/methodology/agent-policy-and-provenance.md) ·
+  [reliability & adversarial](docs/methodology/agent-reliability-and-adversarial-testing.md) · [dataset summary](docs/methodology/dataset-summary.md)
+- [Limitations](docs/limitations.md) · [Threat model](docs/threat-model.md)
+- Outreach: [executive brief](docs/outreach/executive-brief.md) · [recruiter summary](docs/outreach/recruiter-summary.md) ·
+  [researcher summary](docs/outreach/researcher-summary.md) · [demo script](docs/outreach/demo-script.md)
 
-See [docs/methodology/dataset-summary.md](docs/methodology/dataset-summary.md) for the generated dataset statistics.
+## Non-negotiable rules this codebase enforces
 
-## Shadow Test Planning benchmark
-
-```bash
-uv run ee-shadow   # replays builds B002–B006 without future leakage and writes benchmarks/shadow-planning/results/latest.{md,json}
-```
-
-The headline sentence, every table and the list of findings where baselines win are generated by the run; see
-[latest.md](benchmarks/shadow-planning/results/latest.md) and the
-[methodology](docs/methodology/ranking-and-shadow-planning.md).
-
-## Policy-gated agent, reliability lab & adversarial testing
-
-```bash
-uv run ee-api                 # POST /agent/plan {"request": "What should we validate first for B006 on V3?"}
-uv run ee-reliability -k 3    # scenarios × 3 repeated runs → Pass^3, policy compliance, grounding, clarification
-uv run ee-adversarial         # mutation search → failure classes → open/fixed regression suite
-```
-
-The agent reads, explains and proposes; recommendations stay `PROPOSED` until an engineer decides. Prohibited
-actions return `POLICY_DENIED` and are written to a hash-chained provenance ledger. By default the explainer runs
-offline and deterministically; set `EE_MODEL_PROVIDER=anthropic` to use Claude, with a grounding check on its output.
-See [agent policy & provenance](docs/methodology/agent-policy-and-provenance.md) and
-[reliability & adversarial testing](docs/methodology/agent-reliability-and-adversarial-testing.md).
+1. Synthetic data only; no implied BMW affiliation.
+2. Deterministic engines own authoritative calculations; agents recommend, explain and orchestrate.
+3. Agents never modify requirements, test definitions or verdicts, close defects, or approve releases (`POLICY_DENIED`, logged).
+4. No hard-coded metrics: every reported number comes from a run.
+5. No future leakage: as-of-build snapshots, enforced by tests.
