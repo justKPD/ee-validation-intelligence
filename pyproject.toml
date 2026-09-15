@@ -8,6 +8,9 @@ dependencies = [
     "ee-generator",
     "ee-etl",
     "ee-api",
+    "ee-risk",
+    "ee-coverage",
+    "ee-failures",
 ]
 
 [project.optional-dependencies]
@@ -33,6 +36,9 @@ ee-domain = { workspace = true }
 ee-generator = { workspace = true }
 ee-etl = { workspace = true }
 ee-api = { workspace = true }
+ee-risk = { workspace = true }
+ee-coverage = { workspace = true }
+ee-failures = { workspace = true }
 
 [tool.ruff]
 line-length = 110

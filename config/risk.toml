@@ -1,0 +1,27 @@
+# Deterministic risk engine configuration. Weights must sum to 1.0.
+version = "risk-1.0"
+
+[weights]
+base = 0.35
+recent_change = 0.20
+historical_failure = 0.15
+dependency = 0.10
+evidence_staleness = 0.10
+variant_exposure = 0.10
+
+[requirement_weights]
+fmea_base = 0.40
+component_risk = 0.40
+revised_in_build = 0.20
+
+[parameters]
+failure_prior_alpha = 1.0
+failure_prior_beta = 9.0
+failure_rate_saturation = 0.30
+dependency_propagation = 0.70
+requirement_revision_change_signal = 0.60
+confidence_half_evidence = 20
+disagreement_threshold = 0.45
+
+[coverage]
+max_evidence_age_days = 35

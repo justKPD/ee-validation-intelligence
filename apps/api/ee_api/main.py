@@ -7,7 +7,7 @@ from ee_domain.telemetry import configure_tracing
 from fastapi import FastAPI
 from sqlalchemy import Engine, text
 
-from ee_api.routes import catalog
+from ee_api.routes import catalog, intelligence
 
 DISCLAIMER = (
     "Independent portfolio project using entirely synthetic data. "
@@ -29,7 +29,9 @@ def create_app(engine: Engine | None = None) -> FastAPI:
             conn.execute(text("SELECT 1"))
         return {"status": "ok", "disclaimer": DISCLAIMER}
 
+    app.state.snapshots = {}  # build_id -> ValidationSnapshot; authoritative data changes only via ETL
     app.include_router(catalog.router)
+    app.include_router(intelligence.router)
 
     configure_tracing("ee-api")
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor

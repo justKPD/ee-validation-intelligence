@@ -6,6 +6,9 @@ requires-python = ">=3.12"
 dependencies = [
     "ee-domain",
     "ee-etl",
+    "ee-risk",
+    "ee-coverage",
+    "ee-failures",
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
     "opentelemetry-instrumentation-fastapi>=0.46b0",
@@ -17,6 +20,9 @@ ee-api = "ee_api.main:run"
 [tool.uv.sources]
 ee-domain = { workspace = true }
 ee-etl = { workspace = true }
+ee-risk = { workspace = true }
+ee-coverage = { workspace = true }
+ee-failures = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]
