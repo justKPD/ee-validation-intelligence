@@ -35,6 +35,10 @@ class ToolSpec:
         }
 
 
+class ToolUnavailableError(RuntimeError):
+    """A tool could not produce a result (outage, timeout). The agent must fail safely, never guess."""
+
+
 def _schema(props: dict[str, Any], required: list[str]) -> dict[str, Any]:
     return {"type": "object", "properties": props, "required": required, "additionalProperties": False}
 
@@ -50,9 +54,11 @@ class ToolRegistry:
         gate: PolicyGate,
         risk_config: RiskConfig | None = None,
         ranking_config: RankingConfig | None = None,
+        faults: set[str] | None = None,
     ):
         self.data = data
         self.gate = gate
+        self.faults = faults or set()
         self.risk_config = risk_config or RiskConfig()
         self.ranking_config = ranking_config or RankingConfig()
         self._contexts: dict[str, DecisionContext] = {}
@@ -80,6 +86,9 @@ class ToolRegistry:
             )
             raise
         assert spec is not None
+        if name in self.faults:
+            self.calls.append({"tool": name, "args": args, "decision": "ALLOWED", "error": "UNAVAILABLE"})
+            raise ToolUnavailableError(name)
         result = spec.handler(**args)
         self.calls.append({"tool": name, "args": args, "decision": "ALLOWED"})
         return result
@@ -168,10 +177,14 @@ class ToolRegistry:
         variant_id: str | None = None,
         top_n: int = 10,
         budget_minutes: float | None = None,
+        component_ids: list[str] | None = None,
     ) -> list[dict[str, Any]]:
         ranked = rank_engineering(self.context(build_id), self.ranking_config)
         if variant_id:
             ranked = [r for r in ranked if r.variant_id == variant_id]
+        if component_ids:
+            focused = [r for r in ranked if set(r.component_ids) & set(component_ids)]
+            ranked = focused or ranked
         out, used = [], 0.0
         for r in ranked:
             if budget_minutes is not None and used + r.duration_min > budget_minutes:
@@ -183,11 +196,16 @@ class ToolRegistry:
         return [r.__dict__ | {"cumulative_minutes": None} for r in out]
 
     def _propose_plan(
-        self, build_id: str, variant_id: str | None, top_n: int = 5, budget_minutes: float | None = None
+        self,
+        build_id: str,
+        variant_id: str | None,
+        top_n: int = 5,
+        budget_minutes: float | None = None,
+        component_ids: list[str] | None = None,
     ) -> list[dict[str, Any]]:
         ctx = self.context(build_id)
         need = {k for k, rec in ctx.evidence.items() if rec.status != EvidenceStatus.CURRENT}
-        plan = self._ranked_tests(build_id, variant_id, top_n, budget_minutes)
+        plan = self._ranked_tests(build_id, variant_id, top_n, budget_minutes, component_ids)
         for item in plan:
             pairs = {(r, item["variant_id"]) for r in item["requirement_ids"]}
             item["expected_coverage_gain"] = round(len(pairs & need) / max(len(need), 1), 4)

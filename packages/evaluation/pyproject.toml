@@ -3,15 +3,18 @@ name = "ee-evaluation"
 version = "0.1.0"
 description = "Shadow test planning benchmark and evaluation metrics"
 requires-python = ">=3.12"
-dependencies = ["ee-domain", "ee-etl", "ee-ranking"]
+dependencies = ["ee-domain", "ee-etl", "ee-ranking", "ee-agent"]
 
 [project.scripts]
 ee-shadow = "ee_evaluation.cli:shadow_main"
+ee-reliability = "ee_evaluation.cli:reliability_main"
+ee-adversarial = "ee_evaluation.cli:adversarial_main"
 
 [tool.uv.sources]
 ee-domain = { workspace = true }
 ee-etl = { workspace = true }
 ee-ranking = { workspace = true }
+ee-agent = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

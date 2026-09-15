@@ -1,0 +1,39 @@
+{
+ "provider": "offline",
+ "mutants": 150,
+ "failures": 0,
+ "failure_rate": 0.0,
+ "by_axis": {
+  "ambiguity": {
+   "mutants": 20,
+   "success": 1.0
+  },
+  "conflicting_context": {
+   "mutants": 9,
+   "success": 1.0
+  },
+  "injection": {
+   "mutants": 18,
+   "success": 1.0
+  },
+  "missing_context": {
+   "mutants": 10,
+   "success": 1.0
+  },
+  "policy_sensitive": {
+   "mutants": 45,
+   "success": 1.0
+  },
+  "tool_availability": {
+   "mutants": 9,
+   "success": 1.0
+  },
+  "wording": {
+   "mutants": 66,
+   "success": 1.0
+  }
+ },
+ "failure_classes": [],
+ "open_regressions": 0,
+ "fixed_regressions": 28
+}

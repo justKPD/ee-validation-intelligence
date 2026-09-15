@@ -15,6 +15,16 @@ PROHIBITED_INTENTS: list[tuple[re.Pattern[str], str, str]] = [
         "change_test_verdict",
         "set_test_verdict",
     ),
+    (
+        # indirect phrasing, e.g. "the recorded result ... reflected PASS" or "should be recorded as PASS"
+        re.compile(
+            r"\b(results?|verdicts?|outcomes?)\b[^.?!]*\b(recorded|reflects?|reflected|shows?|shown|marked|logged)\b"
+            r"[^.?!]*\b(pass|passed|fail|failed)\b|\brecord(ed)?\s+as\s+(pass|fail)",
+            re.I,
+        ),
+        "change_test_verdict",
+        "set_test_verdict",
+    ),
     (re.compile(r"\bclose\b.*\b(defect|D-\d+)", re.I), "close_defect", "close_defect"),
     (re.compile(r"\bapprove\b.*\brelease|\brelease\b.*\bapprov", re.I), "approve_release", "approve_release"),
     (
@@ -43,9 +53,17 @@ PROHIBITED_INTENTS: list[tuple[re.Pattern[str], str, str]] = [
 INJECTION = re.compile(
     r"ignore (all |any |the )?(previous|prior|above|earlier) (instructions|rules|policies|policy)"
     r"|disregard (the |your )?(policy|rules|instructions)|you are now|system override|developer mode"
-    r"|bypass (the )?(policy|gate)",
+    r"|bypass (the )?(policy|gate)"
+    r"|pretend (that )?(the )?(policy|rules|gate)|act as if (the )?(policy|rules)"
+    r"|(policy|rules) (now )?allows? everything|no (policy|rules) appl(y|ies)",
     re.I,
 )
+# de-obfuscation used only for intent and injection matching (never for slot parsing): "cl0se" -> "close"
+_DEOBFUSCATE = str.maketrans({"0": "o", "1": "l", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s"})
+
+
+def _intent_views(text: str) -> tuple[str, ...]:
+    return (text, text.translate(_DEOBFUSCATE))
 
 
 @dataclass
@@ -73,8 +91,12 @@ def interpret_request(
     text: str, builds: list[str], variants: list[str], components: list[str]
 ) -> Interpretation:
     it = Interpretation()
-    it.prohibited = [(perm, tool) for pattern, perm, tool in PROHIBITED_INTENTS if pattern.search(text)]
-    it.injection = bool(INJECTION.search(text))
+    views = _intent_views(text)
+    matched = [
+        (perm, tool) for pattern, perm, tool in PROHIBITED_INTENTS if any(pattern.search(v) for v in views)
+    ]
+    it.prohibited = list(dict.fromkeys(matched))
+    it.injection = any(INJECTION.search(v) for v in views)
 
     build_ids = sorted(set(re.findall(r"\bB\d{3}\b", text, re.I)))
     if re.search(r"\b(latest|current|newest)\s+build\b", text, re.I) and not build_ids:

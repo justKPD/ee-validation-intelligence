@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session
 
 from ee_agent.interpret import Interpretation, interpret_request
 from ee_agent.providers import Explanation, ModelProvider, OfflineProvider
-from ee_agent.tools import ToolRegistry
+from ee_agent.tools import ToolRegistry, ToolUnavailableError
 
 PROMPT_VERSION = "1.0"
 
@@ -75,11 +75,13 @@ class TestPlanningAgent:
         self.variants = sorted(v.id for v in data["variants"])
         self.components = sorted(c.id for c in data["components"])
 
-    def run(self, request: str, session: Session, actor: str = "engineer") -> AgentResult:
+    def run(
+        self, request: str, session: Session, actor: str = "engineer", tool_faults: set[str] | None = None
+    ) -> AgentResult:
         started = time.perf_counter()
         decisions: list[PolicyDecision] = []
         gate = PolicyGate(self.policy, sink=decisions.append)
-        tools = ToolRegistry(self.data, gate, self.risk_config, self.ranking_config)
+        tools = ToolRegistry(self.data, gate, self.risk_config, self.ranking_config, tool_faults)
         trace: list[str] = []
         graph = self._graph(tools, trace)
         state: PlannerState = graph.invoke({"request": request})
@@ -232,26 +234,42 @@ class TestPlanningAgent:
             trace.append("gather")
             it = state["interpretation"]
             assert it.build_id
+            try:
+                return {
+                    "changes": tools.call("get_build_changes", build_id=it.build_id),
+                    "risk": tools.call("get_component_risk", build_id=it.build_id, top_n=40),
+                    "coverage": tools.call(
+                        "get_requirement_coverage", build_id=it.build_id, variant_id=it.variant_id
+                    ),
+                }
+            except ToolUnavailableError as exc:
+                return _failed(str(exc))
+
+        def _failed(tool: str) -> PlannerState:
+            trace.append("fail")
             return {
-                "changes": tools.call("get_build_changes", build_id=it.build_id),
-                "risk": tools.call("get_component_risk", build_id=it.build_id, top_n=40),
-                "coverage": tools.call(
-                    "get_requirement_coverage", build_id=it.build_id, variant_id=it.variant_id
-                ),
+                "status": "FAILED",
+                "response": f"The required tool '{tool}' returned no result, so no recommendation was made. "
+                "Nothing was guessed; please retry when the tool is available.",
             }
+
+        def after(next_node: str) -> Any:
+            return lambda state: END if state.get("status") == "FAILED" else next_node
 
         def plan(state: PlannerState) -> PlannerState:
             trace.append("plan")
             it = state["interpretation"]
-            items = tools.call(
-                "propose_test_plan",
-                build_id=it.build_id,
-                variant_id=it.variant_id,
-                top_n=it.top_n,
-                budget_minutes=it.budget_minutes,
-            )
-            if it.component_ids:
-                items = [i for i in items if set(i["component_ids"]) & set(it.component_ids)] or items
+            try:
+                items = tools.call(
+                    "propose_test_plan",
+                    build_id=it.build_id,
+                    variant_id=it.variant_id,
+                    top_n=it.top_n,
+                    budget_minutes=it.budget_minutes,
+                    component_ids=it.component_ids or None,
+                )
+            except ToolUnavailableError as exc:
+                return _failed(str(exc))
             for n, item in enumerate(items, start=1):
                 item["rank"] = n
             return {"plan": items}
@@ -302,8 +320,8 @@ class TestPlanningAgent:
         g.add_conditional_edges(
             "interpret", route, {"refuse": "refuse", "clarify": "clarify", "plan": "gather"}
         )
-        g.add_edge("gather", "plan")
-        g.add_edge("plan", "explain")
+        g.add_conditional_edges("gather", after("plan"), ["plan", END])
+        g.add_conditional_edges("plan", after("explain"), ["explain", END])
         for terminal in ("refuse", "clarify", "explain"):
             g.add_edge(terminal, END)
         return g.compile()

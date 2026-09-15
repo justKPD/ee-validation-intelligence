@@ -560,6 +560,7 @@ name = "ee-evaluation"
 version = "0.1.0"
 source = { editable = "packages/evaluation" }
 dependencies = [
+    { name = "ee-agent" },
     { name = "ee-domain" },
     { name = "ee-etl" },
     { name = "ee-ranking" },
@@ -567,6 +568,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "ee-agent", editable = "packages/agent-runtime" },
     { name = "ee-domain", editable = "packages/domain" },
     { name = "ee-etl", editable = "packages/etl" },
     { name = "ee-ranking", editable = "packages/ranking" },

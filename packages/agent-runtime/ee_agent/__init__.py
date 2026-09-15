@@ -3,7 +3,7 @@
 from ee_agent.interpret import Interpretation, interpret_request
 from ee_agent.providers import AnthropicProvider, ModelProvider, OfflineProvider, provider_from_env
 from ee_agent.runner import PROMPT_VERSION, AgentResult, TestPlanningAgent
-from ee_agent.tools import ToolRegistry, ToolSpec
+from ee_agent.tools import ToolRegistry, ToolSpec, ToolUnavailableError
 
 __all__ = [
     "PROMPT_VERSION",
@@ -15,6 +15,7 @@ __all__ = [
     "TestPlanningAgent",
     "ToolRegistry",
     "ToolSpec",
+    "ToolUnavailableError",
     "interpret_request",
     "provider_from_env",
 ]
