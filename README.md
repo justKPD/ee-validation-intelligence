@@ -1,0 +1,57 @@
+# E/E Validation Intelligence & Agentic Test Control Tower
+
+**Risk-Based Test Prioritization, Evidence Traceability & Policy-Gated Agentic Test Management**
+
+> Independent portfolio project inspired by publicly available automotive E/E validation and Agentic-AI research.
+> It uses **entirely synthetic data** and does not represent or reproduce any BMW Group internal system.
+> It has no affiliation with the BMW Group.
+
+## The problem
+
+When a new software build arrives and validation time is limited, **which E/E tests should engineers run first?**
+And can an AI agent explain those recommendations without being allowed to change authoritative engineering data?
+
+## Platform pillars
+
+1. **Validation Intelligence**: risk, evidence-aware coverage, failure fingerprints, test ranking
+2. **Agentic Test Management**: planning, evidence reasoning, clarification, policy gate, human approval
+3. **AI Assurance**: shadow test planning, Pass^k reliability, adversarial testing, provenance
+
+## Quick start (local, SQLite)
+
+```bash
+pip install uv
+uv sync
+uv run ee-seed --seed 42      # migrate + generate + validate + import + summary report
+uv run ee-api                 # http://127.0.0.1:8000/docs
+bash scripts/check.sh         # ruff + format + mypy + pytest (same as CI)
+```
+
+## Docker (PostgreSQL 16 + pgvector)
+
+```bash
+docker compose up --build     # API on :8000, seeded from seed 42
+```
+
+## Repository
+
+| Path | Purpose |
+|---|---|
+| `packages/domain` | canonical schema, DTOs, DB session, OpenTelemetry |
+| `data/generator` | seeded synthetic programme generator with a hidden fault model |
+| `packages/etl` | validated import, data-quality checks, dataset summary |
+| `apps/api` | FastAPI service |
+| `apps/web` | Next.js UI |
+| `migrations` | Alembic migrations |
+| `docs/adr` | architecture decision records |
+
+## Key design decisions
+
+- **Deterministic engines own truth; agents only recommend and explain** ([ADR-002](docs/adr/ADR-002-authority-boundary.md)).
+- **Hidden ground truth.** Defects come from latent component fragility and change-induced faults that the
+  observable FMEA scores only partly reflect. The ranker never sees this, so benchmark results are not circular
+  ([synthetic data methodology](docs/methodology/synthetic-data.md)).
+- **Imperfect historical engineer selection** is recorded and used as the shadow-planning baseline.
+- **No hard-coded metrics.** Every number in reports comes from an actual run.
+
+See [docs/methodology/dataset-summary.md](docs/methodology/dataset-summary.md) for the generated dataset statistics.

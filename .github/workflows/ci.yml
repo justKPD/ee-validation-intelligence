@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: ee
+          POSTGRES_PASSWORD: ee_ci
+          POSTGRES_DB: ee_validation
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U ee" --health-interval 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv python install 3.12
+      - run: uv sync --frozen --extra postgres
+      - run: bash scripts/check.sh
+      - name: Migrate + seed real Postgres
+        env:
+          EE_DATABASE_URL: postgresql+psycopg://ee:ee_ci@localhost:5432/ee_validation
+        run: uv run ee-seed --seed 42

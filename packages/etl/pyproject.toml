@@ -1,0 +1,21 @@
+[project]
+name = "ee-etl"
+version = "0.1.0"
+description = "Validated import, data-quality checks and dataset summary"
+requires-python = ">=3.12"
+dependencies = ["ee-domain", "ee-generator"]
+
+[project.scripts]
+ee-import = "ee_etl.cli:import_main"
+ee-seed = "ee_etl.cli:seed_main"
+
+[tool.uv.sources]
+ee-domain = { workspace = true }
+ee-generator = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ee_etl"]

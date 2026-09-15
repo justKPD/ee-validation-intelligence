@@ -1,0 +1,29 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ee
+      POSTGRES_PASSWORD: ee_local_only
+      POSTGRES_DB: ee_validation
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ee -d ee_validation"]
+      interval: 3s
+      retries: 20
+    volumes: [pgdata:/var/lib/postgresql/data]
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/docker/api.Dockerfile
+    environment:
+      EE_DATABASE_URL: postgresql+psycopg://ee:ee_local_only@db:5432/ee_validation
+      EE_OTEL_EXPORTER: console
+      EE_SEED: "42"
+    ports: ["8000:8000"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

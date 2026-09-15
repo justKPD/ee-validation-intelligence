@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.db
+*.db-journal
+.env
+node_modules/
+.next/
+data/synthetic/dataset/
+data/synthetic/ground_truth/
