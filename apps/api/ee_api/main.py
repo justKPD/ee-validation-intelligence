@@ -6,9 +6,10 @@ from pathlib import Path
 from ee_domain.db import REPO_ROOT, get_engine
 from ee_domain.telemetry import configure_tracing
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import Engine, text
 
-from ee_api.routes import agent, catalog, intelligence, ranking, reliability
+from ee_api.routes import admin, agent, catalog, intelligence, ranking, reliability
 
 DISCLAIMER = (
     "Independent portfolio project using entirely synthetic data. "
@@ -44,6 +45,14 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
     app.include_router(ranking.router)
     app.include_router(agent.router)
     app.include_router(reliability.router)
+    app.include_router(admin.router)
+    origins = os.environ.get("EE_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[o.strip() for o in origins if o.strip()],
+        allow_methods=["GET", "POST"],
+        allow_headers=["*"],
+    )
 
     configure_tracing("ee-api")
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor

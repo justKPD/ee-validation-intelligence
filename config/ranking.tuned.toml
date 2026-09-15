@@ -1,0 +1,18 @@
+# Selected on development seeds, improves held-out seed 42. Not the default.
+version = "ranking-1.0+default_w-c0.3-d0.2"
+
+[weights]
+risk_exposure = 0.3
+uncovered = 0.25
+change_relevance = 0.15
+historical_failure = 0.15
+dependency = 0.05
+stale_evidence = 0.1
+
+[penalties]
+cost_weight = 0.3
+duplicate_weight = 0.2
+
+[hybrid]
+engineering = 0.65
+learned = 0.35

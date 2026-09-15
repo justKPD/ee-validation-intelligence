@@ -1,0 +1,235 @@
+{
+ "heldout_seed": 42,
+ "prediction_quality": {
+  "builds": [
+   "B003",
+   "B004",
+   "B005",
+   "B006"
+  ],
+  "base_rate": 0.0518,
+  "scores": [
+   {
+    "name": "learned_probability",
+    "n": 1255,
+    "positives": 65,
+    "auroc": 0.5993,
+    "brier": 0.0542,
+    "log_loss": 0.2394,
+    "ece": 0.0386
+   },
+   {
+    "name": "engineering_value",
+    "n": 1255,
+    "positives": 65,
+    "auroc": 0.7041,
+    "brier": null,
+    "log_loss": null,
+    "ece": null
+   },
+   {
+    "name": "hybrid_value",
+    "n": 1255,
+    "positives": 65,
+    "auroc": 0.702,
+    "brier": null,
+    "log_loss": null,
+    "ece": null
+   },
+   {
+    "name": "severity",
+    "n": 1255,
+    "positives": 65,
+    "auroc": 0.5161,
+    "brier": null,
+    "log_loss": null,
+    "ece": null
+   }
+  ],
+  "reliability_curve": [
+   {
+    "bin_low": 0.0,
+    "bin_high": 0.1,
+    "count": 1076,
+    "mean_predicted": 0.0221,
+    "observed_rate": 0.0455
+   },
+   {
+    "bin_low": 0.1,
+    "bin_high": 0.2,
+    "count": 109,
+    "mean_predicted": 0.1347,
+    "observed_rate": 0.0826
+   },
+   {
+    "bin_low": 0.2,
+    "bin_high": 0.3,
+    "count": 37,
+    "mean_predicted": 0.2416,
+    "observed_rate": 0.1081
+   },
+   {
+    "bin_low": 0.3,
+    "bin_high": 0.4,
+    "count": 16,
+    "mean_predicted": 0.3434,
+    "observed_rate": 0.125
+   },
+   {
+    "bin_low": 0.4,
+    "bin_high": 0.5,
+    "count": 4,
+    "mean_predicted": 0.44,
+    "observed_rate": 0.0
+   },
+   {
+    "bin_low": 0.5,
+    "bin_high": 0.6,
+    "count": 10,
+    "mean_predicted": 0.5368,
+    "observed_rate": 0.0
+   },
+   {
+    "bin_low": 0.6,
+    "bin_high": 0.7,
+    "count": 1,
+    "mean_predicted": 0.6652,
+    "observed_rate": 1.0
+   },
+   {
+    "bin_low": 0.8,
+    "bin_high": 0.9,
+    "count": 2,
+    "mean_predicted": 0.8138,
+    "observed_rate": 0.0
+   }
+  ]
+ },
+ "tuning": {
+  "dev_seeds": [
+   1,
+   2,
+   3
+  ],
+  "objective_by_config": {
+   "default_w|cost=0.0|dup=0.0": 0.2501,
+   "default_w|cost=0.0|dup=0.2": 0.4684,
+   "default_w|cost=0.15|dup=0.0": 0.4225,
+   "default_w|cost=0.15|dup=0.2": 0.621,
+   "default_w|cost=0.3|dup=0.0": 0.5519,
+   "default_w|cost=0.3|dup=0.2": 0.7564,
+   "change_heavy_w|cost=0.0|dup=0.0": 0.2586,
+   "change_heavy_w|cost=0.0|dup=0.2": 0.4569,
+   "change_heavy_w|cost=0.15|dup=0.0": 0.4179,
+   "change_heavy_w|cost=0.15|dup=0.2": 0.6282,
+   "change_heavy_w|cost=0.3|dup=0.0": 0.544,
+   "change_heavy_w|cost=0.3|dup=0.2": 0.7203
+  },
+  "best": "default_w|cost=0.3|dup=0.2"
+ },
+ "heldout_default": {
+  "objective": 0.6662,
+  "critical_defect_recall_at_20": 0.261,
+  "critical_risk_coverage_at_budget": 0.646,
+  "critical_defect_recall_at_budget": 0.6849,
+  "minutes_saved_share": 0.4052
+ },
+ "heldout_tuned": {
+  "objective": 0.7465,
+  "critical_defect_recall_at_20": 0.2332,
+  "critical_risk_coverage_at_budget": 0.6508,
+  "critical_defect_recall_at_budget": 0.6901,
+  "minutes_saved_share": 0.5133
+ },
+ "tuned_improves_heldout": true,
+ "uncertainty": {
+  "critical_defect_recall_minus_engineer": {
+   "mean": -0.007,
+   "ci_low": -0.0188,
+   "ci_high": 0.0041,
+   "n": 5
+  },
+  "critical_risk_coverage_minus_engineer": {
+   "mean": 0.1529,
+   "ci_low": 0.132,
+   "ci_high": 0.1819,
+   "n": 5
+  },
+  "minutes_saved_share": {
+   "mean": 0.4052,
+   "ci_low": 0.2064,
+   "ci_high": 0.5818,
+   "n": 5
+  }
+ },
+ "overrides": {
+  "builds": [
+   {
+    "build_id": "B002",
+    "engineer_tests": 288,
+    "ranker_tests": 250,
+    "jaccard": 0.2659,
+    "override_share": 0.6076,
+    "expected_defects_engineer_only": 11.4257,
+    "expected_defects_ranker_only": 14.3304,
+    "expected_defects_shared": 13.4873,
+    "live_faults": 18
+   },
+   {
+    "build_id": "B003",
+    "engineer_tests": 304,
+    "ranker_tests": 249,
+    "jaccard": 0.2181,
+    "override_share": 0.6743,
+    "expected_defects_engineer_only": 5.6411,
+    "expected_defects_ranker_only": 13.4095,
+    "expected_defects_shared": 13.4221,
+    "live_faults": 18
+   },
+   {
+    "build_id": "B004",
+    "engineer_tests": 317,
+    "ranker_tests": 289,
+    "jaccard": 0.2072,
+    "override_share": 0.6719,
+    "expected_defects_engineer_only": 19.4189,
+    "expected_defects_ranker_only": 17.8254,
+    "expected_defects_shared": 18.6021,
+    "live_faults": 24
+   },
+   {
+    "build_id": "B005",
+    "engineer_tests": 317,
+    "ranker_tests": 256,
+    "jaccard": 0.2038,
+    "override_share": 0.694,
+    "expected_defects_engineer_only": 4.6848,
+    "expected_defects_ranker_only": 4.8271,
+    "expected_defects_shared": 3.9138,
+    "live_faults": 6
+   },
+   {
+    "build_id": "B006",
+    "engineer_tests": 317,
+    "ranker_tests": 270,
+    "jaccard": 0.1931,
+    "override_share": 0.7003,
+    "expected_defects_engineer_only": 19.7037,
+    "expected_defects_ranker_only": 23.5419,
+    "expected_defects_shared": 23.4425,
+    "live_faults": 30
+   }
+  ],
+  "mean_jaccard": 0.2176,
+  "mean_override_share": 0.6696,
+  "mean_expected_defects_engineer_only": 12.1748,
+  "mean_expected_defects_ranker_only": 14.7869
+ },
+ "sentence": "On held-out seed 42, the learned defect model reached AUROC 0.5993 (ECE 0.0386) versus 0.7041 for the engineering score; the configuration selected on development seeds [1, 2, 3] (default_w|cost=0.3|dup=0.2) improved the held-out objective (0.6662 \u2192 0.7465); risk-based minus engineer critical-defect recall at equal budget was -0.007 (95% bootstrap CI -0.019 to +0.004, n=5 builds).",
+ "findings": [
+  "The learned model ranks observed defects worse than the deterministic engineering score; hybrid weighting should stay conservative.",
+  "The critical-defect-recall difference versus engineers at equal budget is not distinguishable from zero across builds.",
+  "At equal budget the ranker would override 67% of engineer choices (Jaccard 0.22); tests only engineers chose held 12.17 expected hidden defects per build versus 14.79 for tests only the ranker chose."
+ ],
+ "disclaimer": "Calibration and tuning study on entirely fictional synthetic data (independent portfolio project)."
+}

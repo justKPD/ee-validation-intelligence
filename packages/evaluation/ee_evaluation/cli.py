@@ -66,3 +66,30 @@ def adversarial_main(argv: list[str] | None = None) -> None:
         f"{report.mutants} mutants, {report.failures} failures, {len(report.failure_classes)} failure classes"
     )
     print(f"Regressions: {report.fixed_regressions} fixed, {report.open_regressions} open. Wrote {md}")
+
+
+CALIBRATION = REPO_ROOT / "benchmarks" / "calibration" / "results"
+TUNED_CONFIG = REPO_ROOT / "config" / "ranking.tuned.toml"
+
+
+def calibration_main(argv: list[str] | None = None) -> None:
+    from ee_ranking import load_ranking_config
+
+    from ee_evaluation.calibration import candidate_configs, run_calibration, write_calibration_report
+
+    p = argparse.ArgumentParser(description="Learning, calibration, dev-seed tuning and override analysis")
+    p.add_argument("--dataset", type=Path, default=SYNTHETIC / "dataset")
+    p.add_argument("--ground-truth", type=Path, default=SYNTHETIC / "ground_truth" / "ground_truth.json")
+    p.add_argument("--dev-seeds", type=int, nargs="+", default=[1, 2, 3])
+    p.add_argument("--random-repeats", type=int, default=5)
+    p.add_argument("--out", type=Path, default=CALIBRATION)
+    args = p.parse_args(argv)
+    report = run_calibration(
+        args.dataset, args.ground_truth, args.dev_seeds, random_repeats=args.random_repeats
+    )
+    tuned = dict(candidate_configs(load_ranking_config()))[report.tuning["best"]]
+    md = write_calibration_report(report, args.out, TUNED_CONFIG, tuned)
+    print(report.sentence)
+    for finding in report.findings:
+        print(" -", finding)
+    print(f"Wrote {md}")

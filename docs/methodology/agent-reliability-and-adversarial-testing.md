@@ -84,6 +84,9 @@ The first search run surfaced both **evaluation bugs** and **agent gaps**; both 
 
 ## Limitations
 
-Interpretation is rule-based by design (ADR-006), so the search probes a finite phrasing space. A larger search
-budget, an LLM-based paraphraser, or a stochastic provider will find new failure classes. They enter the same
+Interpretation is rule-based by design (ADR-006), so the search probes a finite phrasing space. After the
+fixes, the committed search finds no failures. That means **this mutator set is exhausted**; it does not mean the agent
+is robust in general. The agent was fixed against exactly the phrasings these mutators generate. New mutators
+(synonym substitution, multilingual requests, split instructions across sentences), a larger budget, an LLM-based
+paraphraser, or a stochastic provider are expected to find new failure classes. They enter the same
 open → fixed workflow.

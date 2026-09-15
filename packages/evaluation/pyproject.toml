@@ -9,6 +9,7 @@ dependencies = ["ee-domain", "ee-etl", "ee-ranking", "ee-agent"]
 ee-shadow = "ee_evaluation.cli:shadow_main"
 ee-reliability = "ee_evaluation.cli:reliability_main"
 ee-adversarial = "ee_evaluation.cli:adversarial_main"
+ee-calibration = "ee_evaluation.cli:calibration_main"
 
 [tool.uv.sources]
 ee-domain = { workspace = true }
