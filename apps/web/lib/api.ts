@@ -1,0 +1,258 @@
+export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+
+export class ApiError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
+}
+
+async function handle<T>(res: Response): Promise<T> {
+  if (!res.ok) {
+    let detail = res.statusText;
+    try {
+      const body = await res.json();
+      detail = typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail ?? body);
+    } catch {
+      /* non-JSON error body */
+    }
+    throw new ApiError(res.status, detail);
+  }
+  return (await res.json()) as T;
+}
+
+export async function apiGet<T>(path: string): Promise<T> {
+  return handle<T>(await fetch(`${API_URL}${path}`, { cache: "no-store" }));
+}
+
+export async function apiPost<T>(path: string, body: unknown): Promise<T> {
+  return handle<T>(
+    await fetch(`${API_URL}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }),
+  );
+}
+
+export function qs(params: Record<string, string | number | boolean | undefined | null>): string {
+  const entries = Object.entries(params).filter(([, v]) => v !== undefined && v !== null && v !== "");
+  return entries.length ? `?${new URLSearchParams(entries.map(([k, v]) => [k, String(v)]))}` : "";
+}
+
+// ---- response types (mirrors the FastAPI models) ------------------------------------------------
+export interface Build {
+  id: string;
+  sequence: number;
+  release_date: string;
+  build_family: string;
+}
+export interface Variant {
+  id: string;
+  name: string;
+  powertrain: string;
+  market: string;
+  features: string;
+}
+export interface ComponentRisk {
+  component_id: string;
+  build_id: string;
+  score: number;
+  base: number;
+  impact: number;
+  occurrence: number;
+  detectability: number;
+  factors: Record<string, number>;
+  contributions: Record<string, number>;
+  confidence: number;
+  past_executions: number;
+  past_defects: number;
+  flags: string[];
+  evidence: string[];
+  config_version: string;
+}
+export interface RequirementRisk {
+  requirement_id: string;
+  score: number;
+  fmea_base: number;
+  component_risk: number;
+  revised_in_build: boolean;
+  critical: boolean;
+  component_ids: string[];
+}
+export type EvidenceStatus = "CURRENT" | "STALE" | "MISSING" | "INCOMPATIBLE" | "FAILED";
+export const EVIDENCE_STATUSES: EvidenceStatus[] = ["CURRENT", "STALE", "INCOMPATIBLE", "MISSING", "FAILED"];
+export interface CoverageSummary {
+  build_id: string;
+  requirements_total: number;
+  requirements_with_tests: number;
+  structural_coverage: number;
+  evidence_pairs: number;
+  evidence_coverage: number;
+  status_counts: Record<EvidenceStatus, number>;
+  by_component: Record<string, Partial<Record<EvidenceStatus, number>>>;
+}
+export interface EvidenceRecord {
+  requirement_id: string;
+  variant_id: string;
+  status: EvidenceStatus;
+  test_id: string | null;
+  execution_id: string | null;
+  evidence_build_id: string | null;
+  age_days: number | null;
+  reasons: string[];
+}
+export interface FailureFamily {
+  id: string;
+  fingerprint: string;
+  component_id: string;
+  test_family: string;
+  error_code: string;
+  failure_stage: string;
+  occurrences: number;
+  defect_ids: string[];
+  execution_ids: string[];
+  build_ids: string[];
+  variant_ids: string[];
+  signal_signatures: string[];
+  representative_title: string;
+  first_seen_build: string;
+  last_seen_build: string;
+  max_severity: number;
+  status: "OPEN" | "RESOLVED";
+  recurring: boolean;
+}
+export interface RankedTest {
+  rank: number;
+  test_id: string;
+  variant_id: string;
+  strategy: string;
+  score: number;
+  duration_min: number;
+  cumulative_minutes: number;
+  contributions: Record<string, number>;
+  learned_probability: number | null;
+  critical: boolean;
+  requirement_ids: string[];
+  component_ids: string[];
+  reasons: string[];
+  evidence_ids: string[];
+}
+export interface PlanRecommendation {
+  recommendation_id: string;
+  rank: number;
+  test_id: string;
+  variant_id: string;
+  score: number;
+  duration_min: number;
+  expected_coverage_gain: number;
+  reasons: string[];
+  evidence_ids: string[];
+}
+export interface PolicyDecisionOut {
+  tool: string;
+  permission: string;
+  decision: string;
+  reason: string;
+}
+export interface AgentResult {
+  run_id: string;
+  status: "COMPLETED" | "NEEDS_CLARIFICATION" | "REFUSED" | "FAILED";
+  response: string;
+  clarification_question: string | null;
+  build_id: string | null;
+  variant_id: string | null;
+  recommendations: PlanRecommendation[];
+  policy_decisions: PolicyDecisionOut[];
+  tool_calls: { tool: string; decision: string; error?: string }[];
+  model: { provider: string; name: string; prompt_version: string };
+  grounded: boolean;
+  latency_ms: number;
+  trace: string[];
+}
+export interface Recommendation {
+  id: string;
+  run_id: string;
+  build_id: string;
+  variant_id: string;
+  test_id: string;
+  rank: number;
+  priority_score: number;
+  estimated_minutes: number;
+  expected_coverage_gain: number;
+  status: "PROPOSED" | "APPROVED" | "REJECTED" | "EXECUTED";
+  reasons: string[];
+  evidence_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+export interface LedgerEntry {
+  seq: number;
+  entry_type: string;
+  subject_id: string;
+  at: string;
+  payload: Record<string, unknown>;
+  prev_hash: string;
+  hash: string;
+}
+export interface StrategyMetrics {
+  tests_selected: number;
+  minutes: number;
+  expected_defects: number;
+  defect_recall: number;
+  critical_defect_recall: number;
+  critical_risk_coverage: number;
+  coverage_gain: number;
+  ndcg?: number;
+  map?: number;
+  minutes_to_match_engineer_yield?: number | null;
+  minutes_saved_share?: number | null;
+  match_rate?: number;
+}
+export interface ShadowReport {
+  seed: number;
+  ks: number[];
+  sentence: string;
+  findings: string[];
+  disclaimer: string;
+  aggregate: {
+    at_k: Record<string, Record<string, StrategyMetrics>>;
+    at_engineer_budget: Record<string, StrategyMetrics>;
+    engineer: StrategyMetrics;
+    engineer_budget_minutes: number;
+    observed_replay: Record<string, number | null>;
+  };
+  builds: { build_id: string; live_faults: number; critical_live_faults: number; engineer_budget_minutes: number }[];
+}
+export interface ReliabilityReport {
+  provider: string;
+  model: string;
+  k: number;
+  scenarios: number;
+  runs: number;
+  metrics: Record<string, number>;
+  by_category: Record<string, Record<string, number>>;
+  pass_k: Record<string, boolean>;
+  outcomes: {
+    scenario_id: string;
+    category: string;
+    repeat: number;
+    request: string;
+    expected_status: string;
+    status: string;
+    success: boolean;
+    failed_checks: string[];
+    response_excerpt: string;
+  }[];
+  sentence: string;
+  disclaimer: string;
+}
+export interface AdversarialReport {
+  provider: string;
+  mutants: number;
+  failures: number;
+  failure_rate: number;
+  by_axis: Record<string, { mutants: number; success: number }>;
+  failure_classes: { key: string; mutators: string[]; expected_status: string; actual_status: string; count: number; examples: string[] }[];
+  open_regressions: number;
+  fixed_regressions: number;
+}

@@ -28,3 +28,36 @@ jobs:
         env:
           EE_DATABASE_URL: postgresql+psycopg://ee:ee_ci@localhost:5432/ee_validation
         run: uv run ee-seed --seed 42
+      - name: Benchmarks reproduce from the seed
+        run: |
+          uv run ee-seed --seed 42
+          uv run ee-shadow --random-repeats 5 --out /tmp/shadow
+          uv run ee-reliability -k 3 --out /tmp/reliability
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/aws
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check
+      - run: terraform init -backend=false
+      - run: terraform validate

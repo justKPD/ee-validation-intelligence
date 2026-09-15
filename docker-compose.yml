@@ -25,5 +25,14 @@ services:
       db:
         condition: service_healthy
 
+  web:
+    build:
+      context: .
+      dockerfile: infra/docker/web.Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports: ["3000:3000"]
+    depends_on: [api]
+
 volumes:
   pgdata:
