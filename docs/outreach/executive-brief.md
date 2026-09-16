@@ -42,7 +42,7 @@ An end-to-end platform on a seeded synthetic programme: 40 fictional ECUs, 150 r
 - The learned defect model ranks defects worse than the deterministic engineering score; engineering risk stays primary.
 - risk_based is best or within 0.005 on 68 of 79 comparisons; the report lists every metric where a baseline wins.
 - After fixing the gaps the adversarial search found, the same mutators find nothing. That mutator set is exhausted; it is not proof of robustness.
-- Everything was measured against a synthetic fault model. The Dockerized API/web/database stack was validated locally (PostgreSQL 16.15, pgvector 0.8.6); GitHub Actions CI is authored but has never run on GitHub, and AWS/Terraform is authored but not yet validated or applied.
+- Everything was measured against a synthetic fault model. The Dockerized API/web/database stack was validated locally (PostgreSQL 16.15, pgvector 0.8.6); GitHub Actions CI is green on GitHub, including Terraform fmt/validate; the AWS deployment is authored but not yet applied.
 
 ## Engineering
 
@@ -52,4 +52,4 @@ GitHub Actions, Terraform for AWS (ECS Fargate, RDS, S3, CloudWatch). ADRs for e
 and a generated summary sentence for every benchmark.
 
 ---
-Generated from benchmark results at commit `d4bd438` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `53a654e` by `scripts/build_brief.py`. Seed 42.

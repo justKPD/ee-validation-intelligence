@@ -24,7 +24,8 @@ reproduce any BMW system.
 | Frontend startup and all 8 UI routes | **PASS** (one dev-mode first-load observation, not a defect) |
 | Public naming and disclaimer | **PASS after one fix**: browser tab title changed to the full product name (uncommitted) |
 | Docker / PostgreSQL / pgvector | **PASS** (validated 2026-09-17, see [docker-postgres-validation.md](docker-postgres-validation.md)) |
-| GitHub Actions / Terraform / AWS | **NOT VERIFIED**: no remote, no Terraform binary, no AWS credentials |
+| GitHub Actions / Terraform | **Later PASS**: CI green on GitHub (first run `35150203850`), including Terraform `fmt`/`validate` |
+| AWS deployment | **NOT VERIFIED**: no AWS credentials; never applied |
 | Discrepancies found in previously published text | **1**: hand-typed dataset sizes in the executive brief (see D1) |
 
 ---
@@ -176,8 +177,8 @@ published. Clone into `ee-validation-intelligence` when creating the GitHub repo
 | Item | Why | Status |
 |---|---|---|
 | `docker compose up --build` | Docker was not installed at the time of this pass | **Later VERIFIED** on 2026-09-17; see [docker-postgres-validation.md](docker-postgres-validation.md) |
-| GitHub Actions workflow | no remote repository; never run | NOT VERIFIED |
-| Terraform `fmt` / `validate` / `apply` | no Terraform binary, no AWS credentials | NOT VERIFIED |
+| GitHub Actions workflow | no remote repository at the time of this pass | **Later VERIFIED**: green on GitHub (run `35150203850`) |
+| Terraform `fmt` / `validate` / `apply` | no Terraform binary, no AWS credentials at the time of this pass | `fmt`/`validate` **later VERIFIED** in CI; `apply` NOT VERIFIED |
 | PostgreSQL migrations and seed | no local PostgreSQL at the time of this pass | **Later VERIFIED** on 2026-09-17: PostgreSQL 16.15, migrations `0001 -> 0002` |
 | Live Claude provider | no credentials; covered by fake-client tests only | NOT VERIFIED |
 

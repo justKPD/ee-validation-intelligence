@@ -66,7 +66,7 @@ Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The de
 | 9 Reliability lab | done: 25 scenarios × k runs, Pass^k and grounding metrics |
 | 10 Adversarial testing | done: 14 mutators, failure classes, open → fixed regression suite |
 | 11 Learning & calibration | done: calibration, dev-seed tuning with held-out check, overrides, bootstrap CIs |
-| 12 Deployment | Docker stack **validated**: API/web/database on PostgreSQL 16.15 + pgvector 0.8.6 ([report](docs/release/docker-postgres-validation.md)). GitHub Actions CI authored but **has never run on GitHub**. AWS/Terraform authored but **not yet validated or applied** |
+| 12 Deployment | Docker stack **validated**: API/web/database on PostgreSQL 16.15 + pgvector 0.8.6 ([report](docs/release/docker-postgres-validation.md)). GitHub Actions CI **green on GitHub** (Python gate, PostgreSQL migrate + seed, seed-42 benchmark reproduction, web typecheck + build, Terraform `fmt` + `validate`). AWS deployment **not yet applied** |
 | 13 Documentation | done: architecture, methodology, ADRs, API reference, limitations, threat model |
 | 14 Portfolio / outreach | done: generated executive brief, recruiter and researcher summaries, demo script |
 

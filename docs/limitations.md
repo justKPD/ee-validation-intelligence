@@ -76,6 +76,10 @@ from application correctness.
 
 | Item | Status |
 |---|---|
-| GitHub Actions | authored; no remote repository was configured, so CI has not run |
-| Terraform / AWS | authored; no Terraform binary or AWS credentials, so not validated or applied, and no deployed URL exists |
+| Terraform / AWS | `terraform fmt -check` and `terraform validate` pass in GitHub Actions; never applied (no AWS credentials), so no deployed URL exists |
+
+GitHub Actions CI runs on every push to `main`: the Python gate (ruff, format, mypy, pytest), Alembic migration and seed
+against a PostgreSQL 16 + pgvector service, a check that the seed-42 benchmark results reproduce exactly, web typecheck and
+build, and Terraform `fmt`/`validate`. The first run's Terraform job failed only because the Terraform binary download
+was interrupted (`read ECONNRESET`); the re-run passed with no code change.
 | Live Claude calls | not made; adapter tested with a fake client |
