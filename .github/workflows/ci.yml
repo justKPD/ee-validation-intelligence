@@ -17,7 +17,7 @@ jobs:
           POSTGRES_DB: ee_validation
         ports: ["5432:5432"]
         options: >-
-          --health-cmd "pg_isready -U ee" --health-interval 5s --health-retries 10
+          --health-cmd "pg_isready -U ee -d ee_validation" --health-interval 5s --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
@@ -28,11 +28,12 @@ jobs:
         env:
           EE_DATABASE_URL: postgresql+psycopg://ee:ee_ci@localhost:5432/ee_validation
         run: uv run ee-seed --seed 42
-      - name: Benchmarks reproduce from the seed
+      - name: Benchmarks reproduce the committed seed-42 results
         run: |
           uv run ee-seed --seed 42
-          uv run ee-shadow --random-repeats 5 --out /tmp/shadow
+          uv run ee-shadow --out /tmp/shadow
           uv run ee-reliability -k 3 --out /tmp/reliability
+          uv run python scripts/verify_reproduction.py /tmp/shadow /tmp/reliability
 
   web:
     runs-on: ubuntu-latest
