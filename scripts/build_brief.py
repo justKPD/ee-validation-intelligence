@@ -76,7 +76,9 @@ def main() -> None:
             "- The learned defect model ranks defects worse than the deterministic engineering score; engineering risk stays primary.",
             f"- {shadow['findings'][0]}; the report lists every metric where a baseline wins.",
             "- After fixing the gaps the adversarial search found, the same mutators find nothing. That mutator set is exhausted; it is not proof of robustness.",
-            "- Everything was measured against a synthetic fault model. Docker, CI and AWS are authored but were not executed in the build environment.",
+            "- Everything was measured against a synthetic fault model. The Dockerized API/web/database stack was validated locally "
+            "(PostgreSQL 16.15, pgvector 0.8.6); GitHub Actions CI is authored but has never run on GitHub, and AWS/Terraform is authored "
+            "but not yet validated or applied.",
         ]
     )
 

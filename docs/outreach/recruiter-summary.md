@@ -14,4 +14,4 @@ and propose, but never decide, and proves both with reproducible benchmarks.
 - **Honesty:** results are on synthetic data; limitations are documented in the repository.
 - **Stack:** Python, FastAPI, PostgreSQL, scikit-learn, LangGraph, MCP-style tools, Next.js, Docker, GitHub Actions, Terraform/AWS.
 
-Generated from benchmark results at commit `ef7f162` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `d4bd438` by `scripts/build_brief.py`. Seed 42.
