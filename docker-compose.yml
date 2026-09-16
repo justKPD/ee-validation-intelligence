@@ -1,3 +1,6 @@
+# Fixed project name: container, network and volume names must not depend on the local checkout folder name.
+name: ee-validation-intelligence
+
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -16,9 +19,10 @@ services:
     build:
       context: .
       dockerfile: infra/docker/api.Dockerfile
+    image: ee-validation-intelligence-api:local
     environment:
       EE_DATABASE_URL: postgresql+psycopg://ee:ee_local_only@db:5432/ee_validation
-      EE_OTEL_EXPORTER: console
+      EE_OTEL_EXPORTER: none
       EE_SEED: "42"
     ports: ["8000:8000"]
     depends_on:
@@ -31,8 +35,17 @@ services:
       dockerfile: infra/docker/web.Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://localhost:8000
+    image: ee-validation-intelligence-web:local
     ports: ["3000:3000"]
-    depends_on: [api]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/dashboard').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 10
+    depends_on:
+      api:
+        condition: service_healthy
 
 volumes:
   pgdata:

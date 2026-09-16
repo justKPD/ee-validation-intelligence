@@ -1,0 +1,18 @@
+# Keep build contexts small (limited disk) and never ship host-specific artefacts into images.
+.git
+.github
+.claude
+**/.venv
+**/__pycache__
+**/.mypy_cache
+**/.ruff_cache
+**/.pytest_cache
+**/node_modules
+**/.next
+**/*.tsbuildinfo
+*.db
+*.db-journal
+.env
+data/synthetic/dataset
+data/synthetic/ground_truth
+benchmarks/**/diagnostics.json

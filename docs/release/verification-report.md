@@ -23,7 +23,8 @@ reproduce any BMW system.
 | API startup, planner flow, human approval persistence, provenance, `POLICY_DENIED` | **PASS** |
 | Frontend startup and all 8 UI routes | **PASS** (one dev-mode first-load observation, not a defect) |
 | Public naming and disclaimer | **PASS after one fix**: browser tab title changed to the full product name (uncommitted) |
-| Docker / GitHub Actions / Terraform / AWS | **NOT VERIFIED**: not executable in this environment |
+| Docker / PostgreSQL / pgvector | **PASS** (validated 2026-09-17, see [docker-postgres-validation.md](docker-postgres-validation.md)) |
+| GitHub Actions / Terraform / AWS | **NOT VERIFIED**: no remote, no Terraform binary, no AWS credentials |
 | Discrepancies found in previously published text | **1**: hand-typed dataset sizes in the executive brief (see D1) |
 
 ---
@@ -174,10 +175,10 @@ published. Clone into `ee-validation-intelligence` when creating the GitHub repo
 
 | Item | Why | Status |
 |---|---|---|
-| `docker compose up --build` | Docker is not installed | NOT VERIFIED |
+| `docker compose up --build` | Docker was not installed at the time of this pass | **Later VERIFIED** on 2026-09-17; see [docker-postgres-validation.md](docker-postgres-validation.md) |
 | GitHub Actions workflow | no remote repository; never run | NOT VERIFIED |
 | Terraform `fmt` / `validate` / `apply` | no Terraform binary, no AWS credentials | NOT VERIFIED |
-| PostgreSQL migrations and seed | no local PostgreSQL; verified on SQLite only | NOT VERIFIED |
+| PostgreSQL migrations and seed | no local PostgreSQL at the time of this pass | **Later VERIFIED** on 2026-09-17: PostgreSQL 16.15, migrations `0001 -> 0002` |
 | Live Claude provider | no credentials; covered by fake-client tests only | NOT VERIFIED |
 
 ---
@@ -250,5 +251,21 @@ Fixes for D1 and D2, then a full rerun.
 
 ### Docker / PostgreSQL validation
 
-**Not started: blocked.** `docker info` returns `docker: command not found`, and `C:\Program Files\Docker\Docker` does not exist.
-No Docker, PostgreSQL, pgvector or containerized-stack items could be executed. They are recorded as NOT VERIFIED until Docker is installed.
+At the time of this pass: blocked, because Docker was not installed (`docker: command not found`).
+
+**Completed on 2026-09-17** after Docker Desktop was installed. Full evidence: [docker-postgres-validation.md](docker-postgres-validation.md).
+
+| Item | Result |
+|---|---|
+| Docker Desktop stack | `docker compose up --build`: database, API and web healthy |
+| PostgreSQL | 16.15, validated from an empty database |
+| pgvector | 0.8.6 installed and tested (distance operators, nearest-neighbour ordering) |
+| Alembic migrations | `0001 -> 0002` succeeded; 18 tables, 20 foreign keys |
+| Seed-42 counts | 40 components/ECUs · 150 requirements · 250 tests · 6 builds · 4 variants · 1,821 executions · 124 defects: exact |
+| Record-level match | all 13 seeded tables equal the source dataset record for record |
+| Tests | 188 passed against PostgreSQL; 47 database-backed tests separately re-run on PostgreSQL; standard SQLite path 188 passed; ruff and mypy pass |
+| UI | all 8 routes return 200 and render real PostgreSQL-backed data |
+| Agent flows | planner, approval, provenance and `POLICY_DENIED` validated; hash chain valid; state persisted across a Docker restart |
+| Stable metrics | 0.646 · 0.4052 · CriticalDefectRecall@10 0.1752 / 0.0717 / 0.1041 · AUROC 0.5993 / 0.7041 · reliability unchanged · adversarial 150 mutants / 0 failures / 28 fixed: unchanged |
+| Infrastructure fixes | missing `.dockerignore`; `uv` version mismatch; API startup via `uv run`; missing health checks; folder-name leakage into Docker resource names; PostgreSQL test support via `EE_TEST_DATABASE_URL` |
+| Operational note | Docker objects about 1.87 GB after cleanup; `docker_data.vhdx` stays around 5.63 GB (optional compaction, unrelated to correctness) |
