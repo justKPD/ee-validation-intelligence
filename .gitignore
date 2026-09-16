@@ -16,3 +16,10 @@ data/synthetic/ground_truth/
 *.tsbuildinfo
 # wall-clock diagnostics are machine-dependent and excluded from committed, reproducible results
 benchmarks/**/diagnostics.json
+# Terraform state and plans contain generated secrets (database password); never commit them
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+.terraform.tfstate.lock.info

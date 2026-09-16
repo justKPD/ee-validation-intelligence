@@ -165,7 +165,7 @@ The recommendation scores match the planner results shown before the release (TC
 | Product name | README title, API title, nav, browser title | README: "E/E Validation Intelligence & Agentic Test Control Tower". API: "E/E Validation Intelligence API". Nav: "E/E Validation Intelligence / Agentic Test Control Tower". **Browser title was "E/E Validation Control Tower"**; changed to the full name and confirmed with `document.title` | PASS after fix (uncommitted) |
 | Repository/package name | `pyproject.toml` | `name = "ee-validation-intelligence"` | PASS |
 | Local folder name `bmw` in tracked content | `git grep -n -i bmw` (including lockfiles) | no path or folder references; the only non-disclaimer match is README rule "no implied BMW affiliation" | PASS |
-| Local path / username leaks | `git grep -E "Downloads\|uc\.1\.27\.25\|task 3\|[A-Z]:\\\\"` | no matches | PASS |
+| Local path / username leaks | `git grep -E` for the local user name, download folder and Windows drive paths | no matches | PASS |
 | Disclaimer present | `git grep -c "BMW Group"` | present in README, API description, web footer, all benchmark reports, outreach documents, limitations | PASS |
 | No affiliation or internal-access claims | manual review of README and `docs/outreach/*` | all describe an independent project inspired by public research on synthetic data | PASS |
 
