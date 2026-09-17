@@ -72,4 +72,4 @@ Engineer-vs-ranker Jaccard at equal budget: 0.2176.
 - Would an interventional shadow-mode study (agent recommendations logged beside real selections) be a feasible first step?
 - Which agent failure modes (premature action, policy pressure, missing tools) matter most in test-management workflows?
 
-Generated from benchmark results at commit `1296bdf` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `ed27310` by `scripts/build_brief.py`. Seed 42.

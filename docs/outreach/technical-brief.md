@@ -59,4 +59,4 @@ The reliability lab runs 25 scenarios 3 times each (Pass^3) and measures task su
 - The public demo has no authentication (reviewer names are self-declared) and a per-client write rate limit.
 
 ---
-Generated from benchmark results at commit `1296bdf` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `ed27310` by `scripts/build_brief.py`. Seed 42.

@@ -16,4 +16,4 @@ and propose, but never decide, and proves both with reproducible benchmarks.
 - **Honesty:** results are on synthetic data; defect recall at equal cost is not better than the engineers', and limitations are documented.
 - **Stack:** Python, FastAPI, PostgreSQL/pgvector, scikit-learn, LangGraph, MCP-style tools, Next.js/TypeScript, Docker, GitHub Actions, Railway, Vercel, Terraform (AWS target).
 
-Generated from benchmark results at commit `1296bdf` by `scripts/build_brief.py`. Seed 42.
+Generated from benchmark results at commit `ed27310` by `scripts/build_brief.py`. Seed 42.
