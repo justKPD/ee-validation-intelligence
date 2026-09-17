@@ -20,9 +20,6 @@ watchPatterns = [
 ]
 
 [deploy]
-# migrate + reseed authoritative seed-42 data (agentic tables are preserved), prove pgvector/counts/hash chain in the
-# deploy log without exposing the database publicly, then serve
-startCommand = "sh -c 'ee-seed --seed 42 && python scripts/verify_deployment_db.py && ee-api'"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"

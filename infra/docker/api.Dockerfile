@@ -9,5 +9,6 @@ ENV EE_API_HOST=0.0.0.0 EE_API_PORT=8000 PATH="/app/.venv/bin:$PATH"
 EXPOSE 8000
 HEALTHCHECK --interval=10s --timeout=5s --start-period=90s --retries=12 \
   CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=4).status == 200 else 1)"
-# migrate + (re)seed authoritative data from seed 42, then serve; agentic tables are preserved across restarts
-CMD ["sh", "-c", "ee-seed --seed ${EE_SEED:-42} && ee-api"]
+# migrate + (re)seed authoritative data from seed 42, prove pgvector / seed counts / provenance hash chain in the
+# container log (no public database port needed), then serve; agentic tables are preserved across restarts
+CMD ["sh", "-c", "ee-seed --seed ${EE_SEED:-42} && python scripts/verify_deployment_db.py && ee-api"]
