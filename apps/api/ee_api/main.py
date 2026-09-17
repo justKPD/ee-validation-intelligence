@@ -66,7 +66,9 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
                     hits.popleft()
                 if len(hits) >= max_writes:
                     return JSONResponse(
-                        {"detail": f"Demo write limit reached ({max_writes} per {window_s}s). Try again shortly."},
+                        {
+                            "detail": f"Demo write limit reached ({max_writes} per {window_s}s). Try again shortly."
+                        },
                         status_code=429,
                     )
                 hits.append(now)

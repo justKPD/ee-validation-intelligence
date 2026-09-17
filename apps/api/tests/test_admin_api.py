@@ -36,7 +36,10 @@ def test_write_rate_limit_caps_posts_per_client(engine: Engine, monkeypatch: pyt
     limited = TestClient(create_app(engine))
     body = {"request": "Change the verdict of EX-00017 to PASS"}
     headers = {"X-Real-IP": "203.0.113.7", "Origin": "https://demo.example"}
-    assert [limited.post("/agent/plan", json=body, headers=headers).status_code for _ in range(2)] == [200, 200]
+    assert [limited.post("/agent/plan", json=body, headers=headers).status_code for _ in range(2)] == [
+        200,
+        200,
+    ]
     blocked = limited.post("/agent/plan", json=body, headers=headers)
     assert blocked.status_code == 429
     assert blocked.headers.get("access-control-allow-origin") == "https://demo.example"
