@@ -123,3 +123,8 @@ def test_redacted_url_never_contains_the_password() -> None:
     shown = redacted_url(url)
     assert "s3cr3t-value" not in shown
     assert shown == "postgresql+psycopg://ee:***@db.internal:5432/ee_validation"
+
+
+def test_engine_pre_pings_pooled_connections() -> None:
+    # a database restart must not turn the next API request into a 500
+    assert make_engine("sqlite://").pool._pre_ping

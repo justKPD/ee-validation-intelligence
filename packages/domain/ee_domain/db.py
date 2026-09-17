@@ -26,7 +26,8 @@ def redacted_url(url: str | None = None) -> str:
 
 def make_engine(url: str | None = None) -> Engine:
     url = url or database_url()
-    engine = create_engine(url, future=True)
+    # pre-ping replaces pooled connections that died with a database restart instead of failing the next request
+    engine = create_engine(url, future=True, pool_pre_ping=True)
     if url.startswith("sqlite"):
 
         @event.listens_for(engine, "connect")
