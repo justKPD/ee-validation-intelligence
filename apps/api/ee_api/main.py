@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import os
+import time
+from collections import defaultdict, deque
 from pathlib import Path
 
 from ee_domain.db import REPO_ROOT, get_engine
 from ee_domain.telemetry import configure_tracing
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from sqlalchemy import Engine, text
 
 from ee_api.routes import admin, agent, catalog, intelligence, ranking, reliability
@@ -46,6 +49,29 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
     app.include_router(agent.router)
     app.include_router(reliability.router)
     app.include_router(admin.router)
+    write_limit = _parse_rate_limit(os.environ.get("EE_WRITE_RATE_LIMIT", ""))
+    if write_limit is not None:
+        max_writes, window_s = write_limit
+        recent: dict[str, deque[float]] = defaultdict(deque)
+
+        # public demo guard: the only writes are agent runs and decisions; cap them per client so the demo
+        # database cannot be flooded. Registered before CORS so 429 responses still carry CORS headers.
+        @app.middleware("http")
+        async def limit_writes(request: Request, call_next):  # type: ignore[no-untyped-def]
+            if request.method == "POST":
+                client = request.headers.get("x-real-ip") or (request.client.host if request.client else "?")
+                now = time.monotonic()
+                hits = recent[client]
+                while hits and now - hits[0] > window_s:
+                    hits.popleft()
+                if len(hits) >= max_writes:
+                    return JSONResponse(
+                        {"detail": f"Demo write limit reached ({max_writes} per {window_s}s). Try again shortly."},
+                        status_code=429,
+                    )
+                hits.append(now)
+            return await call_next(request)
+
     origins = os.environ.get("EE_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
     app.add_middleware(
         CORSMiddleware,
@@ -59,6 +85,14 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
 
     FastAPIInstrumentor.instrument_app(app)
     return app
+
+
+def _parse_rate_limit(spec: str) -> tuple[int, int] | None:
+    """`EE_WRITE_RATE_LIMIT="30/600"` allows 30 POST requests per client per 600 s; empty disables the limit."""
+    if not spec.strip():
+        return None
+    count, _, window = spec.partition("/")
+    return int(count), int(window)
 
 
 def run() -> None:
