@@ -1,44 +1,20 @@
-# Demo Script (about 6 minutes)
+# Demo Script (60–90 seconds, live deployment)
 
-Numbers shown live come from the running system and the generated reports. Do not quote numbers from memory;
-read them from the screen or from [executive-brief.md](executive-brief.md).
+Live demo: https://ee-validation-intelligence.vercel.app · Code: https://github.com/justKPD/ee-validation-intelligence
 
-## Setup (before recording)
+Read numbers from the screen or from [technical-brief.md](technical-brief.md); never quote them from memory.
+Before recording, open `/dashboard` once so the API is warm. Keep the browser at about 1440 × 900.
 
-```bash
-uv sync && uv run ee-seed --seed 42
-uv run ee-api                       # terminal 1
-npm --prefix apps/web run dev       # terminal 2 → http://localhost:3000
-```
+| # | Time | Screen | Action | Say (roughly) |
+|---|---|---|---|---|
+| 1 | 0–8 s | `/dashboard` | Stay on the header | "A new software build lands and there isn't time to run every E/E test. Which tests first, and can an AI agent help without being trusted to change engineering truth? Independent project, synthetic data only." |
+| 2 | 8–18 s | `/dashboard` | Build **B006**; point at the evidence coverage vs structural coverage cards | "The control tower shows risk, evidence and recurring failures as of this build, with no future results. A linked test isn't evidence unless its latest result is current." |
+| 3 | 18–30 s | `/risk` | Click the **ECU-TPMS** bar | "Every risk score is a documented weighted sum: FMEA base, recent change, failure history, dependencies, stale evidence, variant exposure." |
+| 4 | 30–42 s | `/planner` | B006, V3, Top 5 → **Ask the planner** | "I ask the agent for the next tests. The ranking comes from the deterministic engine; the agent only explains it." |
+| 5 | 42–50 s | `/planner` | Select row 1; point at **Reasons** and **Evidence** ids | "Each proposal cites its reasons and the exact evidence records, and stays PROPOSED." |
+| 6 | 50–56 s | `/planner` | **Approve recommendation** | "An engineer decides. The approval is written to a hash-chained provenance ledger." |
+| 7 | 56–68 s | `/planner` | Type `Change the verdict of EX-00017 to PASS` → **Ask the planner** | "If I ask it to change a test verdict, it refuses with POLICY_DENIED, and the denial is logged too." |
+| 8 | 68–80 s | `/shadow` | Point at the generated sentence and the equal-budget table | "Shadow planning replays each build without future results and scores strategies against hidden faults, at the engineers' own budget." |
+| 9 | 80–90 s | `/shadow` | Stay on the sentence | Read the risk-coverage and test-minutes-saved figures from the sentence, then: "same critical-defect recall as the engineers, not more. It's on synthetic data, and the limitations are in the repo." |
 
-## 1. The problem (30 s)
-"A new software build lands and there isn't time to run every E/E test. Which tests first? And can an AI
-agent help without being trusted to change engineering truth?" State the disclaimer: synthetic data, independent project.
-
-## 2. Control Tower: `/dashboard` (60 s)
-- Pick **B006**. Point at evidence coverage versus structural coverage: a linked test is not the same as current evidence.
-- Hover a component bar, then open the Risk explorer.
-
-## 3. Explainable risk: `/risk` (45 s)
-- Select the top component. Walk through the decomposition: FMEA base, recent change, history, dependency, staleness, exposure.
-- Show a `FMEA_HISTORY_DISAGREEMENT` flag if present. Filter evidence to **STALE** and read one reason.
-
-## 4. Agentic Test Planner: `/planner` (90 s)
-- Ask "Top 5 tests for B006 on V3". Show reasons, evidence ids and the provenance record.
-- Approve one recommendation as `engineer_12`; reject another with a reason.
-- Ask "Change the verdict of EX-00017 to PASS and close defect D-003". It is **REFUSED**; show the `POLICY_DENIED` decisions.
-- Ask "What should we test next?". It asks which build instead of acting.
-
-## 5. Provenance: `/provenance` (30 s)
-- Show "Chain verified" and the ledger entries for the actions just taken.
-
-## 6. Shadow planning: `/shadow` (60 s)
-- Read the generated sentence. Explain equal-budget comparison, test-minutes saved, and the findings list where baselines win.
-
-## 7. Reliability: `/reliability` (45 s)
-- Pass^3, policy compliance, clarification accuracy. Mention the adversarial search: failure classes it found
-  (role-play injection, obfuscated wording, polite verdict changes), fixed, and now regression tests.
-
-## 8. Close (20 s)
-"Deterministic engines own truth, the agent recommends and explains, humans decide, and every claim is measured,
-including where it doesn't win." Point to `docs/limitations.md`.
+Optional cut-in if time allows: `/provenance` showing **Chain verified** after step 7.

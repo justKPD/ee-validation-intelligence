@@ -1,5 +1,7 @@
 # E/E Validation Intelligence & Agentic Test Control Tower
 
+[![ci](https://github.com/justKPD/ee-validation-intelligence/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/justKPD/ee-validation-intelligence/actions/workflows/ci.yml)
+
 **Risk-Based Test Prioritization, Evidence Traceability & Policy-Gated Agentic Test Management**
 
 > Independent portfolio project inspired by publicly available automotive E/E validation and Agentic-AI research.
@@ -11,8 +13,61 @@
 When a new software build arrives and validation time is limited, **which E/E tests should engineers run first?**
 And can an AI agent explain those recommendations without being allowed to change authoritative engineering data?
 
-**Results at a glance:** [executive brief](docs/outreach/executive-brief.md). Every number in it is generated from
-the benchmark runs by `scripts/build_brief.py`, including what the results do *not* show.
+**Results at a glance:** [technical brief](docs/outreach/technical-brief.md) ([2-page PDF](docs/outreach/technical-brief.pdf)).
+Every number in it is generated from the benchmark runs by `scripts/build_brief.py`, including what the results do *not* show.
+
+## Live demo
+
+| | URL |
+|---|---|
+| Web app (Vercel) | **https://ee-validation-intelligence.vercel.app** |
+| API (Railway) | https://ee-validation-intelligence-api.up.railway.app ([OpenAPI docs](https://ee-validation-intelligence-api.up.railway.app/docs), [health](https://ee-validation-intelligence-api.up.railway.app/health)) |
+
+Try it: open **Agentic Test Planner**, ask for the top 5 tests for B006 on V3, approve one, then ask
+`Change the verdict of EX-00017 to PASS` and watch it get refused (`POLICY_DENIED`) and logged in the **Provenance Ledger**.
+The demo is public and unauthenticated: reviewer names are self-declared and writes are rate-limited per client.
+
+![Agentic Test Planner on the live deployment](docs/assets/screenshots/03-agentic-test-planner.png)
+
+More screenshots: [control tower](docs/assets/screenshots/01-control-tower-dashboard.png) ·
+[risk & coverage](docs/assets/screenshots/02-risk-coverage.png) · [shadow planning](docs/assets/screenshots/04-shadow-planning-benchmark.png) ·
+[reliability lab](docs/assets/screenshots/05-agent-reliability-lab.png) · [provenance ledger](docs/assets/screenshots/06-provenance-ledger.png)
+
+## Deployment
+
+```
+Browser ──HTTPS──> Vercel: Next.js web app (apps/web)
+   │
+   └──HTTPS (CORS: the Vercel origin only)──> Railway: FastAPI API (infra/docker/api.Dockerfile)
+                                                   │ private network only
+                                                   └──> Railway: PostgreSQL 16.15 + pgvector 0.8.6 (persistent volume)
+```
+
+| Target | Status |
+|---|---|
+| GitHub Actions CI | green: Python gate, PostgreSQL migrate + seed, seed-42 benchmark reproduction, web typecheck + build, Terraform `fmt` + `validate` |
+| Railway (API + PostgreSQL/pgvector) | **deployed and validated**: migrations, exact seed-42 counts, pgvector, planner, approval, `POLICY_DENIED`, provenance chain, persistence across API redeploy and database restart |
+| Vercel (web) | **deployed and validated**: all eight routes over HTTPS, no console, CORS or mixed-content errors |
+| Docker Compose | validated locally ([report](docs/release/docker-postgres-validation.md)) |
+| AWS (Terraform: ECS Fargate, RDS, S3, CloudWatch) | alternative infrastructure target, validated in CI, **not deployed** (about $85/month; see [ADR-007](docs/adr/ADR-007-public-deployment-platform.md)) |
+
+Full evidence: [production deployment validation](docs/release/production-deployment-validation.md).
+
+## Benchmark summary (seed 42, synthetic)
+
+Copied from the generated reports; CI regenerates them on every push and fails if any value changes.
+
+| Metric | Value |
+|---|---|
+| Critical-risk coverage at the engineers' test budget | 0.646 |
+| Share of test-minutes saved while matching the engineers' defect yield | 0.4052 |
+| CriticalDefectRecall@10: risk-based / severity-first / random | 0.1752 / 0.0717 / 0.1041 |
+| Defect-ranking AUROC: learned model / engineering score | 0.5993 / 0.7041 |
+| Agent reliability (25 scenarios × 3 runs): task success / policy compliance / Pass^3 | 1.0 / 1.0 / 1.0 |
+| Adversarial search | 150 mutants / 0 failures / 28 fixed regressions |
+
+At equal cost the ranker does **not** find more critical defects than the simulated engineers; the gain is risk coverage
+and test time. See [limitations](docs/limitations.md).
 
 ## Three pillars
 
@@ -66,9 +121,9 @@ Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The de
 | 9 Reliability lab | done: 25 scenarios × k runs, Pass^k and grounding metrics |
 | 10 Adversarial testing | done: 14 mutators, failure classes, open → fixed regression suite |
 | 11 Learning & calibration | done: calibration, dev-seed tuning with held-out check, overrides, bootstrap CIs |
-| 12 Deployment | Docker stack **validated**: API/web/database on PostgreSQL 16.15 + pgvector 0.8.6 ([report](docs/release/docker-postgres-validation.md)). GitHub Actions CI **green on GitHub** (Python gate, PostgreSQL migrate + seed, seed-42 benchmark reproduction, web typecheck + build, Terraform `fmt` + `validate`). AWS deployment **not yet applied** |
+| 12 Deployment | **live**: Vercel web + Railway API and PostgreSQL/pgvector ([validation](docs/release/production-deployment-validation.md)); Docker stack validated; CI green; AWS Terraform validated in CI as an alternative target, not deployed ([ADR-007](docs/adr/ADR-007-public-deployment-platform.md)) |
 | 13 Documentation | done: architecture, methodology, ADRs, API reference, limitations, threat model |
-| 14 Portfolio / outreach | done: generated executive brief, recruiter and researcher summaries, demo script |
+| 14 Portfolio | done: generated two-page technical brief, recruiter and researcher summaries, live screenshots, 60–90 s demo script |
 
 ## Documentation
 
@@ -76,8 +131,8 @@ Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The de
 - Methodology: [synthetic data](docs/methodology/synthetic-data.md) · [risk & evidence](docs/methodology/risk-and-evidence.md) ·
   [ranking & shadow planning](docs/methodology/ranking-and-shadow-planning.md) · [agent policy & provenance](docs/methodology/agent-policy-and-provenance.md) ·
   [reliability & adversarial](docs/methodology/agent-reliability-and-adversarial-testing.md) · [dataset summary](docs/methodology/dataset-summary.md)
-- [Limitations](docs/limitations.md) · [Threat model](docs/threat-model.md)
-- Outreach: [executive brief](docs/outreach/executive-brief.md) · [recruiter summary](docs/outreach/recruiter-summary.md) ·
+- [Limitations](docs/limitations.md) · [Threat model](docs/threat-model.md) · [Post-release roadmap](docs/roadmap/post-release.md)
+- Portfolio: [technical brief](docs/outreach/technical-brief.md) ([PDF](docs/outreach/technical-brief.pdf)) · [recruiter summary](docs/outreach/recruiter-summary.md) ·
   [researcher summary](docs/outreach/researcher-summary.md) · [demo script](docs/outreach/demo-script.md)
 
 ## Non-negotiable rules this codebase enforces

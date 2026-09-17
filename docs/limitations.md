@@ -32,7 +32,7 @@ results say nothing about any real organisation's processes, including the BMW G
 
 ## Security and operations
 
-- **No authentication or authorisation on the API.** The reviewer name on approvals is self-declared. A real
+- **No authentication or authorisation on the API**, including the public demo. The reviewer name on approvals is self-declared. A real
   deployment needs SSO, role-based approval rights, and separation between requester and approver.
 - The ledger is tamper-evident (hash chain), not tamper-proof. A privileged database user could rewrite the whole chain;
   anchoring hashes externally (for example, periodic export to write-once storage) would address that.
@@ -72,14 +72,32 @@ Infrastructure defects found and fixed during that validation:
 disk file `docker_data.vhdx` stays around 5.63 GB, because it does not shrink automatically. Compacting it is optional and separate
 from application correctness.
 
-## What was not executed in this build environment
+## Public deployment (2026-09-17)
+
+The public demo runs on Vercel (web) and Railway (FastAPI API, PostgreSQL 16.15 + pgvector 0.8.6 on a private network);
+see [ADR-007](adr/ADR-007-public-deployment-platform.md) and the
+[production deployment validation](release/production-deployment-validation.md).
+
+- **Not AWS.** The Terraform AWS target (ECS Fargate, RDS, S3, CloudWatch) passes `fmt`/`validate` in CI but was not applied:
+  it would cost about $85/month for a synthetic-data demo. No ECS/RDS/ALB operation is demonstrated.
+- **Unauthenticated public demo.** Anyone can create planner runs and approve or reject recommendations; reviewer names are
+  self-declared. Writes are limited per client (`EE_WRITE_RATE_LIMIT`, 30 per 10 minutes live), and the database volume is capped
+  by the hosting plan. Authoritative engineering data has no write API, so visitors cannot change it.
+- **Shared demo state.** Visitors see each other's runs, approvals and denials; a restart re-seeds engineering data but keeps them.
+- **Single region, single instance.** One API instance and one database in one EU region, without replicas or managed backups
+  beyond the persistent volume.
+- **CORS allows only the production web origin.** Vercel preview deployments cannot call the API.
+- **Hosting configuration.** Railway applies only the build section of `railway.toml` (config-as-code support ends 2026-12-01);
+  the health check and Dockerfile path are also set on the service.
+- **The write rate limit is in-process.** It is per API instance and resets when the API restarts.
+
+## What was not executed
 
 | Item | Status |
 |---|---|
-| Terraform / AWS | `terraform fmt -check` and `terraform validate` pass in GitHub Actions; never applied (no AWS credentials), so no deployed URL exists |
-| Live Claude calls | not made; adapter tested with a fake client |
+| Terraform / AWS | `terraform fmt -check` and `terraform validate` pass in GitHub Actions; never applied (cost; see ADR-007) |
+| Live Claude calls | not made; adapter tested with a fake client; the public demo uses the deterministic offline explainer |
 
 GitHub Actions CI runs on every push to `main`: the Python gate (ruff, format, mypy, pytest), Alembic migration and seed
 against a PostgreSQL 16 + pgvector service, a check that the seed-42 benchmark results reproduce exactly, web typecheck and
-build, and Terraform `fmt`/`validate`. The first run's Terraform job failed only because the Terraform binary download
-was interrupted (`read ECONNRESET`); the re-run passed with no code change.
+build, and Terraform `fmt`/`validate`.
