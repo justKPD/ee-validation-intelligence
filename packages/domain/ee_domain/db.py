@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from functools import lru_cache
 from pathlib import Path
 
-from sqlalchemy import Engine, create_engine, event
+from sqlalchemy import Engine, create_engine, event, make_url
 from sqlalchemy.orm import Session, sessionmaker
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -17,6 +17,11 @@ DEFAULT_URL = f"sqlite:///{(REPO_ROOT / 'ee_validation.db').as_posix()}"
 
 def database_url() -> str:
     return os.environ.get("EE_DATABASE_URL", DEFAULT_URL)
+
+
+def redacted_url(url: str | None = None) -> str:
+    """Database URL safe for logs: the password is replaced with ***."""
+    return make_url(url or database_url()).render_as_string(hide_password=True)
 
 
 def make_engine(url: str | None = None) -> Engine:

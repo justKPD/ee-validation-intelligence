@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 from ee_domain import models as m
-from ee_domain.db import make_engine
+from ee_domain.db import make_engine, redacted_url
 from ee_etl.importer import DataQualityError, load_dataset, read_dataset
 from ee_etl.migrate import upgrade_head
 from ee_etl.quality import run_quality_checks
@@ -116,3 +116,10 @@ def test_summary_report_is_built_from_database(engine: Engine) -> None:
     assert "Entirely fictional synthetic data" in md
     assert "| Components | 40 |" in md
     assert "| B006 |" in md
+
+
+def test_redacted_url_never_contains_the_password() -> None:
+    url = "postgresql+psycopg://ee:s3cr3t-value@db.internal:5432/ee_validation"
+    shown = redacted_url(url)
+    assert "s3cr3t-value" not in shown
+    assert shown == "postgresql+psycopg://ee:***@db.internal:5432/ee_validation"
