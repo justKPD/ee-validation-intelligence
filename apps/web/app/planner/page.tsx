@@ -102,36 +102,11 @@ export default function Planner() {
           {result && result.status !== "COMPLETED" && (
             <div className="sentence" style={{ whiteSpace: "pre-line", borderLeftColor: result.status === "REFUSED" ? "var(--status-critical)" : result.status === "ANSWERED" ? "var(--status-good)" : "var(--status-warning)" }}>{result.response}</div>
           )}
-          {result?.answer?.known && (
-            <div className="table-wrap" style={{ marginTop: 12 }}>
-              <table>
-                <thead><tr><th>Variant</th><th>Verdict</th><th>Requirement</th><th>Evidence</th><th>Latest run</th><th>Why</th><th /></tr></thead>
-                <tbody>
-                  {result.answer.variants.flatMap((v) =>
-                    (v.records.length ? v.records : [null]).map((r, i) => (
-                      <tr key={`${v.variant_id}-${r?.requirement_id ?? i}`}>
-                        <td>{i === 0 ? v.variant_id : ""}</td>
-                        <td>{i === 0 ? <StatusBadge status={v.verdict} /> : ""}</td>
-                        <td className="mono">{r?.requirement_id ?? "–"}</td>
-                        <td>{r ? <StatusBadge status={r.status} /> : "–"}</td>
-                        <td className="mono">{r?.execution_id ? `${r.execution_id} (${r.evidence_build_id}, ${r.age_days} d)` : "none"}</td>
-                        <td className="secondary">{r?.reasons.join("; ") ?? `not defined for ${v.variant_id}`}</td>
-                        <td>
-                          {r && (
-                            <Link href={`/risk${qs({ build: result.answer!.build_id, variant: v.variant_id, component: r.component_ids[0], status: r.status })}`}>
-                              See in Risk & Coverage →
-                            </Link>
-                          )}
-                        </td>
-                      </tr>
-                    )),
-                  )}
-                </tbody>
-              </table>
-              <p className="muted" style={{ fontSize: 12 }}>
-                Computed by the evidence engine from data visible as of {result.answer.build_id}; logged as run <span className="mono">{result.run_id}</span> in the provenance ledger. Nothing was changed.
-              </p>
-            </div>
+          {result?.status === "ANSWERED" && (
+            <p className="muted" style={{ fontSize: 12, marginTop: 10 }}>
+              Computed by the evidence engine from data visible as of {result.build_id}; logged as run <span className="mono">{result.run_id}</span> in
+              the provenance ledger. Nothing was changed or proposed.
+            </p>
           )}
           {result?.recommendations.length ? (
             <div className="table-wrap">
@@ -169,6 +144,31 @@ export default function Planner() {
           )}
         </Card>
 
+        {result?.answer?.known ? (
+          <Card title={`Evidence for ${result.answer.test_id} as of ${result.answer.build_id}`} subtitle="Per variant: the verdict, then each requirement the test covers.">
+            {result.answer.variants.map((v) => (
+              <div key={v.variant_id} style={{ marginBottom: 14 }}>
+                <p style={{ margin: "0 0 6px" }}><strong>{v.variant_id}</strong> · <StatusBadge status={v.verdict} /></p>
+                {v.records.length === 0 && <p className="muted" style={{ margin: 0 }}>{result.answer!.test_id} is not defined for {v.variant_id}.</p>}
+                {v.records.map((r) => {
+                  const focus = r.component_ids.find((c) => r.reasons.some((x) => x.includes(c))) ?? r.component_ids[0];
+                  return (
+                    <div key={r.requirement_id} style={{ borderLeft: "3px solid var(--border, #ddd)", paddingLeft: 10, margin: "6px 0" }}>
+                      <p style={{ margin: 0 }}><span className="mono">{r.requirement_id}</span> · <StatusBadge status={r.status} /></p>
+                      <p className="secondary" style={{ margin: "2px 0", fontSize: 13 }}>
+                        Latest run: <span className="mono">{r.execution_id ? `${r.execution_id} on ${r.evidence_build_id} (${r.age_days} d before)` : "none"}</span>
+                      </p>
+                      <ul className="reasons" style={{ margin: "2px 0" }}>{r.reasons.map((x) => <li key={x}>{x}</li>)}</ul>
+                      <Link href={`/risk${qs({ build: result.answer!.build_id, variant: v.variant_id, component: focus, status: r.status })}`}>
+                        See it in Risk & Coverage →
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </Card>
+        ) : (
         <Card title={rec ? `${rec.test_id} on ${rec.variant_id}` : "Explanation & provenance"} subtitle={rec ? <>Recommendation <span className="mono">{rec.recommendation_id}</span> · {status && <StatusBadge status={status} />}</> : undefined}>
           {rec ? (
             <>
@@ -193,6 +193,7 @@ export default function Planner() {
             </>
           ) : <p className="muted">Select a recommendation.</p>}
         </Card>
+        )}
       </div>
     </>
   );
