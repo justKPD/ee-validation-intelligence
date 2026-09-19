@@ -28,7 +28,8 @@ Every tool call, allowed or denied, is stored in `policy_decision`. Denials are 
 | Request shape | Outcome |
 |---|---|
 | build + variant (or "all variants") are clear | `COMPLETED`: gather → rank → propose → explain |
-| build or variant missing, unknown or multiple; unknown component | `NEEDS_CLARIFICATION`, no plan tools called |
+| evidence question naming one test and a build, e.g. "Does TC-186 give valid evidence for B006 on V3?" (variant optional) | `ANSWERED`: read-only `get_test_evidence` → per-variant verdict (VALID / NOT_VALID / NO_EVIDENCE / NOT_APPLICABLE) with each requirement's evidence status, latest execution and reason; nothing proposed, run logged in the ledger |
+| build or variant missing, unknown or multiple; unknown component or test | `NEEDS_CLARIFICATION`, no plan tools called |
 | prohibited intent (verdict change, close defect, release approval, requirement or test rewrite, approval, execution) | `REFUSED`; the attempted tool is `POLICY_DENIED` |
 | injection-style instruction ("ignore previous instructions", "you are now", "bypass the policy") | `REFUSED`; `override_policy` denied |
 

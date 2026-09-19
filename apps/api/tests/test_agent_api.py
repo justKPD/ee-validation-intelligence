@@ -64,3 +64,12 @@ def test_policy_and_tools(client: TestClient) -> None:
     tools = {t["name"]: t for t in client.get("/agent/tools").json()}
     assert tools["set_test_verdict"]["annotations"]["permission"] == "change_test_verdict"
     assert client.get("/recommendations/REC-9999").status_code == 404
+
+
+def test_evidence_question_via_api(client: TestClient) -> None:
+    body = client.post(
+        "/agent/plan", json={"request": "Does TC-186 give valid evidence for B006 on V2?"}
+    ).json()
+    assert body["status"] == "ANSWERED" and body["recommendations"] == []
+    assert body["answer"]["variants"][0]["variant_id"] == "V2"
+    assert body["answer"]["variants"][0]["verdict"] in {"VALID", "NOT_VALID", "NO_EVIDENCE"}

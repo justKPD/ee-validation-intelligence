@@ -15,14 +15,16 @@ export const EVIDENCE_COLORS: Record<EvidenceStatus, string> = {
 const STATUS_ICON: Record<string, string> = {
   CURRENT: "✓", STALE: "◷", INCOMPATIBLE: "≠", FAILED: "✕", MISSING: "∅",
   OPEN: "●", RESOLVED: "✓", PROPOSED: "…", APPROVED: "✓", REJECTED: "✕", EXECUTED: "▶",
-  COMPLETED: "✓", NEEDS_CLARIFICATION: "?", REFUSED: "⛔", FAILED_RUN: "✕",
+  COMPLETED: "✓", ANSWERED: "✓", NEEDS_CLARIFICATION: "?", REFUSED: "⛔", FAILED_RUN: "✕",
+  VALID: "✓", NOT_VALID: "✕", NO_EVIDENCE: "∅", NOT_APPLICABLE: "–",
   ALLOWED: "✓", POLICY_DENIED: "⛔",
 };
 const STATUS_COLOR: Record<string, string> = {
   ...EVIDENCE_COLORS,
   OPEN: "var(--status-critical)", RESOLVED: "var(--status-good)",
   PROPOSED: "var(--status-warning)", APPROVED: "var(--status-good)", REJECTED: "var(--status-critical)", EXECUTED: "var(--series-1)",
-  COMPLETED: "var(--status-good)", NEEDS_CLARIFICATION: "var(--status-warning)", REFUSED: "var(--status-serious)",
+  COMPLETED: "var(--status-good)", ANSWERED: "var(--status-good)", NEEDS_CLARIFICATION: "var(--status-warning)", REFUSED: "var(--status-serious)",
+  VALID: "var(--status-good)", NOT_VALID: "var(--status-critical)", NO_EVIDENCE: "var(--status-neutral)", NOT_APPLICABLE: "var(--status-neutral)",
   ALLOWED: "var(--status-good)", POLICY_DENIED: "var(--status-critical)",
 };
 

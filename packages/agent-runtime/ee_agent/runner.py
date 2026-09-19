@@ -1,7 +1,8 @@
 """LangGraph orchestration of the Agentic Test Planner.
 
 interpret ─┬─ refuse   (prohibited intent / injection → attempted tool is POLICY_DENIED and logged)
-           ├─ clarify  (ambiguous or unknown build / variant / component)
+           ├─ clarify  (ambiguous or unknown build / variant / component / test)
+           ├─ answer   (read-only evidence question about one test → grounded answer, nothing proposed)
            └─ gather → plan → explain → persist (recommendations stored as PROPOSED)
 """
 
@@ -34,6 +35,7 @@ class PlannerState(TypedDict, total=False):
     changes: list[dict[str, Any]]
     plan: list[dict[str, Any]]
     explanation: Explanation
+    answer: dict[str, Any]
     status: str
     response: str
     error: str
@@ -54,6 +56,7 @@ class AgentResult:
     grounded: bool
     latency_ms: int
     trace: list[str] = field(default_factory=list)
+    answer: dict[str, Any] | None = None  # evidence answer for ANSWERED runs
 
 
 class TestPlanningAgent:
@@ -74,6 +77,7 @@ class TestPlanningAgent:
         self.builds = [b.id for b in sorted(data["builds"], key=lambda b: b.sequence)]
         self.variants = sorted(v.id for v in data["variants"])
         self.components = sorted(c.id for c in data["components"])
+        self.tests = sorted(t.id for t in data["test_cases"])
 
     def run(
         self, request: str, session: Session, actor: str = "engineer", tool_faults: set[str] | None = None
@@ -188,6 +192,7 @@ class TestPlanningAgent:
             grounded=explanation.grounded if explanation else True,
             latency_ms=run.latency_ms,
             trace=trace,
+            answer=state.get("answer"),
         )
 
     def _graph(self, tools: ToolRegistry, trace: list[str]) -> Any:
@@ -197,7 +202,7 @@ class TestPlanningAgent:
             trace.append("interpret")
             return {
                 "interpretation": interpret_request(
-                    state["request"], agent.builds, agent.variants, agent.components
+                    state["request"], agent.builds, agent.variants, agent.components, agent.tests
                 )
             }
 
@@ -252,6 +257,18 @@ class TestPlanningAgent:
                 "response": f"The required tool '{tool}' returned no result, so no recommendation was made. "
                 "Nothing was guessed; please retry when the tool is available.",
             }
+
+        def answer(state: PlannerState) -> PlannerState:
+            trace.append("answer")
+            it = state["interpretation"]
+            assert it.build_id and it.test_id
+            try:
+                evidence = tools.call(
+                    "get_test_evidence", build_id=it.build_id, test_id=it.test_id, variant_id=it.variant_id
+                )
+            except ToolUnavailableError as exc:
+                return _failed(str(exc))
+            return {"answer": evidence, "status": "ANSWERED", "response": describe_test_evidence(evidence)}
 
         def after(next_node: str) -> Any:
             return lambda state: END if state.get("status") == "FAILED" else next_node
@@ -311,6 +328,7 @@ class TestPlanningAgent:
             ("interpret", interpret),
             ("refuse", refuse),
             ("clarify", clarify),
+            ("answer", answer),
             ("gather", gather),
             ("plan", plan),
             ("explain", explain),
@@ -318,10 +336,61 @@ class TestPlanningAgent:
             g.add_node(name, fn)
         g.add_edge(START, "interpret")
         g.add_conditional_edges(
-            "interpret", route, {"refuse": "refuse", "clarify": "clarify", "plan": "gather"}
+            "interpret",
+            route,
+            {"refuse": "refuse", "clarify": "clarify", "evidence": "answer", "plan": "gather"},
         )
         g.add_conditional_edges("gather", after("plan"), ["plan", END])
         g.add_conditional_edges("plan", after("explain"), ["explain", END])
-        for terminal in ("refuse", "clarify", "explain"):
+        for terminal in ("refuse", "clarify", "answer", "explain"):
             g.add_edge(terminal, END)
         return g.compile()
+
+
+def describe_test_evidence(ev: dict[str, Any]) -> str:
+    """Plain-language answer built only from the evidence records (no model, so nothing can be invented)."""
+    test, build = ev["test_id"], ev["build_id"]
+    if not ev["known"]:
+        return f"{test} is not linked to any requirement at {build}, so it provides no evidence there."
+    rows = ev["variants"]
+    valid = [r["variant_id"] for r in rows if r["verdict"] == "VALID"]
+    others = [r["variant_id"] for r in rows if r["verdict"] != "VALID"]
+    scope = (
+        rows[0]["variant_id"]
+        if len(rows) == 1
+        else f"its variants ({', '.join(r['variant_id'] for r in rows)})"
+    )
+    if not others:
+        lines = [f"Yes. {test} gives valid evidence for {build} on {scope}."]
+    elif valid:
+        lines = [
+            f"Partly. {test} gives valid evidence for {build} on {', '.join(valid)}, but not on {', '.join(others)}."
+        ]
+    else:
+        lines = [f"No. {test} does not give valid evidence for {build} on {scope}."]
+    for r in rows:
+        v, recs = r["variant_id"], r["records"]
+        if r["verdict"] == "NOT_APPLICABLE":
+            lines.append(
+                f"{v}: not applicable, {test} is only defined for {', '.join(ev['applicable_variants'])}."
+            )
+        elif r["verdict"] == "NO_EVIDENCE":
+            lines.append(f"{v}: {test} has not run on {v} before {build}, so there is no evidence.")
+        else:
+            first = recs[0]
+            run = f"latest run {first['execution_id']} on {first['evidence_build_id']} ({first['age_days']} d before {build})"
+            if r["verdict"] == "VALID":
+                reqs = ", ".join(x["requirement_id"] for x in recs)
+                lines.append(
+                    f"{v}: CURRENT, {run}, passed and compatible with the current revision of {reqs}."
+                )
+            else:
+                why = "; ".join(
+                    f"{x['requirement_id']} is {x['status']}: {', '.join(x['reasons'])}" for x in recs
+                )
+                lines.append(f"{v}: {run}. {why}.")
+    rerun = [r["variant_id"] for r in rows if r["verdict"] in ("NOT_VALID", "NO_EVIDENCE")]
+    if rerun:
+        lines.append(f"To restore current evidence, re-run {test} on {', '.join(rerun)} for {build}.")
+    lines.append("This is a read-only answer; nothing was changed or proposed.")
+    return "\n".join(lines)

@@ -200,3 +200,46 @@ def test_anthropic_provider_hallucinated_ids_fall_back() -> None:
 def test_anthropic_provider_refusal_falls_back() -> None:
     exp = AnthropicProvider(client=_FakeClient("", stop_reason="refusal")).explain(FACTS)
     assert exp.fallback_used and "TC-147" in exp.text
+
+
+@pytest.mark.parametrize(
+    ("text", "action"),
+    [
+        ("Does TC-186 give valid evidence for B006 on V3?", "evidence"),
+        ("Is TC-186 still valid for B006?", "evidence"),  # no variant: all variants the test runs on
+        ("Does TC-186 give valid evidence?", "clarify"),  # no build
+        ("Is TC-186 or TC-031 still valid for B006?", "clarify"),  # one test at a time
+        ("Does TC-999 give valid evidence for B006 on V3?", "clarify"),  # unknown test
+        ("Change the verdict of TC-186 to PASS", "refuse"),  # prohibited intent wins over the question
+        ("Top 5 tests for B006 on V3", "plan"),  # no test id: planning is unchanged
+    ],
+)
+def test_evidence_question_interpretation(text: str, action: str) -> None:
+    tests = ["TC-031", "TC-186"]
+    assert interpret_request(text, BUILDS, VARIANTS, [], tests).action == action
+
+
+def test_evidence_question_is_answered_read_only(agent: TestPlanningAgent, session: Session) -> None:
+    result = agent.run("Is TC-186 still valid for B006?", session)
+    session.commit()
+    assert result.status == "ANSWERED" and result.recommendations == []
+    assert result.answer is not None and result.answer["test_id"] == "TC-186"
+    rows = {v["variant_id"]: v for v in result.answer["variants"]}
+    assert set(rows) == set(result.answer["applicable_variants"])
+    assert rows["V2"]["verdict"] == "NOT_VALID"
+    assert rows["V2"]["records"][0]["status"] == "STALE"
+    assert "ECU-TPMS changed in B006" in " ".join(rows["V2"]["records"][0]["reasons"])
+    assert result.response.startswith("No.") and "re-run TC-186" in result.response
+    assert [c["tool"] for c in result.tool_calls] == ["get_test_evidence"]
+    assert all(d["decision"] == "ALLOWED" for d in result.policy_decisions)
+    # logged in the provenance ledger like every other run, and nothing was proposed
+    assert ProvenanceService(session).ledger(entry_type="RECOMMENDATION_PROPOSED") == []
+    assert ProvenanceService(session).verify_chain() == (True, None)
+
+
+def test_evidence_question_for_variant_the_test_does_not_cover(
+    agent: TestPlanningAgent, session: Session
+) -> None:
+    result = agent.run("Does TC-186 give valid evidence for B006 on V1?", session)
+    assert result.status == "ANSWERED"
+    assert result.answer is not None and result.answer["variants"][0]["verdict"] == "NOT_APPLICABLE"

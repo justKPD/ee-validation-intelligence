@@ -2,11 +2,16 @@
 
 The agent acts only when the build and variant are unambiguous. Otherwise it asks, because acting
 prematurely on incomplete information is a known agent failure mode.
+
+Besides planning, it answers read-only evidence questions about one named test, for example
+"Does TC-186 give valid evidence for B006 on V3?". Those need a build and a test id; without a variant the
+answer covers every variant the test runs on.
 """
 
 from __future__ import annotations
 
 import re
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 
 PROHIBITED_INTENTS: list[tuple[re.Pattern[str], str, str]] = [
@@ -62,6 +67,13 @@ INJECTION = re.compile(
 _DEOBFUSCATE = str.maketrans({"0": "o", "1": "l", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s"})
 
 
+# an evidence question names a test and asks about its validity/freshness/coverage
+EVIDENCE_QUESTION = re.compile(
+    r"\b(evidence|valid|validity|current|stale|up[ -]to[ -]date|still (good|ok|okay|valid)|covered|coverage|trust)\b",
+    re.I,
+)
+
+
 def _intent_views(text: str) -> tuple[str, ...]:
     return (text, text.translate(_DEOBFUSCATE))
 
@@ -77,6 +89,8 @@ class Interpretation:
     prohibited: list[tuple[str, str]] = field(default_factory=list)  # (permission, tool)
     injection: bool = False
     clarification: str | None = None
+    question: bool = False  # read-only evidence question about one test
+    test_id: str | None = None
 
     @property
     def action(self) -> str:
@@ -84,13 +98,19 @@ class Interpretation:
             return "refuse"
         if self.clarification:
             return "clarify"
-        return "plan"
+        return "evidence" if self.question else "plan"
 
 
 def interpret_request(
-    text: str, builds: list[str], variants: list[str], components: list[str]
+    text: str,
+    builds: list[str],
+    variants: list[str],
+    components: list[str],
+    tests: Sequence[str] | None = None,
 ) -> Interpretation:
     it = Interpretation()
+    test_ids = sorted({t.upper() for t in re.findall(r"\bTC-\d{3}\b", text, re.I)})
+    it.question = bool(test_ids) and bool(EVIDENCE_QUESTION.search(text))
     views = _intent_views(text)
     matched = [
         (perm, tool) for pattern, perm, tool in PROHIBITED_INTENTS if any(pattern.search(v) for v in views)
@@ -118,13 +138,38 @@ def interpret_request(
             f"You mentioned several builds ({', '.join(build_ids)}). Which single build should I plan for?"
         )
     elif not build_ids:
-        it.clarification = f"Which software build should I plan validation for? Known builds: {build_list}."
+        it.clarification = (
+            f"Which software build should I check {test_ids[0]}'s evidence for? Known builds: {build_list}."
+            if it.question
+            else f"Which software build should I plan validation for? Known builds: {build_list}."
+        )
     elif build_ids[0].upper() not in builds:
         it.clarification = (
             f"Build {build_ids[0]} is unknown. Known builds: {build_list}. Which one did you mean?"
         )
     else:
         it.build_id = build_ids[0].upper()
+
+    if it.clarification is None and it.question:
+        if len(test_ids) > 1:
+            it.clarification = (
+                f"You mentioned several tests ({', '.join(test_ids)}). Which single test should I check?"
+            )
+        elif tests is not None and test_ids[0] not in tests:
+            it.clarification = f"Test {test_ids[0]} is not in the programme. Which test did you mean?"
+        else:
+            it.test_id = test_ids[0]
+        if it.clarification is None:
+            if len(variant_ids) > 1:
+                it.clarification = (
+                    f"You mentioned several variants ({', '.join(variant_ids)}). Which one, or leave the variant out "
+                    "to check every variant the test runs on?"
+                )
+            elif variant_ids and variant_ids[0] not in variants:
+                it.clarification = f"Variant {variant_ids[0]} is unknown. Known variants: {variant_list}. Which one did you mean?"
+            elif variant_ids:
+                it.variant_id = variant_ids[0]
+        return it
 
     if it.clarification is None:
         if len(variant_ids) > 1:

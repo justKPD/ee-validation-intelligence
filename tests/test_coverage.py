@@ -2,7 +2,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from ee_coverage import CoverageConfig, EvidenceStatus, assess_evidence, summarize_coverage
+from ee_coverage import (
+    CoverageConfig,
+    EvidenceStatus,
+    assess_evidence,
+    assess_test_evidence,
+    summarize_coverage,
+)
 from ee_domain.snapshot import ValidationSnapshot, build_snapshot
 
 
@@ -68,3 +74,12 @@ def test_summary_is_consistent(snap_b006: ValidationSnapshot) -> None:
     assert 0 < summary.evidence_coverage < summary.structural_coverage <= 1
     assert summary.requirements_with_tests < summary.requirements_total
     assert set(summary.by_component) <= set(snap_b006.components)
+
+
+def test_single_test_evidence_uses_the_same_rules(dataset: dict[str, list[Any]]) -> None:
+    snap = build_snapshot(dataset, "B006")
+    recs = assess_test_evidence(snap, "TC-186", "V2")
+    assert recs and all(r.test_id == "TC-186" and r.variant_id == "V2" for r in recs)
+    assert {r.requirement_id for r in recs} == set(snap.test_requirements["TC-186"])
+    never_ran = assess_test_evidence(snap, "TC-186", "V3")
+    assert all(r.status.value == "MISSING" and r.execution_id is None for r in never_ran)

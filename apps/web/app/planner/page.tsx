@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { BuildVariantFilters, Card, ErrorBox, IdList, PageHeader, StatusBadge } from "@/components/ui";
-import { apiGet, apiPost, type AgentResult, type Recommendation } from "@/lib/api";
+import { apiGet, apiPost, qs, type AgentResult, type Recommendation } from "@/lib/api";
 import { num, pct, score } from "@/lib/format";
 
 type Record_ = Record<string, unknown> & { decision?: { status: string; history: { decision: string; reviewer: string; reason: string; at: string }[] } };
@@ -78,6 +79,15 @@ export default function Planner() {
             Or ask in your own words
             <textarea rows={4} value={custom} placeholder={composed} onChange={(e) => setCustom(e.target.value)} />
           </label>
+          <p className="muted" style={{ fontSize: 12, margin: "6px 0 0" }}>
+            You can also ask about evidence, e.g.{" "}
+            {["Does TC-186 give valid evidence for B006 on V2?", "Is TC-031 still valid for B006?"].map((q, i) => (
+              <span key={q}>
+                {i > 0 && " or "}
+                <button className="link" onClick={() => setCustom(q)}>“{q}”</button>
+              </span>
+            ))}
+          </p>
           <label className="secondary" style={{ display: "grid", gap: 4, fontSize: 12, marginTop: 10 }}>
             Reviewer
             <input value={reviewer} onChange={(e) => setReviewer(e.target.value)} />
@@ -88,9 +98,40 @@ export default function Planner() {
           <p className="muted" style={{ fontSize: 12 }}>Sends: “{request}”</p>
         </Card>
 
-        <Card title="Proposed plan" subtitle={result ? <>Run <span className="mono">{result.run_id}</span> · <StatusBadge status={result.status} /> · {result.model.provider}/{result.model.name} · {result.latency_ms} ms</> : "Ask the planner to see ranked recommendations."}>
+        <Card title={result?.status === "ANSWERED" ? "Answer" : "Proposed plan"} subtitle={result ? <>Run <span className="mono">{result.run_id}</span> · <StatusBadge status={result.status} /> · {result.model.provider}/{result.model.name} · {result.latency_ms} ms</> : "Ask the planner to see ranked recommendations."}>
           {result && result.status !== "COMPLETED" && (
-            <div className="sentence" style={{ borderLeftColor: result.status === "REFUSED" ? "var(--status-critical)" : "var(--status-warning)" }}>{result.response}</div>
+            <div className="sentence" style={{ whiteSpace: "pre-line", borderLeftColor: result.status === "REFUSED" ? "var(--status-critical)" : result.status === "ANSWERED" ? "var(--status-good)" : "var(--status-warning)" }}>{result.response}</div>
+          )}
+          {result?.answer?.known && (
+            <div className="table-wrap" style={{ marginTop: 12 }}>
+              <table>
+                <thead><tr><th>Variant</th><th>Verdict</th><th>Requirement</th><th>Evidence</th><th>Latest run</th><th>Why</th><th /></tr></thead>
+                <tbody>
+                  {result.answer.variants.flatMap((v) =>
+                    (v.records.length ? v.records : [null]).map((r, i) => (
+                      <tr key={`${v.variant_id}-${r?.requirement_id ?? i}`}>
+                        <td>{i === 0 ? v.variant_id : ""}</td>
+                        <td>{i === 0 ? <StatusBadge status={v.verdict} /> : ""}</td>
+                        <td className="mono">{r?.requirement_id ?? "–"}</td>
+                        <td>{r ? <StatusBadge status={r.status} /> : "–"}</td>
+                        <td className="mono">{r?.execution_id ? `${r.execution_id} (${r.evidence_build_id}, ${r.age_days} d)` : "none"}</td>
+                        <td className="secondary">{r?.reasons.join("; ") ?? `not defined for ${v.variant_id}`}</td>
+                        <td>
+                          {r && (
+                            <Link href={`/risk${qs({ build: result.answer!.build_id, variant: v.variant_id, component: r.component_ids[0], status: r.status })}`}>
+                              See in Risk & Coverage →
+                            </Link>
+                          )}
+                        </td>
+                      </tr>
+                    )),
+                  )}
+                </tbody>
+              </table>
+              <p className="muted" style={{ fontSize: 12 }}>
+                Computed by the evidence engine from data visible as of {result.answer.build_id}; logged as run <span className="mono">{result.run_id}</span> in the provenance ledger. Nothing was changed.
+              </p>
+            </div>
           )}
           {result?.recommendations.length ? (
             <div className="table-wrap">

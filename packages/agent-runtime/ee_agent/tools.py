@@ -10,7 +10,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from ee_coverage import EvidenceStatus
+from ee_coverage import EvidenceStatus, assess_test_evidence
 from ee_domain.snapshot import DatasetView, build_snapshot
 from ee_domain.visibility import visible_data
 from ee_policies import PolicyDeniedError, PolicyGate
@@ -142,6 +142,51 @@ class ToolRegistry:
             "reasons": rec.reasons,
         }
 
+    def _test_evidence(self, build_id: str, test_id: str, variant_id: str | None = None) -> dict[str, Any]:
+        snap = self.context(build_id).snapshot
+        if test_id not in snap.tests:
+            return {"test_id": test_id, "build_id": build_id, "known": False, "variants": []}
+        applicable = sorted(snap.test_variants.get(test_id, []))
+        asked = [variant_id] if variant_id else applicable
+        out: list[dict[str, Any]] = []
+        for vid in asked:
+            if vid not in applicable:
+                out.append({"variant_id": vid, "verdict": "NOT_APPLICABLE", "records": []})
+                continue
+            recs = assess_test_evidence(snap, test_id, vid)
+            statuses = {r.status for r in recs}
+            if statuses == {EvidenceStatus.CURRENT}:
+                verdict = "VALID"
+            elif statuses <= {EvidenceStatus.MISSING}:
+                verdict = "NO_EVIDENCE"
+            else:
+                verdict = "NOT_VALID"
+            out.append(
+                {
+                    "variant_id": vid,
+                    "verdict": verdict,
+                    "records": [
+                        {
+                            "requirement_id": r.requirement_id,
+                            "status": r.status.value,
+                            "execution_id": r.execution_id,
+                            "evidence_build_id": r.evidence_build_id,
+                            "age_days": r.age_days,
+                            "reasons": r.reasons,
+                            "component_ids": snap.req_components.get(r.requirement_id, []),
+                        }
+                        for r in recs
+                    ],
+                }
+            )
+        return {
+            "test_id": test_id,
+            "build_id": build_id,
+            "known": True,
+            "applicable_variants": applicable,
+            "variants": out,
+        }
+
     def _test_history(self, build_id: str, test_id: str) -> list[dict[str, Any]]:
         snap = self.context(build_id).snapshot
         defects = {d.execution_id: d.id for d in snap.defects}
@@ -250,6 +295,16 @@ class ToolRegistry:
                     ["build_id", "requirement_id", "variant_id"],
                 ),
                 self._evidence,
+            ),
+            ToolSpec(
+                "get_test_evidence",
+                "Whether one test's latest run gives valid evidence for a build and variant, per requirement.",
+                "read_coverage",
+                s(
+                    {"build_id": BUILD, "test_id": {"type": "string"}, "variant_id": VARIANT},
+                    ["build_id", "test_id"],
+                ),
+                self._test_evidence,
             ),
             ToolSpec(
                 "get_test_history",

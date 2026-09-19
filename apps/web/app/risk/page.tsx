@@ -11,9 +11,9 @@ import { useApi } from "@/lib/useApi";
 function RiskExplorer() {
   const params = useSearchParams();
   const [build, setBuild] = useState<string | null>(params.get("build"));
-  const [variant, setVariant] = useState("");
+  const [variant, setVariant] = useState(params.get("variant") ?? "");
   const [component, setComponent] = useState<string | null>(params.get("component"));
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(params.get("status") ?? "");
   const [criticalOnly, setCriticalOnly] = useState(true);
 
   const risks = useApi<ComponentRisk[]>(build ? `/builds/${build}/risk/components` : null);

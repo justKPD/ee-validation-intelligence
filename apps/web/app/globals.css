@@ -157,3 +157,14 @@ pre.json { background: var(--surface-2); border-radius: 8px; padding: 10px; over
 .legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
 .legend .line-key { display: inline-block; width: 14px; height: 2px; border-radius: 1px; margin-right: 6px; vertical-align: 3px; }
 .view-toggle { font-size: 12px; padding: 2px 8px; }
+
+/* inline text button (example questions in the planner) */
+button.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -156,7 +156,7 @@ export interface PolicyDecisionOut {
 }
 export interface AgentResult {
   run_id: string;
-  status: "COMPLETED" | "NEEDS_CLARIFICATION" | "REFUSED" | "FAILED";
+  status: "COMPLETED" | "ANSWERED" | "NEEDS_CLARIFICATION" | "REFUSED" | "FAILED";
   response: string;
   clarification_question: string | null;
   build_id: string | null;
@@ -168,6 +168,27 @@ export interface AgentResult {
   grounded: boolean;
   latency_ms: number;
   trace: string[];
+  answer?: TestEvidenceAnswer | null;
+}
+/** Answer to "does this test give valid evidence for this build (and variant)?" */
+export interface TestEvidenceAnswer {
+  test_id: string;
+  build_id: string;
+  known: boolean;
+  applicable_variants?: string[];
+  variants: {
+    variant_id: string;
+    verdict: "VALID" | "NOT_VALID" | "NO_EVIDENCE" | "NOT_APPLICABLE";
+    records: {
+      requirement_id: string;
+      status: EvidenceStatus;
+      execution_id: string | null;
+      evidence_build_id: string | null;
+      age_days: number | null;
+      reasons: string[];
+      component_ids: string[];
+    }[];
+  }[];
 }
 export interface Recommendation {
   id: string;

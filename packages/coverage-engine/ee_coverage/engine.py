@@ -128,6 +128,34 @@ def assess_evidence(snap: ValidationSnapshot, config: CoverageConfig | None = No
     return records
 
 
+def assess_test_evidence(
+    snap: ValidationSnapshot, test_id: str, variant_id: str, config: CoverageConfig | None = None
+) -> list[EvidenceRecord]:
+    """Evidence that one test's latest run on one variant gives each requirement it covers, as of ``snap``.
+
+    Answers "does this test still provide valid evidence for this build and variant?" with the same rules as
+    ``assess_evidence``, but for a single test instead of the best test per requirement.
+    """
+    cfg = config or CoverageConfig()
+    latest = None
+    for e in snap.executions:  # sorted by executed_at, so later overwrites earlier
+        if e.test_id == test_id and e.variant_id == variant_id and e.verdict != "BLOCKED":
+            latest = e
+    records: list[EvidenceRecord] = []
+    for rid in sorted(snap.test_requirements.get(test_id, [])):
+        if latest is None:
+            reason = f"{test_id} has not run on {variant_id} before {snap.build_id}"
+            records.append(
+                EvidenceRecord(rid, variant_id, EvidenceStatus.MISSING, test_id, None, None, None, [reason])
+            )
+            continue
+        status, age, reasons = _classify(snap, rid, latest, cfg)
+        records.append(
+            EvidenceRecord(rid, variant_id, status, test_id, latest.id, latest.build_id, age, reasons)
+        )
+    return records
+
+
 def summarize_coverage(snap: ValidationSnapshot, records: list[EvidenceRecord]) -> CoverageSummary:
     total = len(snap.requirements)
     with_tests = sum(1 for r in snap.requirements if snap.requirement_tests.get(r))
