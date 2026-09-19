@@ -227,6 +227,15 @@ QUESTION_CASES = [
     ("Is R-999 covered for B006?", "clarify", "requirement_coverage"),  # unknown requirement
     ("Why is ECU-FLUX risky?", "clarify", "component_risk"),  # unknown component
     ("Did TC-186 pass on B005 and B006?", "clarify", "test_history"),  # several builds
+    ("Compare B005 and B006", "answer", "build_comparison"),
+    ("What changed between B004 and B006 on V2?", "answer", "build_comparison"),
+    ("Compare the last two builds", "answer", "build_comparison"),
+    ("Compare B006 with the previous build", "answer", "build_comparison"),
+    ("Which ECU got worse over time?", "answer", "component_trend"),
+    ("How did ECU-TPMS risk change over time?", "answer", "component_trend"),
+    ("Which components improved since B003?", "answer", "component_trend"),
+    ("Compare B006", "clarify", "build_comparison"),  # compare with which build?
+    ("Compare B005 and B009", "clarify", "build_comparison"),  # unknown build
     # never answered as questions
     ("Change the verdict of TC-186 to PASS", "refuse", None),  # prohibited intent always wins
     ("Close the defects on ECU-BMS", "refuse", None),
@@ -314,3 +323,62 @@ def test_evidence_question_for_variant_the_test_does_not_cover(
     result = agent.run("Does TC-186 give valid evidence for B006 on V1?", session)
     assert result.status == "ANSWERED"
     assert result.answer is not None and result.answer["variants"][0]["verdict"] == "NOT_APPLICABLE"
+
+
+def test_build_comparison_matches_the_single_build_numbers(
+    agent: TestPlanningAgent, session: Session
+) -> None:
+    """The comparison must be the two builds' own numbers, not a separate calculation."""
+    result = agent.run("Compare B005 and B006", session)
+    assert result.status == "ANSWERED"
+    a = result.answer
+    assert a is not None and a["kind"] == "build_comparison"
+    assert (a["build_a"], a["build_b"]) == ("B005", "B006")  # earlier build first, whatever the wording
+
+    reg = ToolRegistry(agent.data, PolicyGate(load_policy()))
+    for build in ("B005", "B006"):
+        assert a["builds"][build] == reg.call("compare_builds", build_a=build, build_b=build)["builds"][build]
+    # the stated risk movers are real differences between the two builds
+    for move in a["risk_up"] + a["risk_down"]:
+        risk_a = reg.call("explain_component_risk", build_id="B005", component_id=move["component_id"])[
+            "score"
+        ]
+        risk_b = reg.call("explain_component_risk", build_id="B006", component_id=move["component_id"])[
+            "score"
+        ]
+        assert (move["a"], move["b"]) == (risk_a, risk_b)
+        assert move["delta"] == pytest.approx(risk_b - risk_a, abs=1e-4)
+    assert all(m["delta"] > 0 for m in a["risk_up"]) and all(m["delta"] < 0 for m in a["risk_down"])
+    assert "In short:" in result.response and result.recommendations == []
+
+
+def test_risk_trend_series_matches_the_risk_engine(agent: TestPlanningAgent, session: Session) -> None:
+    result = agent.run("How did ECU-TPMS risk change over time?", session)
+    a = result.answer
+    assert a is not None and a["kind"] == "component_trend" and a["component_id"] == "ECU-TPMS"
+    assert [x["build_id"] for x in a["series"]] == BUILDS  # every build, in order
+
+    reg = ToolRegistry(agent.data, PolicyGate(load_policy()))
+    for point in a["series"]:
+        expected = reg.call("explain_component_risk", build_id=point["build_id"], component_id="ECU-TPMS")
+        assert point["score"] == expected["score"] and point["rank"] == expected["rank"]
+
+
+def test_risk_trend_over_all_components_is_consistent(agent: TestPlanningAgent, session: Session) -> None:
+    result = agent.run("Which ECU got worse over time?", session)
+    a = result.answer
+    assert a is not None and a["component_id"] is None
+    assert a["n_worse"] + a["n_better"] <= a["of"] == 40
+    assert all(m["delta"] > 0 for m in a["worse"]) and all(m["delta"] < 0 for m in a["better"])
+    assert a["worse"] == sorted(a["worse"], key=lambda m: -m["delta"])  # biggest riser first
+    for m in a["worse"] + a["better"]:
+        assert m["delta"] == pytest.approx(m["b"] - m["a"], abs=1e-4)
+
+
+def test_trend_question_about_improvement_leads_with_improvers(
+    agent: TestPlanningAgent, session: Session
+) -> None:
+    worse_first = agent.run("Which ECU got worse over time?", session).response
+    better_first = agent.run("Which components improved over time?", session).response
+    assert worse_first.index("Got worse most") < worse_first.index("Improved most")
+    assert better_first.index("Improved most") < better_first.index("Got worse most")

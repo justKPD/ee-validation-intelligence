@@ -343,6 +343,127 @@ class ToolRegistry:
             "failures": failures,
         }
 
+    def _build_summary(self, build_id: str, variant_id: str | None = None) -> dict[str, Any]:
+        """Headline numbers of one build: changes, evidence and risk as of its release, plus its recorded results."""
+        ctx = self.context(build_id)
+        recs = [r for (_, vid), r in ctx.evidence.items() if variant_id is None or vid == variant_id]
+        current = sum(r.status == EvidenceStatus.CURRENT for r in recs)
+        risks = sorted(ctx.component_risk.values(), key=lambda r: (-r.score, r.component_id))
+        executions, defects = self._recorded()
+        runs = [
+            e
+            for e in executions
+            if e.build_id == build_id and (variant_id is None or e.variant_id == variant_id)
+        ]
+        verdicts = Counter(e.verdict for e in runs)
+        return {
+            "changes": len(ctx.snapshot.current_changes),
+            "evidence_pairs": len(recs),
+            "current_share": round(current / max(len(recs), 1), 4),
+            "mean_risk": round(sum(r.score for r in risks) / max(len(risks), 1), 4),
+            "top_component": risks[0].component_id,
+            "top_score": risks[0].score,
+            "runs": len(runs),
+            "fail": verdicts.get("FAIL", 0),
+            "blocked": verdicts.get("BLOCKED", 0),
+            "defects": sum(1 for e in runs if e.id in defects),
+        }
+
+    def _compare_builds(self, build_a: str, build_b: str, variant_id: str | None = None) -> dict[str, Any]:
+        a_ctx, b_ctx = self.context(build_a), self.context(build_b)
+        lost = gained = 0
+        for key, rb in b_ctx.evidence.items():
+            if variant_id and key[1] != variant_id:
+                continue
+            ra = a_ctx.evidence.get(key)
+            was, now = (
+                ra is not None and ra.status == EvidenceStatus.CURRENT,
+                rb.status == EvidenceStatus.CURRENT,
+            )
+            lost += was and not now
+            gained += now and not was
+        deltas: list[dict[str, Any]] = sorted(
+            (
+                {
+                    "component_id": c,
+                    "a": a_ctx.component_risk[c].score,
+                    "b": b_ctx.component_risk[c].score,
+                    "delta": round(b_ctx.component_risk[c].score - a_ctx.component_risk[c].score, 4),
+                }
+                for c in b_ctx.component_risk
+            ),
+            key=lambda d: (-d["delta"], d["component_id"]),
+        )
+        return {
+            "build_a": build_a,
+            "build_b": build_b,
+            "variant_id": variant_id,
+            "builds": {
+                build_a: self._build_summary(build_a, variant_id),
+                build_b: self._build_summary(build_b, variant_id),
+            },
+            "evidence_lost": lost,
+            "evidence_gained": gained,
+            "risk_up": [d for d in deltas if d["delta"] > 0][:3],
+            "risk_down": [d for d in reversed(deltas) if d["delta"] < 0][:3],
+        }
+
+    def _risk_trend(self, build_from: str, build_to: str, component_id: str | None = None) -> dict[str, Any]:
+        order = [b.id for b in sorted(self.data["builds"], key=lambda b: b.sequence)]
+        span = order[order.index(build_from) : order.index(build_to) + 1]
+        executions, defects = self._recorded()
+        build_of = {e.id: e.build_id for e in executions}
+        defects_per = Counter((d.component_id, build_of.get(d.execution_id)) for d in defects.values())
+        ranked = {
+            b: sorted(self.context(b).component_risk.values(), key=lambda r: (-r.score, r.component_id))
+            for b in span
+        }
+        out: dict[str, Any] = {
+            "build_from": build_from,
+            "build_to": build_to,
+            "component_id": component_id,
+            "of": len(ranked[build_to]),
+        }
+        if component_id:
+            out["series"] = [
+                {
+                    "build_id": b,
+                    "score": self.context(b).component_risk[component_id].score,
+                    "rank": next(
+                        i for i, r in enumerate(ranked[b], start=1) if r.component_id == component_id
+                    ),
+                    "defects": defects_per.get((component_id, b), 0),
+                }
+                for b in span
+            ]
+            return out
+        first, last = self.context(build_from).component_risk, self.context(build_to).component_risk
+        deltas: list[dict[str, Any]] = sorted(
+            (
+                {
+                    "component_id": c,
+                    "a": first[c].score,
+                    "b": last[c].score,
+                    "delta": round(last[c].score - first[c].score, 4),
+                }
+                for c in last
+            ),
+            key=lambda d: (-d["delta"], d["component_id"]),
+        )
+        out.update(
+            {
+                "n_worse": sum(d["delta"] > 0 for d in deltas),
+                "n_better": sum(d["delta"] < 0 for d in deltas),
+                "worse": [d for d in deltas if d["delta"] > 0][:5],
+                "better": [d for d in reversed(deltas) if d["delta"] < 0][:3],
+                "riskiest": {
+                    "component_id": ranked[build_to][0].component_id,
+                    "score": ranked[build_to][0].score,
+                },
+            }
+        )
+        return out
+
     def _test_history(self, build_id: str, test_id: str) -> list[dict[str, Any]]:
         snap = self.context(build_id).snapshot
         defects = {d.execution_id: d.id for d in snap.defects}
@@ -502,6 +623,23 @@ class ToolRegistry:
                 "read_results",
                 s({"build_id": BUILD, "variant_id": VARIANT}, ["build_id"]),
                 self._build_results,
+            ),
+            ToolSpec(
+                "compare_builds",
+                "Compare two builds: changes, current evidence, risk and recorded results, with biggest risk movers.",
+                "read_coverage",
+                s({"build_a": BUILD, "build_b": BUILD, "variant_id": VARIANT}, ["build_a", "build_b"]),
+                self._compare_builds,
+            ),
+            ToolSpec(
+                "get_risk_trend",
+                "Component risk as of every build in a range: one component's history, or the biggest risers and fallers.",
+                "read_risk",
+                s(
+                    {"build_from": BUILD, "build_to": BUILD, "component_id": {"type": "string"}},
+                    ["build_from", "build_to"],
+                ),
+                self._risk_trend,
             ),
             ToolSpec(
                 "get_test_history",

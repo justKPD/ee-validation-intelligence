@@ -267,13 +267,58 @@ export interface BuildFailuresAnswer {
     defect_severity: number | null;
   }[];
 }
+export interface BuildSummary {
+  changes: number;
+  evidence_pairs: number;
+  current_share: number;
+  mean_risk: number;
+  top_component: string;
+  top_score: number;
+  runs: number;
+  fail: number;
+  blocked: number;
+  defects: number;
+}
+export interface RiskMove {
+  component_id: string;
+  a: number;
+  b: number;
+  delta: number;
+}
+export interface BuildComparisonAnswer {
+  kind: "build_comparison";
+  build_a: string;
+  build_b: string;
+  variant_id: string | null;
+  builds: Record<string, BuildSummary>;
+  evidence_lost: number;
+  evidence_gained: number;
+  risk_up: RiskMove[];
+  risk_down: RiskMove[];
+}
+export interface ComponentTrendAnswer {
+  kind: "component_trend";
+  build_from: string;
+  build_to: string;
+  component_id: string | null;
+  of: number;
+  focus?: "better" | "worse";
+  series?: { build_id: string; score: number; rank: number; defects: number }[];
+  n_worse?: number;
+  n_better?: number;
+  worse?: RiskMove[];
+  better?: RiskMove[];
+  riskiest?: { component_id: string; score: number };
+}
 export type AgentAnswer =
   | TestEvidenceAnswer
   | TestHistoryAnswer
   | RequirementCoverageAnswer
   | ComponentRiskAnswer
   | ComponentDefectsAnswer
-  | BuildFailuresAnswer;
+  | BuildFailuresAnswer
+  | BuildComparisonAnswer
+  | ComponentTrendAnswer;
 export interface Recommendation {
   id: string;
   run_id: string;

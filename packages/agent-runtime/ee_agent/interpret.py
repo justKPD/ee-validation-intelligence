@@ -15,7 +15,7 @@ import re
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 
-from ee_agent.questions import AS_OF_KINDS, classify_question
+from ee_agent.questions import AS_OF_KINDS, LAST_TWO, PREVIOUS, classify_question
 
 PROHIBITED_INTENTS: list[tuple[re.Pattern[str], str, str]] = [
     (
@@ -88,6 +88,9 @@ class Interpretation:
     question: str | None = None  # read-only question kind (see ee_agent.questions); None for planning
     test_id: str | None = None
     requirement_id: str | None = None
+    compare_build_id: str | None = (
+        None  # earlier build of a comparison or trend range (build_id is the later one)
+    )
     build_defaulted: bool = False  # no build named: the latest build was used for a read-only question
 
     @property
@@ -126,9 +129,12 @@ def _interpret_question(
     known: dict[str, Sequence[str] | None],
     builds: list[str],
     variants: list[str],
+    text: str = "",
 ) -> Interpretation:
     it.question = kind
     build_list, variant_list = ", ".join(builds), ", ".join(variants)
+    if kind in ("build_comparison", "component_trend"):
+        return _interpret_range(it, kind, build_ids, variant_ids, ids, known, builds, variants, text)
     if len(build_ids) > 1:
         it.clarification = (
             f"You mentioned several builds ({', '.join(build_ids)}). Which single build did you mean?"
@@ -163,6 +169,68 @@ def _interpret_question(
     return it
 
 
+def _interpret_range(
+    it: Interpretation,
+    kind: str,
+    build_ids: list[str],
+    variant_ids: list[str],
+    ids: dict[str, list[str]],
+    known: dict[str, Sequence[str] | None],
+    builds: list[str],
+    variants: list[str],
+    text: str,
+) -> Interpretation:
+    """Two builds for a comparison, or a build range for a trend (earlier build -> later build)."""
+    build_list = ", ".join(builds)
+    unknown = [b.upper() for b in build_ids if b.upper() not in builds]
+    named = sorted({b.upper() for b in build_ids if b.upper() in builds}, key=builds.index)
+    if unknown:
+        it.clarification = (
+            f"Build {unknown[0]} is unknown. Known builds: {build_list}. Which one did you mean?"
+        )
+        return it
+    if len(named) > 2:
+        it.clarification = (
+            f"You mentioned {len(named)} builds ({', '.join(named)}). Which two should I compare?"
+        )
+        return it
+    if len(named) == 2:
+        pair = named
+    elif kind == "build_comparison" and LAST_TWO.search(text):
+        pair = builds[-2:]
+    elif len(named) == 1 and kind == "build_comparison":
+        i = builds.index(named[0])
+        if PREVIOUS.search(text) and i > 0:
+            pair = [builds[i - 1], named[0]]
+        else:
+            it.clarification = f"Compare {named[0]} with which build? Known builds: {build_list}."
+            return it
+    elif len(named) == 1:  # trend since a build
+        if named[0] == builds[-1]:
+            it.clarification = (
+                f"{named[0]} is the latest build. From which earlier build should I show the trend?"
+            )
+            return it
+        pair = [named[0], builds[-1]]
+    else:  # trend with no build: the whole programme
+        pair = [builds[0], builds[-1]]
+        it.build_defaulted = kind == "build_comparison"
+    it.compare_build_id, it.build_id = pair[0], pair[1]
+    if kind == "component_trend" and ids["component"]:
+        value, it.clarification = _single("component", ids["component"], known["component"])
+        it.component_ids = [value] if value else []
+    if it.clarification is None and kind == "build_comparison":
+        if len(variant_ids) > 1:
+            it.clarification = (
+                f"You mentioned several variants ({', '.join(variant_ids)}). Which one? Leave it out for all."
+            )
+        elif variant_ids and variant_ids[0] not in variants:
+            it.clarification = f"Variant {variant_ids[0]} is unknown. Known variants: {', '.join(variants)}."
+        elif variant_ids:
+            it.variant_id = variant_ids[0]
+    return it
+
+
 def interpret_request(
     text: str,
     builds: list[str],
@@ -190,11 +258,11 @@ def interpret_request(
 
     # read-only questions; prohibited or injected requests are always refused, planning requests go on below
     if not (it.prohibited or it.injection):
-        kind = classify_question(text, test_ids, requirement_ids, mentioned)
+        kind = classify_question(text, test_ids, requirement_ids, mentioned, build_ids)
         if kind:
             ids = {"test": test_ids, "requirement": requirement_ids, "component": mentioned}
             known = {"test": tests, "requirement": requirements, "component": components}
-            return _interpret_question(it, kind, build_ids, variant_ids, ids, known, builds, variants)
+            return _interpret_question(it, kind, build_ids, variant_ids, ids, known, builds, variants, text)
 
     it.component_ids = [c for c in mentioned if c in components]
     if m := re.search(r"(\d+(?:\.\d+)?)\s*(h|hours?)\b", text, re.I):

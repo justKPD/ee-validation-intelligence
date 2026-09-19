@@ -80,6 +80,8 @@ def test_other_questions_via_api(client: TestClient) -> None:
         ("Did TC-186 pass on B005?", "test_history"),
         ("Why is ECU-TPMS risky in B006?", "component_risk"),
         ("Which tests failed in B005?", "build_failures"),
+        ("Compare B005 and B006", "build_comparison"),
+        ("Which ECU got worse over time?", "component_trend"),
     ):
         body = client.post("/agent/plan", json={"request": text}).json()
         assert body["status"] == "ANSWERED" and body["answer"]["kind"] == kind

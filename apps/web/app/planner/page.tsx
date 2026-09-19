@@ -15,6 +15,8 @@ const EXAMPLES = [
   "Why is ECU-TPMS risky in B006?",
   "Which tests failed in B005?",
   "How many defects does ECU-BMS have?",
+  "Compare B005 and B006",
+  "Which ECU got worse over time?",
 ];
 
 export default function Planner() {

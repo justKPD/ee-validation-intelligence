@@ -22,7 +22,7 @@ from sqlalchemy.orm import Session
 
 from ee_agent.interpret import Interpretation, interpret_request
 from ee_agent.providers import Explanation, ModelProvider, OfflineProvider
-from ee_agent.questions import describe
+from ee_agent.questions import ASKS_BETTER, describe
 from ee_agent.tools import ToolRegistry, ToolUnavailableError
 
 PROMPT_VERSION = "1.0"
@@ -299,11 +299,21 @@ class TestPlanningAgent:
                     "get_build_results",
                     {"build_id": it.build_id, "variant_id": it.variant_id},
                 ),
+                "build_comparison": (
+                    "compare_builds",
+                    {"build_a": it.compare_build_id, "build_b": it.build_id, "variant_id": it.variant_id},
+                ),
+                "component_trend": (
+                    "get_risk_trend",
+                    {"build_from": it.compare_build_id, "build_to": it.build_id, "component_id": component},
+                ),
             }[kind]
             try:
                 data = tools.call(tool, **args)
             except ToolUnavailableError as exc:
                 return _failed(str(exc))
+            if kind == "component_trend" and not it.component_ids:
+                data["focus"] = "better" if ASKS_BETTER.search(state["request"]) else "worse"
             text = describe(kind, data)
             if it.build_defaulted:
                 text = f"(No build named, so this uses the latest build, {it.build_id}.)\n{text}"

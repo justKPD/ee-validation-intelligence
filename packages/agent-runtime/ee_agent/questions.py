@@ -11,11 +11,14 @@ Kinds:
 - ``component_risk``       ECU-... + why/risk/score                        (as of a build; risk engine)
 - ``component_defects``    ECU-... + defect/bug/issue                      (recorded defects)
 - ``build_failures``       fail/defect + which/what/how many/list/show     (recorded executions)
+- ``build_comparison``     compare/vs/difference + two builds              (each build as of its release + results)
+- ``component_trend``      worse/better/increase/trend/over time + ECU     (risk as of every build in a range)
 """
 
 from __future__ import annotations
 
 import re
+from collections.abc import Sequence
 from typing import Any
 
 from ee_coverage import EvidenceStatus
@@ -42,6 +45,19 @@ _RISK = re.compile(r"\b(why|risk|risky|riskier|score|scored)\b", re.I)
 _DEFECTS = re.compile(r"\b(defects?|bugs?|issues?|problems?)\b", re.I)
 _FAILURES = re.compile(r"\b(fail|failed|failing|failures?|defects?|broke|broken)\b", re.I)
 _ASKING = re.compile(r"\b(which|what|how many|list|show|any|were there|did)\b", re.I)
+_COMPARE = re.compile(
+    r"\b(compare\w*|comparison|vs\.?|versus|difference\w*|diff|between|changed from)\b", re.I
+)
+LAST_TWO = re.compile(r"\b(last|latest) (two|2) builds\b", re.I)
+PREVIOUS = re.compile(r"\b(previous|prior|last|preceding) (build|one|release)\b", re.I)
+_TREND = re.compile(
+    r"\b(worse|worsen\w*|better|improv\w*|increas\w*|decreas\w*|rise|rises|risen|rising|trend\w*|over time"
+    r"|across (the )?builds|since|degrad\w*|grew|growing)\b",
+    re.I,
+)
+# a trend question asking what got better (rather than worse) leads the answer with the improvers
+ASKS_BETTER = re.compile(r"\b(improv\w*|better|safer|decreas\w*|fell|fall\w*|drop\w*|less risky)\b", re.I)
+_COMPONENT_WORD = re.compile(r"\b(ecus?|components?|modules?)\b", re.I)
 
 QUESTION_KINDS = (
     "test_evidence",
@@ -50,13 +66,19 @@ QUESTION_KINDS = (
     "component_risk",
     "component_defects",
     "build_failures",
+    "build_comparison",
+    "component_trend",
 )
 # kinds judged "as of" a build (default: the latest build); the others read recorded results
 AS_OF_KINDS = {"test_evidence", "requirement_coverage", "component_risk"}
 
 
 def classify_question(
-    text: str, tests: list[str], requirements: list[str], components: list[str]
+    text: str,
+    tests: list[str],
+    requirements: list[str],
+    components: list[str],
+    builds: Sequence[str] = (),
 ) -> str | None:
     """Question kind, or ``None`` when the text is a planning request (or not a recognised question)."""
     if PLANNING.search(text):
@@ -69,6 +91,12 @@ def classify_question(
         return None
     if requirements and _REQUIREMENT.search(text):
         return "requirement_coverage"
+    if components and (_TREND.search(text) or (_COMPARE.search(text) and len(builds) > 1)):
+        return "component_trend"
+    if not components and _COMPONENT_WORD.search(text) and _TREND.search(text):
+        return "component_trend"
+    if _COMPARE.search(text) and (builds or LAST_TWO.search(text)):
+        return "build_comparison"
     if components:
         if _DEFECTS.search(text):
             return "component_defects"
@@ -95,6 +123,8 @@ def describe(kind: str, data: dict[str, Any]) -> str:
         "component_risk": _component_risk,
         "component_defects": _component_defects,
         "build_failures": _build_failures,
+        "build_comparison": _build_comparison,
+        "component_trend": _component_trend,
     }[kind]
     return writer(data) + "\nThis is a read-only answer; nothing was changed or proposed."
 
@@ -272,4 +302,121 @@ def _build_failures(bf: dict[str, Any]) -> str:
         lines.append(f"{f['test_id']} failed on {f['variant_id']} ({f['execution_id']}){defect}.")
     if len(fails) > 10:
         lines.append(f"... and {len(fails) - 10} more failed run(s).")
+    return "\n".join(lines)
+
+
+def _pct(x: float) -> str:
+    return f"{x * 100:.1f}%"
+
+
+def _signed(x: float, digits: int = 3) -> str:
+    return f"{x:+.{digits}f}"
+
+
+def _build_comparison(c: dict[str, Any]) -> str:
+    a, b = c["build_a"], c["build_b"]
+    A, B = c["builds"][a], c["builds"][b]  # noqa: N806 (the two builds, as in the question)
+    scope = f" on {c['variant_id']}" if c["variant_id"] else ""
+
+    measures = [
+        (B["changes"] - A["changes"], "more changes", "fewer changes", "number of changes"),
+        (
+            B["current_share"] - A["current_share"],
+            "more current evidence",
+            "less current evidence",
+            "share of current evidence",
+        ),
+        (B["mean_risk"] - A["mean_risk"], "higher average risk", "lower average risk", "average risk"),
+        (B["fail"] - A["fail"], "more failed runs", "fewer failed runs", "number of failed runs"),
+    ]
+    differ = [more if d > 0 else less for d, more, less, _ in measures if d != 0]
+    same = [name for d, _, _, name in measures if d == 0]
+    if differ:
+        listed = differ[0] if len(differ) == 1 else f"{', '.join(differ[:-1])} and {differ[-1]}"
+        head = f"In short: {b} has {listed} than {a}{scope}."
+    else:
+        head = f"In short: {b} and {a}{scope} look the same on these measures."
+    if same and differ:
+        head += f" The {' and '.join(same)} stayed the same."
+    lines = [
+        head,
+        f"Changes in the build: {A['changes']} -> {B['changes']} ({B['changes'] - A['changes']:+d}).",
+        f"Current evidence: {_pct(A['current_share'])} -> {_pct(B['current_share'])} "
+        f"({(B['current_share'] - A['current_share']) * 100:+.1f} pts); {c['evidence_lost']} requirement/variant pair(s) "
+        f"lost current evidence, {c['evidence_gained']} gained it.",
+        f"Average component risk: {A['mean_risk']:.3f} -> {B['mean_risk']:.3f} ({_signed(B['mean_risk'] - A['mean_risk'])}); "
+        f"riskiest: {A['top_component']} {A['top_score']:.3f} -> {B['top_component']} {B['top_score']:.3f}.",
+        f"Recorded test results: {A['runs']} runs, {A['fail']} failed, {A['defects']} defect(s) -> "
+        f"{B['runs']} runs, {B['fail']} failed, {B['defects']} defect(s).",
+    ]
+    if c["risk_up"]:
+        lines.append(
+            "Risk rose most for: "
+            + "; ".join(
+                f"{r['component_id']} {_signed(r['delta'])} ({r['a']:.3f} -> {r['b']:.3f})"
+                for r in c["risk_up"]
+            )
+            + "."
+        )
+    if c["risk_down"]:
+        lines.append(
+            "Risk fell most for: "
+            + "; ".join(
+                f"{r['component_id']} {_signed(r['delta'])} ({r['a']:.3f} -> {r['b']:.3f})"
+                for r in c["risk_down"]
+            )
+            + "."
+        )
+    lines.append(
+        "Evidence and risk are judged as of each build's release; results are the runs recorded for each build."
+    )
+    return "\n".join(lines)
+
+
+def _component_trend(t: dict[str, Any]) -> str:
+    first, last = t["build_from"], t["build_to"]
+    if t["component_id"]:
+        series = t["series"]
+        start, end = series[0]["score"], series[-1]["score"]
+        direction = "got worse" if end > start else "improved" if end < start else "did not change"
+        peak = max(series, key=lambda x: x["score"])
+        return "\n".join(
+            [
+                f"{t['component_id']} risk {first} -> {last}: {start:.3f} -> {end:.3f} ({_signed(end - start)}), so it {direction}.",
+                f"Highest in {peak['build_id']} ({peak['score']:.3f}, rank {peak['rank']} of {t['of']}).",
+                "Per build: "
+                + ", ".join(f"{x['build_id']} {x['score']:.3f} (rank {x['rank']})" for x in series)
+                + ".",
+                "Recorded defects per build: "
+                + ", ".join(f"{x['build_id']} {x['defects']}" for x in series)
+                + ".",
+                "Risk is judged as of each build's release.",
+            ]
+        )
+    worse, better = t["worse"], t["better"]
+    lines: list[str] = [
+        f"From {first} to {last}, {t['n_worse']} of {t['of']} components got riskier and {t['n_better']} got safer."
+    ]
+    parts = []
+    if worse:
+        parts.append(
+            "Got worse most: "
+            + "; ".join(
+                f"{r['component_id']} {_signed(r['delta'])} ({r['a']:.3f} -> {r['b']:.3f})" for r in worse
+            )
+            + "."
+        )
+    if better:
+        parts.append(
+            "Improved most: "
+            + "; ".join(
+                f"{r['component_id']} {_signed(r['delta'])} ({r['a']:.3f} -> {r['b']:.3f})" for r in better
+            )
+            + "."
+        )
+    if t.get("focus") == "better":
+        parts.reverse()
+    lines += parts
+    lines.append(f"Riskiest in {last}: {t['riskiest']['component_id']} ({t['riskiest']['score']:.3f}).")
+    lines.append("Risk is judged as of each build's release.")
     return "\n".join(lines)
