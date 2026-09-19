@@ -34,7 +34,8 @@ The demo is public and unauthenticated: reviewer names are self-declared and wri
 
 More screenshots: [control tower](docs/assets/screenshots/01-control-tower-dashboard.png) ·
 [risk & coverage](docs/assets/screenshots/02-risk-coverage.png) · [shadow planning](docs/assets/screenshots/04-shadow-planning-benchmark.png) ·
-[reliability lab](docs/assets/screenshots/05-agent-reliability-lab.png) · [provenance ledger](docs/assets/screenshots/06-provenance-ledger.png)
+[reliability lab](docs/assets/screenshots/05-agent-reliability-lab.png) · [provenance ledger](docs/assets/screenshots/06-provenance-ledger.png) ·
+[evidence question](docs/assets/screenshots/07-evidence-question.png)
 
 ## Explore the data
 
