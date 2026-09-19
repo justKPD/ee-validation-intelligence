@@ -1,0 +1,2018 @@
+[
+ {
+  "component_id": "ECU-BCM",
+  "test_id": "TC-001"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-002"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-003"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-004"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-005"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "test_id": "TC-005"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-006"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-007"
+ },
+ {
+  "component_id": "ECU-HVAC_ECU",
+  "test_id": "TC-007"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-007"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-008"
+ },
+ {
+  "component_id": "ECU-HVAC_ECU",
+  "test_id": "TC-008"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-009"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-009"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-009"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "test_id": "TC-010"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-011"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-011"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "test_id": "TC-011"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-012"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-012"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "test_id": "TC-013"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-014"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-014"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-015"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-016"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-016"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-017"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-017"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-018"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-018"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-018"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "test_id": "TC-019"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-019"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-020"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-020"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-021"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-021"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-021"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-021"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-022"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-023"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-023"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-024"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-025"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-025"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-026"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-026"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-026"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-027"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-027"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-028"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "test_id": "TC-028"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-028"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-029"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-030"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-030"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-031"
+ },
+ {
+  "component_id": "ECU-TPMS",
+  "test_id": "TC-031"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-032"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-032"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-033"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-033"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-033"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-033"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-034"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-034"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-035"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-036"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "test_id": "TC-036"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-036"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-037"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-037"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-037"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-038"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-039"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-040"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-041"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-042"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "test_id": "TC-042"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-043"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-043"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-043"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-044"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-045"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-046"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-046"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-047"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "test_id": "TC-047"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-048"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-048"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-049"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-050"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-051"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-052"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-052"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-052"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-053"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-054"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-055"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-055"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-056"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "test_id": "TC-056"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-057"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-058"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-058"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-059"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-060"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-060"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-061"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-062"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-062"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-063"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-064"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-065"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-066"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-067"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-068"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-068"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-068"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-069"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-069"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-070"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-070"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-071"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-072"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-072"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-073"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-073"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-073"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-073"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-074"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-074"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-075"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-076"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "test_id": "TC-076"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-076"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-077"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-077"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-078"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-078"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-078"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-079"
+ },
+ {
+  "component_id": "ECU-HVAC_ECU",
+  "test_id": "TC-079"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-079"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-080"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-081"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-081"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-081"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-082"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-082"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-082"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-083"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-084"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-084"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-085"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-085"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-085"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-086"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-087"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-087"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-088"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-088"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-089"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-089"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-089"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-090"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-091"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-091"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-092"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-092"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-092"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-093"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-093"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-094"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-095"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-095"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-095"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-095"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-096"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-097"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-097"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-097"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-097"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-098"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-099"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-099"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-100"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-100"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-101"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-101"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-102"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-102"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-102"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-102"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-103"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-104"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "test_id": "TC-105"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-106"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-107"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-107"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-107"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-107"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-107"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-107"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-108"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-108"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-108"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-109"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-109"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-109"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-110"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-111"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-111"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-112"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-112"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-113"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-113"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-113"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-114"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-115"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-116"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-117"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-118"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-118"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-119"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-119"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-119"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-119"
+ },
+ {
+  "component_id": "ECU-HVAC_ECU",
+  "test_id": "TC-120"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-120"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-121"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "test_id": "TC-122"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-123"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-123"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-124"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-125"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-125"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-125"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-125"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-126"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-127"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-127"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "test_id": "TC-127"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-127"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-128"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-128"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-129"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-130"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-130"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-130"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-130"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-131"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-131"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-131"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-132"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-132"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-132"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-133"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-133"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-134"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-135"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-135"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-135"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-136"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-136"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-136"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-137"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-138"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-139"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-139"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-139"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-140"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-141"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-141"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-141"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-142"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-142"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-142"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-143"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-143"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-143"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-144"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-144"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "test_id": "TC-144"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-144"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-145"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-145"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-146"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-146"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-147"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-148"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-149"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-149"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-149"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-149"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-150"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-151"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-151"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-152"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-153"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-153"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-154"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-155"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "test_id": "TC-155"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-155"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-156"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-156"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-157"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "test_id": "TC-157"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-157"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-158"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-158"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-158"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-158"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-159"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-159"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-159"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-160"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-160"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-161"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-162"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-162"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-163"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "test_id": "TC-164"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-165"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-166"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-167"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-167"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-168"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-168"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-168"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-169"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-170"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-170"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-171"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-172"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-172"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-172"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-173"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-174"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-174"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "test_id": "TC-174"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-175"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-176"
+ },
+ {
+  "component_id": "ECU-TPMS",
+  "test_id": "TC-176"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-177"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "test_id": "TC-177"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-177"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-178"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-179"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-179"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-179"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-180"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-180"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-181"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-181"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-182"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-183"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-183"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-184"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-184"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-185"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-185"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-186"
+ },
+ {
+  "component_id": "ECU-TPMS",
+  "test_id": "TC-186"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-187"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-188"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-188"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-188"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-188"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-189"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-190"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-190"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-190"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "test_id": "TC-191"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-191"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-192"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-192"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-193"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-193"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-193"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-194"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-194"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-194"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-195"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-195"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-196"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-196"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-197"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-197"
+ },
+ {
+  "component_id": "ECU-BCM",
+  "test_id": "TC-198"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-199"
+ },
+ {
+  "component_id": "ECU-BCM",
+  "test_id": "TC-200"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-200"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "test_id": "TC-201"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-202"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-203"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-203"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-204"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-205"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-205"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-205"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-205"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-206"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-206"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-207"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-208"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-209"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-209"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-210"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "test_id": "TC-210"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-210"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-211"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-212"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-212"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-212"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-213"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-214"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-214"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-215"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-216"
+ },
+ {
+  "component_id": "ECU-TPMS",
+  "test_id": "TC-216"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-216"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-217"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-217"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-217"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-218"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-218"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-219"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-219"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-220"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-220"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-221"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "test_id": "TC-222"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-222"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "test_id": "TC-222"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-222"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-223"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-223"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-224"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-224"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-224"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-225"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-225"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-226"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-226"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "test_id": "TC-227"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-228"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-228"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-228"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-228"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-229"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "test_id": "TC-230"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-231"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-231"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "test_id": "TC-231"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "test_id": "TC-231"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-232"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-232"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "test_id": "TC-233"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-233"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-234"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-234"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-234"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-234"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-234"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "test_id": "TC-235"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "test_id": "TC-235"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-235"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "test_id": "TC-235"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "test_id": "TC-236"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-237"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-237"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "test_id": "TC-237"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "test_id": "TC-238"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-238"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "test_id": "TC-238"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-239"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "test_id": "TC-239"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-239"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-240"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-240"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "test_id": "TC-241"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "test_id": "TC-241"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-242"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-242"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-242"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "test_id": "TC-242"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "test_id": "TC-243"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-244"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "test_id": "TC-244"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "test_id": "TC-244"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "test_id": "TC-244"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "test_id": "TC-244"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-245"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "test_id": "TC-246"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "test_id": "TC-247"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "test_id": "TC-247"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "test_id": "TC-248"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "test_id": "TC-248"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-249"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "test_id": "TC-250"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "test_id": "TC-250"
+ }
+]

@@ -1,0 +1,312 @@
+[
+ {
+  "downstream_id": "ECU-BMS",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-VCU",
+  "kind": "signal",
+  "upstream_id": "ECU-BMS"
+ },
+ {
+  "downstream_id": "ECU-ADAS_GATEWAY",
+  "kind": "power",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-ADAS_GATEWAY",
+  "kind": "power",
+  "upstream_id": "ECU-VCU"
+ },
+ {
+  "downstream_id": "ECU-INFOTAINMENT",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-ADAS_GATEWAY"
+ },
+ {
+  "downstream_id": "ECU-DCDC",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-INFOTAINMENT"
+ },
+ {
+  "downstream_id": "ECU-DCDC",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-OBC",
+  "kind": "signal",
+  "upstream_id": "ECU-DCDC"
+ },
+ {
+  "downstream_id": "ECU-OBC",
+  "kind": "power",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-HVAC_ECU",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-EPS",
+  "kind": "power",
+  "upstream_id": "ECU-INFOTAINMENT"
+ },
+ {
+  "downstream_id": "ECU-ABS_ESC",
+  "kind": "signal",
+  "upstream_id": "ECU-DCDC"
+ },
+ {
+  "downstream_id": "ECU-AIRBAG",
+  "kind": "power",
+  "upstream_id": "ECU-EPS"
+ },
+ {
+  "downstream_id": "ECU-AIRBAG",
+  "kind": "signal",
+  "upstream_id": "ECU-HVAC_ECU"
+ },
+ {
+  "downstream_id": "ECU-TCU",
+  "kind": "power",
+  "upstream_id": "ECU-AIRBAG"
+ },
+ {
+  "downstream_id": "ECU-INV_FRONT",
+  "kind": "power",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-INV_FRONT",
+  "kind": "signal",
+  "upstream_id": "ECU-TCU"
+ },
+ {
+  "downstream_id": "ECU-INV_REAR",
+  "kind": "power",
+  "upstream_id": "ECU-VCU"
+ },
+ {
+  "downstream_id": "ECU-INV_REAR",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-TCU"
+ },
+ {
+  "downstream_id": "ECU-HV_JUNCTION",
+  "kind": "signal",
+  "upstream_id": "ECU-EPS"
+ },
+ {
+  "downstream_id": "ECU-HV_JUNCTION",
+  "kind": "signal",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-THERMAL_MGMT",
+  "kind": "signal",
+  "upstream_id": "ECU-EPS"
+ },
+ {
+  "downstream_id": "ECU-CHARGE_PORT_CTRL",
+  "kind": "signal",
+  "upstream_id": "ECU-INFOTAINMENT"
+ },
+ {
+  "downstream_id": "ECU-CHARGE_PORT_CTRL",
+  "kind": "signal",
+  "upstream_id": "ECU-OBC"
+ },
+ {
+  "downstream_id": "ECU-SEAT_CTRL",
+  "kind": "power",
+  "upstream_id": "ECU-TCU"
+ },
+ {
+  "downstream_id": "ECU-SEAT_CTRL",
+  "kind": "signal",
+  "upstream_id": "ECU-BMS"
+ },
+ {
+  "downstream_id": "ECU-DOOR_CTRL_FL",
+  "kind": "power",
+  "upstream_id": "ECU-ADAS_GATEWAY"
+ },
+ {
+  "downstream_id": "ECU-DOOR_CTRL_FR",
+  "kind": "signal",
+  "upstream_id": "ECU-INFOTAINMENT"
+ },
+ {
+  "downstream_id": "ECU-DOOR_CTRL_FR",
+  "kind": "signal",
+  "upstream_id": "ECU-HVAC_ECU"
+ },
+ {
+  "downstream_id": "ECU-LIGHT_CTRL",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-LIGHT_CTRL",
+  "kind": "power",
+  "upstream_id": "ECU-DCDC"
+ },
+ {
+  "downstream_id": "ECU-WIPER_CTRL",
+  "kind": "signal",
+  "upstream_id": "ECU-HVAC_ECU"
+ },
+ {
+  "downstream_id": "ECU-WIPER_CTRL",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-EPS"
+ },
+ {
+  "downstream_id": "ECU-KEYLESS_ENTRY",
+  "kind": "signal",
+  "upstream_id": "ECU-INV_FRONT"
+ },
+ {
+  "downstream_id": "ECU-INSTRUMENT_CLUSTER",
+  "kind": "power",
+  "upstream_id": "ECU-HVAC_ECU"
+ },
+ {
+  "downstream_id": "ECU-INSTRUMENT_CLUSTER",
+  "kind": "power",
+  "upstream_id": "ECU-OBC"
+ },
+ {
+  "downstream_id": "ECU-HUD",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-HVAC_ECU"
+ },
+ {
+  "downstream_id": "ECU-HUD",
+  "kind": "signal",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-AUDIO_AMP",
+  "kind": "signal",
+  "upstream_id": "ECU-AIRBAG"
+ },
+ {
+  "downstream_id": "ECU-AUDIO_AMP",
+  "kind": "power",
+  "upstream_id": "ECU-EPS"
+ },
+ {
+  "downstream_id": "ECU-CENTRAL_GATEWAY",
+  "kind": "power",
+  "upstream_id": "ECU-LIGHT_CTRL"
+ },
+ {
+  "downstream_id": "ECU-CENTRAL_GATEWAY",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-CHARGE_PORT_CTRL"
+ },
+ {
+  "downstream_id": "ECU-RADAR_FRONT",
+  "kind": "power",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-RADAR_FRONT",
+  "kind": "signal",
+  "upstream_id": "ECU-ADAS_GATEWAY"
+ },
+ {
+  "downstream_id": "ECU-CAMERA_FRONT",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-BMS"
+ },
+ {
+  "downstream_id": "ECU-CAMERA_FRONT",
+  "kind": "power",
+  "upstream_id": "ECU-ADAS_GATEWAY"
+ },
+ {
+  "downstream_id": "ECU-LIDAR_CTRL",
+  "kind": "power",
+  "upstream_id": "ECU-INSTRUMENT_CLUSTER"
+ },
+ {
+  "downstream_id": "ECU-LIDAR_CTRL",
+  "kind": "power",
+  "upstream_id": "ECU-AUDIO_AMP"
+ },
+ {
+  "downstream_id": "ECU-PARK_ASSIST",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-INV_FRONT"
+ },
+ {
+  "downstream_id": "ECU-SURROUND_VIEW",
+  "kind": "signal",
+  "upstream_id": "ECU-EPS"
+ },
+ {
+  "downstream_id": "ECU-TPMS",
+  "kind": "power",
+  "upstream_id": "ECU-BCM"
+ },
+ {
+  "downstream_id": "ECU-TPMS",
+  "kind": "power",
+  "upstream_id": "ECU-INV_FRONT"
+ },
+ {
+  "downstream_id": "ECU-EPB",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-WIPER_CTRL"
+ },
+ {
+  "downstream_id": "ECU-SUSPENSION_CTRL",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-HVAC_ECU"
+ },
+ {
+  "downstream_id": "ECU-SUSPENSION_CTRL",
+  "kind": "power",
+  "upstream_id": "ECU-DOOR_CTRL_FR"
+ },
+ {
+  "downstream_id": "ECU-STEERING_ANGLE",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-LIGHT_CTRL"
+ },
+ {
+  "downstream_id": "ECU-STEERING_ANGLE",
+  "kind": "power",
+  "upstream_id": "ECU-AUDIO_AMP"
+ },
+ {
+  "downstream_id": "ECU-OTA_MANAGER",
+  "kind": "power",
+  "upstream_id": "ECU-INV_FRONT"
+ },
+ {
+  "downstream_id": "ECU-V2X_UNIT",
+  "kind": "power",
+  "upstream_id": "ECU-TCU"
+ },
+ {
+  "downstream_id": "ECU-V2X_UNIT",
+  "kind": "power",
+  "upstream_id": "ECU-OTA_MANAGER"
+ },
+ {
+  "downstream_id": "ECU-DIAG_MASTER",
+  "kind": "power",
+  "upstream_id": "ECU-DOOR_CTRL_FR"
+ },
+ {
+  "downstream_id": "ECU-POWER_DIST",
+  "kind": "gateway_route",
+  "upstream_id": "ECU-RADAR_FRONT"
+ }
+]

@@ -1,0 +1,30 @@
+[
+ {
+  "features": "hv,adas_l2,heat_pump",
+  "id": "V1",
+  "market": "EU",
+  "name": "Fictional BEV Sedan EU",
+  "powertrain": "BEV"
+ },
+ {
+  "features": "hv,adas_l2,tow",
+  "id": "V2",
+  "market": "US",
+  "name": "Fictional PHEV SUV US",
+  "powertrain": "PHEV"
+ },
+ {
+  "features": "hv,adas_l2_plus,air_suspension,hud",
+  "id": "V3",
+  "market": "EU",
+  "name": "Fictional BEV Performance",
+  "powertrain": "BEV"
+ },
+ {
+  "features": "adas_l1",
+  "id": "V4",
+  "market": "CN",
+  "name": "Fictional ICE Compact CN",
+  "powertrain": "ICE"
+ }
+]

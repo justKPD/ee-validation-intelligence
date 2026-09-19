@@ -1,0 +1,686 @@
+[
+ {
+  "build_id": "B002",
+  "change_kind": "refactor",
+  "id": "CH-0001",
+  "magnitude": 0.45,
+  "new_revision": null,
+  "target_id": "ECU-STEERING_ANGLE",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "bugfix",
+  "id": "CH-0002",
+  "magnitude": 0.44,
+  "new_revision": null,
+  "target_id": "ECU-TCU",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "bugfix",
+  "id": "CH-0003",
+  "magnitude": 0.25,
+  "new_revision": null,
+  "target_id": "ECU-VCU",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "feature",
+  "id": "CH-0004",
+  "magnitude": 0.96,
+  "new_revision": null,
+  "target_id": "ECU-SURROUND_VIEW",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "dependency_update",
+  "id": "CH-0005",
+  "magnitude": 0.92,
+  "new_revision": null,
+  "target_id": "ECU-BMS",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "dependency_update",
+  "id": "CH-0006",
+  "magnitude": 0.74,
+  "new_revision": null,
+  "target_id": "ECU-ADAS_GATEWAY",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "feature",
+  "id": "CH-0007",
+  "magnitude": 0.91,
+  "new_revision": null,
+  "target_id": "ECU-DCDC",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0008",
+  "magnitude": 0.26,
+  "new_revision": 2,
+  "target_id": "R-100",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0009",
+  "magnitude": 0.62,
+  "new_revision": 2,
+  "target_id": "R-127",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0010",
+  "magnitude": 0.74,
+  "new_revision": 2,
+  "target_id": "R-087",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0011",
+  "magnitude": 0.42,
+  "new_revision": 2,
+  "target_id": "R-146",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0012",
+  "magnitude": 0.78,
+  "new_revision": 2,
+  "target_id": "R-118",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0013",
+  "magnitude": 0.72,
+  "new_revision": 2,
+  "target_id": "R-143",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0014",
+  "magnitude": 0.76,
+  "new_revision": 2,
+  "target_id": "R-080",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0015",
+  "magnitude": 0.72,
+  "new_revision": 2,
+  "target_id": "R-038",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0016",
+  "magnitude": 0.85,
+  "new_revision": 2,
+  "target_id": "R-073",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B002",
+  "change_kind": "requirement_revision",
+  "id": "CH-0017",
+  "magnitude": 0.35,
+  "new_revision": 2,
+  "target_id": "R-136",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "bugfix",
+  "id": "CH-0018",
+  "magnitude": 0.27,
+  "new_revision": null,
+  "target_id": "ECU-DCDC",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "refactor",
+  "id": "CH-0019",
+  "magnitude": 0.43,
+  "new_revision": null,
+  "target_id": "ECU-POWER_DIST",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "refactor",
+  "id": "CH-0020",
+  "magnitude": 0.94,
+  "new_revision": null,
+  "target_id": "ECU-INFOTAINMENT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "dependency_update",
+  "id": "CH-0021",
+  "magnitude": 0.85,
+  "new_revision": null,
+  "target_id": "ECU-THERMAL_MGMT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "dependency_update",
+  "id": "CH-0022",
+  "magnitude": 0.21,
+  "new_revision": null,
+  "target_id": "ECU-DIAG_MASTER",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "feature",
+  "id": "CH-0023",
+  "magnitude": 0.96,
+  "new_revision": null,
+  "target_id": "ECU-AIRBAG",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "refactor",
+  "id": "CH-0024",
+  "magnitude": 0.74,
+  "new_revision": null,
+  "target_id": "ECU-ADAS_GATEWAY",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "requirement_revision",
+  "id": "CH-0025",
+  "magnitude": 0.9,
+  "new_revision": 2,
+  "target_id": "R-051",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "requirement_revision",
+  "id": "CH-0026",
+  "magnitude": 0.66,
+  "new_revision": 2,
+  "target_id": "R-002",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "requirement_revision",
+  "id": "CH-0027",
+  "magnitude": 0.84,
+  "new_revision": 3,
+  "target_id": "R-118",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "requirement_revision",
+  "id": "CH-0028",
+  "magnitude": 0.9,
+  "new_revision": 2,
+  "target_id": "R-150",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "requirement_revision",
+  "id": "CH-0029",
+  "magnitude": 0.86,
+  "new_revision": 2,
+  "target_id": "R-095",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B003",
+  "change_kind": "requirement_revision",
+  "id": "CH-0030",
+  "magnitude": 0.68,
+  "new_revision": 2,
+  "target_id": "R-066",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "calibration",
+  "id": "CH-0031",
+  "magnitude": 0.69,
+  "new_revision": null,
+  "target_id": "ECU-SURROUND_VIEW",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "refactor",
+  "id": "CH-0032",
+  "magnitude": 0.58,
+  "new_revision": null,
+  "target_id": "ECU-V2X_UNIT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "calibration",
+  "id": "CH-0033",
+  "magnitude": 0.78,
+  "new_revision": null,
+  "target_id": "ECU-THERMAL_MGMT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "calibration",
+  "id": "CH-0034",
+  "magnitude": 0.65,
+  "new_revision": null,
+  "target_id": "ECU-DCDC",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "bugfix",
+  "id": "CH-0035",
+  "magnitude": 0.39,
+  "new_revision": null,
+  "target_id": "ECU-ABS_ESC",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "feature",
+  "id": "CH-0036",
+  "magnitude": 0.81,
+  "new_revision": null,
+  "target_id": "ECU-AUDIO_AMP",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0037",
+  "magnitude": 0.55,
+  "new_revision": 2,
+  "target_id": "R-145",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0038",
+  "magnitude": 0.87,
+  "new_revision": 2,
+  "target_id": "R-105",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0039",
+  "magnitude": 0.37,
+  "new_revision": 3,
+  "target_id": "R-002",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0040",
+  "magnitude": 0.52,
+  "new_revision": 2,
+  "target_id": "R-069",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0041",
+  "magnitude": 0.54,
+  "new_revision": 2,
+  "target_id": "R-054",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0042",
+  "magnitude": 0.59,
+  "new_revision": 2,
+  "target_id": "R-144",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0043",
+  "magnitude": 0.72,
+  "new_revision": 2,
+  "target_id": "R-126",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B004",
+  "change_kind": "requirement_revision",
+  "id": "CH-0044",
+  "magnitude": 0.71,
+  "new_revision": 2,
+  "target_id": "R-140",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "bugfix",
+  "id": "CH-0045",
+  "magnitude": 0.83,
+  "new_revision": null,
+  "target_id": "ECU-INV_FRONT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "calibration",
+  "id": "CH-0046",
+  "magnitude": 0.54,
+  "new_revision": null,
+  "target_id": "ECU-EPB",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "feature",
+  "id": "CH-0047",
+  "magnitude": 0.85,
+  "new_revision": null,
+  "target_id": "ECU-TPMS",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "feature",
+  "id": "CH-0048",
+  "magnitude": 0.21,
+  "new_revision": null,
+  "target_id": "ECU-DOOR_CTRL_FL",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "refactor",
+  "id": "CH-0049",
+  "magnitude": 0.41,
+  "new_revision": null,
+  "target_id": "ECU-THERMAL_MGMT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "requirement_revision",
+  "id": "CH-0050",
+  "magnitude": 0.31,
+  "new_revision": 3,
+  "target_id": "R-095",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "requirement_revision",
+  "id": "CH-0051",
+  "magnitude": 0.51,
+  "new_revision": 2,
+  "target_id": "R-120",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "requirement_revision",
+  "id": "CH-0052",
+  "magnitude": 0.42,
+  "new_revision": 3,
+  "target_id": "R-038",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "requirement_revision",
+  "id": "CH-0053",
+  "magnitude": 0.86,
+  "new_revision": 2,
+  "target_id": "R-115",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "requirement_revision",
+  "id": "CH-0054",
+  "magnitude": 0.52,
+  "new_revision": 2,
+  "target_id": "R-098",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B005",
+  "change_kind": "requirement_revision",
+  "id": "CH-0055",
+  "magnitude": 0.34,
+  "new_revision": 3,
+  "target_id": "R-143",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "calibration",
+  "id": "CH-0056",
+  "magnitude": 0.26,
+  "new_revision": null,
+  "target_id": "ECU-AUDIO_AMP",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "feature",
+  "id": "CH-0057",
+  "magnitude": 0.35,
+  "new_revision": null,
+  "target_id": "ECU-HUD",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "calibration",
+  "id": "CH-0058",
+  "magnitude": 0.69,
+  "new_revision": null,
+  "target_id": "ECU-INFOTAINMENT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "dependency_update",
+  "id": "CH-0059",
+  "magnitude": 0.86,
+  "new_revision": null,
+  "target_id": "ECU-ADAS_GATEWAY",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "feature",
+  "id": "CH-0060",
+  "magnitude": 0.86,
+  "new_revision": null,
+  "target_id": "ECU-HVAC_ECU",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "calibration",
+  "id": "CH-0061",
+  "magnitude": 0.22,
+  "new_revision": null,
+  "target_id": "ECU-DIAG_MASTER",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "feature",
+  "id": "CH-0062",
+  "magnitude": 0.96,
+  "new_revision": null,
+  "target_id": "ECU-TPMS",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "refactor",
+  "id": "CH-0063",
+  "magnitude": 0.5,
+  "new_revision": null,
+  "target_id": "ECU-INV_FRONT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "refactor",
+  "id": "CH-0064",
+  "magnitude": 0.24,
+  "new_revision": null,
+  "target_id": "ECU-V2X_UNIT",
+  "target_type": "component"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0065",
+  "magnitude": 0.21,
+  "new_revision": 2,
+  "target_id": "R-046",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0066",
+  "magnitude": 0.55,
+  "new_revision": 2,
+  "target_id": "R-134",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0067",
+  "magnitude": 0.51,
+  "new_revision": 3,
+  "target_id": "R-051",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0068",
+  "magnitude": 0.4,
+  "new_revision": 3,
+  "target_id": "R-150",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0069",
+  "magnitude": 0.31,
+  "new_revision": 2,
+  "target_id": "R-114",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0070",
+  "magnitude": 0.7,
+  "new_revision": 2,
+  "target_id": "R-106",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0071",
+  "magnitude": 0.51,
+  "new_revision": 2,
+  "target_id": "R-037",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0072",
+  "magnitude": 0.3,
+  "new_revision": 2,
+  "target_id": "R-013",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0073",
+  "magnitude": 0.48,
+  "new_revision": 4,
+  "target_id": "R-095",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0074",
+  "magnitude": 0.8,
+  "new_revision": 2,
+  "target_id": "R-057",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0075",
+  "magnitude": 0.67,
+  "new_revision": 2,
+  "target_id": "R-072",
+  "target_type": "requirement"
+ },
+ {
+  "build_id": "B006",
+  "change_kind": "requirement_revision",
+  "id": "CH-0076",
+  "magnitude": 0.62,
+  "new_revision": 2,
+  "target_id": "R-070",
+  "target_type": "requirement"
+ }
+]

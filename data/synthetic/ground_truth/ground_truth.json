@@ -1,0 +1,2705 @@
+{
+ "faults": [
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00004",
+   "error_code": "ED93C",
+   "failure_stage": "startup",
+   "id": "F-0001",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "speed",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00042",
+   "error_code": "E768B",
+   "failure_stage": "transition",
+   "id": "F-0002",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00029",
+   "error_code": "E9222",
+   "failure_stage": "startup",
+   "id": "F-0003",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00046",
+   "error_code": "ED93C",
+   "failure_stage": "steady_state",
+   "id": "F-0004",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "light command",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00067",
+   "error_code": "E768B",
+   "failure_stage": "steady_state",
+   "id": "F-0005",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00139",
+   "error_code": "ED93C",
+   "failure_stage": "startup",
+   "id": "F-0006",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "door status",
+   "variant_scope": [
+    "V1",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": false,
+   "detected_by": null,
+   "error_code": "ED93C",
+   "failure_stage": "transition",
+   "id": "F-0007",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001",
+    "B002",
+    "B003"
+   ],
+   "severity": 3,
+   "signal": "steering torque",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00050",
+   "error_code": "E9222",
+   "failure_stage": "shutdown",
+   "id": "F-0008",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-VCU",
+   "detected": true,
+   "detected_by": "EX-00006",
+   "error_code": "E66A3",
+   "failure_stage": "shutdown",
+   "id": "F-0009",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "firmware image",
+   "variant_scope": [
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00169",
+   "error_code": "EAD30",
+   "failure_stage": "startup",
+   "id": "F-0010",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "torque request",
+   "variant_scope": [
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00021",
+   "error_code": "EAD30",
+   "failure_stage": "fault_injection",
+   "id": "F-0011",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "torque request",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00017",
+   "error_code": "EAD30",
+   "failure_stage": "transition",
+   "id": "F-0012",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "firmware image",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00031",
+   "error_code": "EAD30",
+   "failure_stage": "transition",
+   "id": "F-0013",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "object list",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00032",
+   "error_code": "EAD30",
+   "failure_stage": "shutdown",
+   "id": "F-0014",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "object list",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DCDC",
+   "detected": false,
+   "detected_by": null,
+   "error_code": "E115A",
+   "failure_stage": "startup",
+   "id": "F-0015",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001",
+    "B002",
+    "B003",
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "light command",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-HVAC_ECU",
+   "detected": true,
+   "detected_by": "EX-00035",
+   "error_code": "E88BF",
+   "failure_stage": "fault_injection",
+   "id": "F-0016",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-EPS",
+   "detected": true,
+   "detected_by": "EX-00012",
+   "error_code": "EA9A9",
+   "failure_stage": "transition",
+   "id": "F-0017",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "torque request",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00028",
+   "error_code": "E2067",
+   "failure_stage": "transition",
+   "id": "F-0018",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "speed",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00048",
+   "error_code": "E48C5",
+   "failure_stage": "transition",
+   "id": "F-0019",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00058",
+   "error_code": "E48C5",
+   "failure_stage": "shutdown",
+   "id": "F-0020",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00051",
+   "error_code": "E2067",
+   "failure_stage": "shutdown",
+   "id": "F-0021",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "current",
+   "variant_scope": [
+    "V1",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-TCU",
+   "detected": true,
+   "detected_by": "EX-00392",
+   "error_code": "EC978",
+   "failure_stage": "fault_injection",
+   "id": "F-0022",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001",
+    "B002"
+   ],
+   "severity": 3,
+   "signal": "temperature",
+   "variant_scope": [
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-TCU",
+   "detected": true,
+   "detected_by": "EX-00211",
+   "error_code": "E19AA",
+   "failure_stage": "transition",
+   "id": "F-0023",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-HV_JUNCTION",
+   "detected": true,
+   "detected_by": "EX-00033",
+   "error_code": "E1EB5",
+   "failure_stage": "steady_state",
+   "id": "F-0024",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "light command",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-CHARGE_PORT_CTRL",
+   "detected": true,
+   "detected_by": "EX-00113",
+   "error_code": "E8060",
+   "failure_stage": "startup",
+   "id": "F-0025",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 1,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-SEAT_CTRL",
+   "detected": true,
+   "detected_by": "EX-00162",
+   "error_code": "E12BD",
+   "failure_stage": "shutdown",
+   "id": "F-0026",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-SEAT_CTRL",
+   "detected": true,
+   "detected_by": "EX-00019",
+   "error_code": "E12BD",
+   "failure_stage": "fault_injection",
+   "id": "F-0027",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DOOR_CTRL_FL",
+   "detected": true,
+   "detected_by": "EX-00087",
+   "error_code": "EDDCD",
+   "failure_stage": "steady_state",
+   "id": "F-0028",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 1,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DOOR_CTRL_FL",
+   "detected": true,
+   "detected_by": "EX-00122",
+   "error_code": "EB829",
+   "failure_stage": "shutdown",
+   "id": "F-0029",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DOOR_CTRL_FR",
+   "detected": true,
+   "detected_by": "EX-00069",
+   "error_code": "E94A5",
+   "failure_stage": "transition",
+   "id": "F-0030",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "voltage",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-LIGHT_CTRL",
+   "detected": true,
+   "detected_by": "EX-00217",
+   "error_code": "EA979",
+   "failure_stage": "startup",
+   "id": "F-0031",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "temperature",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-LIGHT_CTRL",
+   "detected": true,
+   "detected_by": "EX-00054",
+   "error_code": "E189A",
+   "failure_stage": "transition",
+   "id": "F-0032",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "object list",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-WIPER_CTRL",
+   "detected": true,
+   "detected_by": "EX-00049",
+   "error_code": "EC2CD",
+   "failure_stage": "shutdown",
+   "id": "F-0033",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "current",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-WIPER_CTRL",
+   "detected": true,
+   "detected_by": "EX-00227",
+   "error_code": "E92B3",
+   "failure_stage": "shutdown",
+   "id": "F-0034",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "firmware image",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-INSTRUMENT_CLUSTER",
+   "detected": true,
+   "detected_by": "EX-00026",
+   "error_code": "E193B",
+   "failure_stage": "shutdown",
+   "id": "F-0035",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "door status",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-INSTRUMENT_CLUSTER",
+   "detected": true,
+   "detected_by": "EX-00013",
+   "error_code": "E6C17",
+   "failure_stage": "fault_injection",
+   "id": "F-0036",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-RADAR_FRONT",
+   "detected": true,
+   "detected_by": "EX-00018",
+   "error_code": "E7528",
+   "failure_stage": "transition",
+   "id": "F-0037",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "steering torque",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-LIDAR_CTRL",
+   "detected": true,
+   "detected_by": "EX-00151",
+   "error_code": "E13EF",
+   "failure_stage": "steady_state",
+   "id": "F-0038",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-SURROUND_VIEW",
+   "detected": true,
+   "detected_by": "EX-00060",
+   "error_code": "E58D4",
+   "failure_stage": "shutdown",
+   "id": "F-0039",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-SUSPENSION_CTRL",
+   "detected": true,
+   "detected_by": "EX-00463",
+   "error_code": "E56C9",
+   "failure_stage": "transition",
+   "id": "F-0040",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001",
+    "B002"
+   ],
+   "severity": 3,
+   "signal": "light command",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-OTA_MANAGER",
+   "detected": true,
+   "detected_by": "EX-00072",
+   "error_code": "EFE01",
+   "failure_stage": "transition",
+   "id": "F-0041",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "torque request",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00147",
+   "error_code": "E1130",
+   "failure_stage": "transition",
+   "id": "F-0042",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00007",
+   "error_code": "E1130",
+   "failure_stage": "transition",
+   "id": "F-0043",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "light command",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00056",
+   "error_code": "E1130",
+   "failure_stage": "fault_injection",
+   "id": "F-0044",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 3,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00107",
+   "error_code": "E1130",
+   "failure_stage": "steady_state",
+   "id": "F-0045",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1"
+   ]
+  },
+  {
+   "component_id": "ECU-DIAG_MASTER",
+   "detected": true,
+   "detected_by": "EX-00092",
+   "error_code": "E7839",
+   "failure_stage": "transition",
+   "id": "F-0046",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 2,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DIAG_MASTER",
+   "detected": true,
+   "detected_by": "EX-00131",
+   "error_code": "E9198",
+   "failure_stage": "fault_injection",
+   "id": "F-0047",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 5,
+   "signal": "light command",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-POWER_DIST",
+   "detected": true,
+   "detected_by": "EX-00008",
+   "error_code": "E9F02",
+   "failure_stage": "fault_injection",
+   "id": "F-0048",
+   "injected_build": "B001",
+   "live_builds": [
+    "B001"
+   ],
+   "severity": 4,
+   "signal": "voltage",
+   "variant_scope": [
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00283",
+   "error_code": "E768B",
+   "failure_stage": "transition",
+   "id": "F-0049",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 4,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-VCU",
+   "detected": true,
+   "detected_by": "EX-00284",
+   "error_code": "EDD04",
+   "failure_stage": "transition",
+   "id": "F-0050",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 5,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-VCU",
+   "detected": true,
+   "detected_by": "EX-00316",
+   "error_code": "E66A3",
+   "failure_stage": "shutdown",
+   "id": "F-0051",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 3,
+   "signal": "speed",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-00339",
+   "error_code": "E1D53",
+   "failure_stage": "wake_sleep",
+   "id": "F-0052",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 1,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-00531",
+   "error_code": "E3926",
+   "failure_stage": "shutdown",
+   "id": "F-0053",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 3,
+   "signal": "light command",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-00296",
+   "error_code": "EC4F0",
+   "failure_stage": "wake_sleep",
+   "id": "F-0054",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 2,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DCDC",
+   "detected": true,
+   "detected_by": "EX-00412",
+   "error_code": "E115A",
+   "failure_stage": "wake_sleep",
+   "id": "F-0055",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 4,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00450",
+   "error_code": "E2067",
+   "failure_stage": "wake_sleep",
+   "id": "F-0056",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 4,
+   "signal": "object list",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-TCU",
+   "detected": true,
+   "detected_by": "EX-00751",
+   "error_code": "E7263",
+   "failure_stage": "wake_sleep",
+   "id": "F-0057",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002",
+    "B003"
+   ],
+   "severity": 1,
+   "signal": "steering torque",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-TCU",
+   "detected": true,
+   "detected_by": "EX-00346",
+   "error_code": "E7263",
+   "failure_stage": "transition",
+   "id": "F-0058",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 3,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-CENTRAL_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00280",
+   "error_code": "ED798",
+   "failure_stage": "wake_sleep",
+   "id": "F-0059",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 5,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1"
+   ]
+  },
+  {
+   "component_id": "ECU-RADAR_FRONT",
+   "detected": true,
+   "detected_by": "EX-00350",
+   "error_code": "E7528",
+   "failure_stage": "transition",
+   "id": "F-0060",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 4,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-RADAR_FRONT",
+   "detected": true,
+   "detected_by": "EX-00308",
+   "error_code": "E77CB",
+   "failure_stage": "wake_sleep",
+   "id": "F-0061",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 5,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00305",
+   "error_code": "E1130",
+   "failure_stage": "wake_sleep",
+   "id": "F-0062",
+   "injected_build": "B002",
+   "live_builds": [
+    "B002"
+   ],
+   "severity": 4,
+   "signal": "speed",
+   "variant_scope": [
+    "V1",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": false,
+   "detected_by": null,
+   "error_code": "E9222",
+   "failure_stage": "shutdown",
+   "id": "F-0063",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003",
+    "B004",
+    "B005",
+    "B006"
+   ],
+   "severity": 5,
+   "signal": "speed",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00818",
+   "error_code": "E9222",
+   "failure_stage": "wake_sleep",
+   "id": "F-0064",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 5,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00635",
+   "error_code": "EBF3F",
+   "failure_stage": "fault_injection",
+   "id": "F-0065",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 4,
+   "signal": "firmware image",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00585",
+   "error_code": "EAD30",
+   "failure_stage": "transition",
+   "id": "F-0066",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 5,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00579",
+   "error_code": "EAD30",
+   "failure_stage": "startup",
+   "id": "F-0067",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 5,
+   "signal": "current",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00761",
+   "error_code": "EAD30",
+   "failure_stage": "fault_injection",
+   "id": "F-0068",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 4,
+   "signal": "diagnostic session",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00667",
+   "error_code": "EAD30",
+   "failure_stage": "shutdown",
+   "id": "F-0069",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 5,
+   "signal": "speed",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-00617",
+   "error_code": "EC4F0",
+   "failure_stage": "wake_sleep",
+   "id": "F-0070",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 3,
+   "signal": "speed",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-01178",
+   "error_code": "EC4F0",
+   "failure_stage": "transition",
+   "id": "F-0071",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003",
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "voltage",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-00670",
+   "error_code": "EC4F0",
+   "failure_stage": "shutdown",
+   "id": "F-0072",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 1,
+   "signal": "door status",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DCDC",
+   "detected": true,
+   "detected_by": "EX-00578",
+   "error_code": "E739C",
+   "failure_stage": "fault_injection",
+   "id": "F-0073",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 2,
+   "signal": "light command",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-DOOR_CTRL_FL",
+   "detected": true,
+   "detected_by": "EX-00784",
+   "error_code": "EB829",
+   "failure_stage": "shutdown",
+   "id": "F-0074",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 3,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-CENTRAL_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-00609",
+   "error_code": "ED798",
+   "failure_stage": "wake_sleep",
+   "id": "F-0075",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 4,
+   "signal": "door status",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-LIDAR_CTRL",
+   "detected": true,
+   "detected_by": "EX-00705",
+   "error_code": "E13EF",
+   "failure_stage": "fault_injection",
+   "id": "F-0076",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 4,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DIAG_MASTER",
+   "detected": true,
+   "detected_by": "EX-00704",
+   "error_code": "E7839",
+   "failure_stage": "startup",
+   "id": "F-0077",
+   "injected_build": "B003",
+   "live_builds": [
+    "B003"
+   ],
+   "severity": 2,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-00879",
+   "error_code": "E9222",
+   "failure_stage": "shutdown",
+   "id": "F-0078",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 5,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V1"
+   ]
+  },
+  {
+   "component_id": "ECU-DCDC",
+   "detected": true,
+   "detected_by": "EX-00871",
+   "error_code": "E739C",
+   "failure_stage": "fault_injection",
+   "id": "F-0079",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 3,
+   "signal": "door status",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DCDC",
+   "detected": true,
+   "detected_by": "EX-00878",
+   "error_code": "E739C",
+   "failure_stage": "fault_injection",
+   "id": "F-0080",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "steering torque",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-EPS",
+   "detected": true,
+   "detected_by": "EX-00895",
+   "error_code": "EA9A9",
+   "failure_stage": "startup",
+   "id": "F-0081",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-EPS",
+   "detected": true,
+   "detected_by": "EX-00888",
+   "error_code": "E7F74",
+   "failure_stage": "transition",
+   "id": "F-0082",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "current",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-EPS",
+   "detected": true,
+   "detected_by": "EX-00880",
+   "error_code": "EA9A9",
+   "failure_stage": "steady_state",
+   "id": "F-0083",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 3,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-EPS",
+   "detected": true,
+   "detected_by": "EX-00919",
+   "error_code": "EA9A9",
+   "failure_stage": "fault_injection",
+   "id": "F-0084",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00914",
+   "error_code": "E2067",
+   "failure_stage": "fault_injection",
+   "id": "F-0085",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "steering torque",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-00881",
+   "error_code": "E48C5",
+   "failure_stage": "steady_state",
+   "id": "F-0086",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 5,
+   "signal": "temperature",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-WIPER_CTRL",
+   "detected": true,
+   "detected_by": "EX-01086",
+   "error_code": "E92B3",
+   "failure_stage": "shutdown",
+   "id": "F-0087",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 2,
+   "signal": "light command",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-KEYLESS_ENTRY",
+   "detected": true,
+   "detected_by": "EX-01149",
+   "error_code": "E4B4E",
+   "failure_stage": "steady_state",
+   "id": "F-0088",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "door status",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-INSTRUMENT_CLUSTER",
+   "detected": true,
+   "detected_by": "EX-01532",
+   "error_code": "E6C17",
+   "failure_stage": "wake_sleep",
+   "id": "F-0089",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004",
+    "B005",
+    "B006"
+   ],
+   "severity": 1,
+   "signal": "torque request",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-AUDIO_AMP",
+   "detected": true,
+   "detected_by": "EX-00890",
+   "error_code": "E384E",
+   "failure_stage": "transition",
+   "id": "F-0090",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 3,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-AUDIO_AMP",
+   "detected": true,
+   "detected_by": "EX-00894",
+   "error_code": "E263B",
+   "failure_stage": "transition",
+   "id": "F-0091",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 3,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-LIDAR_CTRL",
+   "detected": true,
+   "detected_by": "EX-00921",
+   "error_code": "E13EF",
+   "failure_stage": "wake_sleep",
+   "id": "F-0092",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 5,
+   "signal": "voltage",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-LIDAR_CTRL",
+   "detected": true,
+   "detected_by": "EX-00939",
+   "error_code": "ECCA7",
+   "failure_stage": "startup",
+   "id": "F-0093",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 5,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-SURROUND_VIEW",
+   "detected": true,
+   "detected_by": "EX-00975",
+   "error_code": "E58D4",
+   "failure_stage": "startup",
+   "id": "F-0094",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 1,
+   "signal": "voltage",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-STEERING_ANGLE",
+   "detected": true,
+   "detected_by": "EX-00930",
+   "error_code": "E41CC",
+   "failure_stage": "fault_injection",
+   "id": "F-0095",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 3,
+   "signal": "voltage",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00970",
+   "error_code": "E52D7",
+   "failure_stage": "startup",
+   "id": "F-0096",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-00884",
+   "error_code": "E3CCF",
+   "failure_stage": "transition",
+   "id": "F-0097",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 3,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-V2X_UNIT",
+   "detected": true,
+   "detected_by": "EX-01037",
+   "error_code": "E1130",
+   "failure_stage": "fault_injection",
+   "id": "F-0098",
+   "injected_build": "B004",
+   "live_builds": [
+    "B004"
+   ],
+   "severity": 4,
+   "signal": "diagnostic session",
+   "variant_scope": [
+    "V1",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-LIGHT_CTRL",
+   "detected": true,
+   "detected_by": "EX-01201",
+   "error_code": "E189A",
+   "failure_stage": "transition",
+   "id": "F-0099",
+   "injected_build": "B005",
+   "live_builds": [
+    "B005"
+   ],
+   "severity": 3,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-LIGHT_CTRL",
+   "detected": true,
+   "detected_by": "EX-01229",
+   "error_code": "E189A",
+   "failure_stage": "fault_injection",
+   "id": "F-0100",
+   "injected_build": "B005",
+   "live_builds": [
+    "B005"
+   ],
+   "severity": 3,
+   "signal": "voltage",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-KEYLESS_ENTRY",
+   "detected": true,
+   "detected_by": "EX-01256",
+   "error_code": "E4B4E",
+   "failure_stage": "steady_state",
+   "id": "F-0101",
+   "injected_build": "B005",
+   "live_builds": [
+    "B005"
+   ],
+   "severity": 3,
+   "signal": "voltage",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-CENTRAL_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-01210",
+   "error_code": "ED798",
+   "failure_stage": "steady_state",
+   "id": "F-0102",
+   "injected_build": "B005",
+   "live_builds": [
+    "B005"
+   ],
+   "severity": 2,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-01520",
+   "error_code": "E768B",
+   "failure_stage": "steady_state",
+   "id": "F-0103",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-01526",
+   "error_code": "E9222",
+   "failure_stage": "wake_sleep",
+   "id": "F-0104",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "diagnostic session",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": false,
+   "detected_by": null,
+   "error_code": "E9222",
+   "failure_stage": "fault_injection",
+   "id": "F-0105",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "diagnostic session",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-01541",
+   "error_code": "E9222",
+   "failure_stage": "steady_state",
+   "id": "F-0106",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 5,
+   "signal": "door status",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-01554",
+   "error_code": "E9222",
+   "failure_stage": "shutdown",
+   "id": "F-0107",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-BMS",
+   "detected": true,
+   "detected_by": "EX-01575",
+   "error_code": "ED93C",
+   "failure_stage": "fault_injection",
+   "id": "F-0108",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "steering torque",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-VCU",
+   "detected": true,
+   "detected_by": "EX-01559",
+   "error_code": "E66A3",
+   "failure_stage": "wake_sleep",
+   "id": "F-0109",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-01505",
+   "error_code": "EC272",
+   "failure_stage": "shutdown",
+   "id": "F-0110",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 5,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-01623",
+   "error_code": "EC272",
+   "failure_stage": "shutdown",
+   "id": "F-0111",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "door status",
+   "variant_scope": [
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-01740",
+   "error_code": "EAD30",
+   "failure_stage": "steady_state",
+   "id": "F-0112",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 5,
+   "signal": "door status",
+   "variant_scope": [
+    "V1",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ADAS_GATEWAY",
+   "detected": true,
+   "detected_by": "EX-01589",
+   "error_code": "EAD30",
+   "failure_stage": "steady_state",
+   "id": "F-0113",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-01517",
+   "error_code": "EC4F0",
+   "failure_stage": "fault_injection",
+   "id": "F-0114",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-INFOTAINMENT",
+   "detected": true,
+   "detected_by": "EX-01524",
+   "error_code": "E1D53",
+   "failure_stage": "wake_sleep",
+   "id": "F-0115",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 1,
+   "signal": "voltage",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-HVAC_ECU",
+   "detected": false,
+   "detected_by": null,
+   "error_code": "E3534",
+   "failure_stage": "shutdown",
+   "id": "F-0116",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-HVAC_ECU",
+   "detected": false,
+   "detected_by": null,
+   "error_code": "E88BF",
+   "failure_stage": "fault_injection",
+   "id": "F-0117",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "temperature",
+   "variant_scope": [
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-HVAC_ECU",
+   "detected": true,
+   "detected_by": "EX-01616",
+   "error_code": "E3534",
+   "failure_stage": "wake_sleep",
+   "id": "F-0118",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-HVAC_ECU",
+   "detected": true,
+   "detected_by": "EX-01515",
+   "error_code": "E3534",
+   "failure_stage": "startup",
+   "id": "F-0119",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "door status",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-01530",
+   "error_code": "E2067",
+   "failure_stage": "shutdown",
+   "id": "F-0120",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 5,
+   "signal": "state-of-charge",
+   "variant_scope": [
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-01571",
+   "error_code": "E5359",
+   "failure_stage": "fault_injection",
+   "id": "F-0121",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "firmware image",
+   "variant_scope": [
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-ABS_ESC",
+   "detected": true,
+   "detected_by": "EX-01523",
+   "error_code": "E2067",
+   "failure_stage": "transition",
+   "id": "F-0122",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "object list",
+   "variant_scope": [
+    "V1",
+    "V2"
+   ]
+  },
+  {
+   "component_id": "ECU-THERMAL_MGMT",
+   "detected": true,
+   "detected_by": "EX-01562",
+   "error_code": "E3CDE",
+   "failure_stage": "transition",
+   "id": "F-0123",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "torque request",
+   "variant_scope": [
+    "V1",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-SEAT_CTRL",
+   "detected": true,
+   "detected_by": "EX-01644",
+   "error_code": "EE9BE",
+   "failure_stage": "steady_state",
+   "id": "F-0124",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "wake-up",
+   "variant_scope": [
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-SEAT_CTRL",
+   "detected": true,
+   "detected_by": "EX-01737",
+   "error_code": "EE9BE",
+   "failure_stage": "shutdown",
+   "id": "F-0125",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 1,
+   "signal": "CAN timeout",
+   "variant_scope": [
+    "V1",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-HUD",
+   "detected": true,
+   "detected_by": "EX-01657",
+   "error_code": "E4D3F",
+   "failure_stage": "transition",
+   "id": "F-0126",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 3,
+   "signal": "brake pressure",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-RADAR_FRONT",
+   "detected": true,
+   "detected_by": "EX-01548",
+   "error_code": "EBB6E",
+   "failure_stage": "startup",
+   "id": "F-0127",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "light command",
+   "variant_scope": [
+    "V2",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-PARK_ASSIST",
+   "detected": true,
+   "detected_by": "EX-01519",
+   "error_code": "E2715",
+   "failure_stage": "startup",
+   "id": "F-0128",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 2,
+   "signal": "door status",
+   "variant_scope": [
+    "V1",
+    "V3",
+    "V4"
+   ]
+  },
+  {
+   "component_id": "ECU-DIAG_MASTER",
+   "detected": true,
+   "detected_by": "EX-01512",
+   "error_code": "E9198",
+   "failure_stage": "wake_sleep",
+   "id": "F-0129",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 4,
+   "signal": "temperature",
+   "variant_scope": [
+    "V1",
+    "V2",
+    "V3"
+   ]
+  },
+  {
+   "component_id": "ECU-POWER_DIST",
+   "detected": true,
+   "detected_by": "EX-01531",
+   "error_code": "E90CF",
+   "failure_stage": "fault_injection",
+   "id": "F-0130",
+   "injected_build": "B006",
+   "live_builds": [
+    "B006"
+   ],
+   "severity": 5,
+   "signal": "diagnostic session",
+   "variant_scope": [
+    "V2",
+    "V3"
+   ]
+  }
+ ],
+ "generator_version": "1.1.0",
+ "latent_fragility": {
+  "ECU-ABS_ESC": 0.6277,
+  "ECU-ADAS_GATEWAY": 0.7432,
+  "ECU-AIRBAG": 0.0758,
+  "ECU-AUDIO_AMP": 0.0803,
+  "ECU-BCM": 0.028,
+  "ECU-BMS": 0.5058,
+  "ECU-CAMERA_FRONT": 0.0589,
+  "ECU-CENTRAL_GATEWAY": 0.2104,
+  "ECU-CHARGE_PORT_CTRL": 0.1994,
+  "ECU-DCDC": 0.2375,
+  "ECU-DIAG_MASTER": 0.4422,
+  "ECU-DOOR_CTRL_FL": 0.2153,
+  "ECU-DOOR_CTRL_FR": 0.0733,
+  "ECU-EPB": 0.1294,
+  "ECU-EPS": 0.3425,
+  "ECU-HUD": 0.2223,
+  "ECU-HVAC_ECU": 0.5671,
+  "ECU-HV_JUNCTION": 0.1051,
+  "ECU-INFOTAINMENT": 0.3131,
+  "ECU-INSTRUMENT_CLUSTER": 0.1881,
+  "ECU-INV_FRONT": 0.0507,
+  "ECU-INV_REAR": 0.1167,
+  "ECU-KEYLESS_ENTRY": 0.5011,
+  "ECU-LIDAR_CTRL": 0.5708,
+  "ECU-LIGHT_CTRL": 0.4941,
+  "ECU-OBC": 0.0367,
+  "ECU-OTA_MANAGER": 0.0841,
+  "ECU-PARK_ASSIST": 0.1713,
+  "ECU-POWER_DIST": 0.1906,
+  "ECU-RADAR_FRONT": 0.3822,
+  "ECU-SEAT_CTRL": 0.5857,
+  "ECU-STEERING_ANGLE": 0.0738,
+  "ECU-SURROUND_VIEW": 0.1293,
+  "ECU-SUSPENSION_CTRL": 0.1228,
+  "ECU-TCU": 0.2248,
+  "ECU-THERMAL_MGMT": 0.0703,
+  "ECU-TPMS": 0.017,
+  "ECU-V2X_UNIT": 0.5102,
+  "ECU-VCU": 0.2224,
+  "ECU-WIPER_CTRL": 0.1053
+ },
+ "seed": 42,
+ "test_sensitivity": {
+  "TC-001": 0.3481,
+  "TC-002": 0.6528,
+  "TC-003": 0.8036,
+  "TC-004": 0.637,
+  "TC-005": 0.5361,
+  "TC-006": 0.7832,
+  "TC-007": 0.7398,
+  "TC-008": 0.6268,
+  "TC-009": 0.3197,
+  "TC-010": 0.4538,
+  "TC-011": 0.3626,
+  "TC-012": 0.7018,
+  "TC-013": 0.66,
+  "TC-014": 0.7124,
+  "TC-015": 0.349,
+  "TC-016": 0.3398,
+  "TC-017": 0.7893,
+  "TC-018": 0.6603,
+  "TC-019": 0.9067,
+  "TC-020": 0.5567,
+  "TC-021": 0.6315,
+  "TC-022": 0.5197,
+  "TC-023": 0.5921,
+  "TC-024": 0.4768,
+  "TC-025": 0.6833,
+  "TC-026": 0.5024,
+  "TC-027": 0.4771,
+  "TC-028": 0.4924,
+  "TC-029": 0.8081,
+  "TC-030": 0.4811,
+  "TC-031": 0.7299,
+  "TC-032": 0.4974,
+  "TC-033": 0.6452,
+  "TC-034": 0.7444,
+  "TC-035": 0.6687,
+  "TC-036": 0.3497,
+  "TC-037": 0.6413,
+  "TC-038": 0.4873,
+  "TC-039": 0.3507,
+  "TC-040": 0.3751,
+  "TC-041": 0.5898,
+  "TC-042": 0.6519,
+  "TC-043": 0.4132,
+  "TC-044": 0.4419,
+  "TC-045": 0.4174,
+  "TC-046": 0.5372,
+  "TC-047": 0.505,
+  "TC-048": 0.8963,
+  "TC-049": 0.7825,
+  "TC-050": 0.6453,
+  "TC-051": 0.3746,
+  "TC-052": 0.95,
+  "TC-053": 0.3381,
+  "TC-054": 0.7572,
+  "TC-055": 0.7723,
+  "TC-056": 0.5449,
+  "TC-057": 0.8093,
+  "TC-058": 0.4742,
+  "TC-059": 0.7759,
+  "TC-060": 0.8998,
+  "TC-061": 0.3934,
+  "TC-062": 0.3366,
+  "TC-063": 0.7638,
+  "TC-064": 0.5911,
+  "TC-065": 0.5087,
+  "TC-066": 0.6196,
+  "TC-067": 0.7465,
+  "TC-068": 0.3957,
+  "TC-069": 0.62,
+  "TC-070": 0.5453,
+  "TC-071": 0.7377,
+  "TC-072": 0.8983,
+  "TC-073": 0.554,
+  "TC-074": 0.4076,
+  "TC-075": 0.6037,
+  "TC-076": 0.3392,
+  "TC-077": 0.4754,
+  "TC-078": 0.6305,
+  "TC-079": 0.4616,
+  "TC-080": 0.4914,
+  "TC-081": 0.4628,
+  "TC-082": 0.3925,
+  "TC-083": 0.4573,
+  "TC-084": 0.756,
+  "TC-085": 0.74,
+  "TC-086": 0.5594,
+  "TC-087": 0.6597,
+  "TC-088": 0.5614,
+  "TC-089": 0.4605,
+  "TC-090": 0.6588,
+  "TC-091": 0.5533,
+  "TC-092": 0.6243,
+  "TC-093": 0.4079,
+  "TC-094": 0.663,
+  "TC-095": 0.7499,
+  "TC-096": 0.3396,
+  "TC-097": 0.5333,
+  "TC-098": 0.8524,
+  "TC-099": 0.7066,
+  "TC-100": 0.8083,
+  "TC-101": 0.3926,
+  "TC-102": 0.6732,
+  "TC-103": 0.7624,
+  "TC-104": 0.4745,
+  "TC-105": 0.7224,
+  "TC-106": 0.4458,
+  "TC-107": 0.5512,
+  "TC-108": 0.6361,
+  "TC-109": 0.4849,
+  "TC-110": 0.6965,
+  "TC-111": 0.611,
+  "TC-112": 0.5509,
+  "TC-113": 0.5148,
+  "TC-114": 0.5277,
+  "TC-115": 0.4983,
+  "TC-116": 0.95,
+  "TC-117": 0.95,
+  "TC-118": 0.6582,
+  "TC-119": 0.598,
+  "TC-120": 0.6665,
+  "TC-121": 0.4573,
+  "TC-122": 0.3154,
+  "TC-123": 0.3259,
+  "TC-124": 0.8155,
+  "TC-125": 0.3796,
+  "TC-126": 0.6199,
+  "TC-127": 0.4037,
+  "TC-128": 0.5219,
+  "TC-129": 0.3794,
+  "TC-130": 0.7633,
+  "TC-131": 0.4071,
+  "TC-132": 0.7776,
+  "TC-133": 0.5437,
+  "TC-134": 0.555,
+  "TC-135": 0.5263,
+  "TC-136": 0.5193,
+  "TC-137": 0.3763,
+  "TC-138": 0.518,
+  "TC-139": 0.5655,
+  "TC-140": 0.4924,
+  "TC-141": 0.4894,
+  "TC-142": 0.49,
+  "TC-143": 0.7942,
+  "TC-144": 0.7215,
+  "TC-145": 0.3669,
+  "TC-146": 0.5806,
+  "TC-147": 0.4622,
+  "TC-148": 0.3986,
+  "TC-149": 0.6046,
+  "TC-150": 0.5955,
+  "TC-151": 0.339,
+  "TC-152": 0.95,
+  "TC-153": 0.371,
+  "TC-154": 0.5552,
+  "TC-155": 0.6915,
+  "TC-156": 0.8025,
+  "TC-157": 0.7806,
+  "TC-158": 0.6777,
+  "TC-159": 0.6562,
+  "TC-160": 0.8117,
+  "TC-161": 0.3272,
+  "TC-162": 0.9376,
+  "TC-163": 0.3615,
+  "TC-164": 0.7087,
+  "TC-165": 0.4062,
+  "TC-166": 0.5781,
+  "TC-167": 0.4752,
+  "TC-168": 0.7413,
+  "TC-169": 0.6218,
+  "TC-170": 0.4342,
+  "TC-171": 0.7766,
+  "TC-172": 0.5938,
+  "TC-173": 0.5231,
+  "TC-174": 0.4869,
+  "TC-175": 0.6238,
+  "TC-176": 0.7108,
+  "TC-177": 0.6979,
+  "TC-178": 0.4671,
+  "TC-179": 0.95,
+  "TC-180": 0.6349,
+  "TC-181": 0.95,
+  "TC-182": 0.3204,
+  "TC-183": 0.6917,
+  "TC-184": 0.5285,
+  "TC-185": 0.752,
+  "TC-186": 0.3881,
+  "TC-187": 0.8555,
+  "TC-188": 0.5494,
+  "TC-189": 0.6018,
+  "TC-190": 0.9465,
+  "TC-191": 0.3478,
+  "TC-192": 0.6736,
+  "TC-193": 0.557,
+  "TC-194": 0.755,
+  "TC-195": 0.7236,
+  "TC-196": 0.7554,
+  "TC-197": 0.5992,
+  "TC-198": 0.7199,
+  "TC-199": 0.6029,
+  "TC-200": 0.7756,
+  "TC-201": 0.3417,
+  "TC-202": 0.6446,
+  "TC-203": 0.9187,
+  "TC-204": 0.7995,
+  "TC-205": 0.5268,
+  "TC-206": 0.6108,
+  "TC-207": 0.464,
+  "TC-208": 0.4859,
+  "TC-209": 0.5399,
+  "TC-210": 0.8872,
+  "TC-211": 0.7575,
+  "TC-212": 0.457,
+  "TC-213": 0.5105,
+  "TC-214": 0.6492,
+  "TC-215": 0.5617,
+  "TC-216": 0.5913,
+  "TC-217": 0.3884,
+  "TC-218": 0.6527,
+  "TC-219": 0.8886,
+  "TC-220": 0.6605,
+  "TC-221": 0.6957,
+  "TC-222": 0.6718,
+  "TC-223": 0.5605,
+  "TC-224": 0.5622,
+  "TC-225": 0.3696,
+  "TC-226": 0.4812,
+  "TC-227": 0.6765,
+  "TC-228": 0.3162,
+  "TC-229": 0.6205,
+  "TC-230": 0.5491,
+  "TC-231": 0.8477,
+  "TC-232": 0.4051,
+  "TC-233": 0.6388,
+  "TC-234": 0.4805,
+  "TC-235": 0.7535,
+  "TC-236": 0.5895,
+  "TC-237": 0.5372,
+  "TC-238": 0.372,
+  "TC-239": 0.4704,
+  "TC-240": 0.7848,
+  "TC-241": 0.95,
+  "TC-242": 0.7139,
+  "TC-243": 0.5273,
+  "TC-244": 0.6349,
+  "TC-245": 0.5874,
+  "TC-246": 0.3481,
+  "TC-247": 0.5624,
+  "TC-248": 0.4931,
+  "TC-249": 0.4066,
+  "TC-250": 0.735
+ }
+}

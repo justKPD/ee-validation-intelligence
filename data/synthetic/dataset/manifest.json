@@ -1,0 +1,35 @@
+{
+ "counts": {
+  "build_changes": 76,
+  "builds": 6,
+  "component_dependencies": 62,
+  "components": 40,
+  "defects": 124,
+  "executions": 1821,
+  "requirement_components": 190,
+  "requirements": 150,
+  "test_cases": 250,
+  "test_components": 504,
+  "test_requirements": 402,
+  "test_variants": 577,
+  "variants": 4
+ },
+ "disclaimer": "Entirely fictional synthetic data. No BMW Group data.",
+ "generator_version": "1.1.0",
+ "seed": 42,
+ "sha256": {
+  "build_changes": "f2c8f2d9a984aa30a17b87d49cd8444f2870c5b390d979a1d16c68a2cc227c2a",
+  "builds": "1ad668a0fb5ae54af9d84e2648b5f140f62f35065bc348c94d8287e1154542ac",
+  "component_dependencies": "c6700f8a1e4fa77186946b7428846a3891d4c73600f3e3246672d4c6dd90c5be",
+  "components": "1f421e4604993ef7e369f66771bdd43773de2d2ff188f73d19eb0ef5d561a501",
+  "defects": "0c040a21ab8a169ca80f6ecdc896f13e0c476a06b6b23928954a3d513408011f",
+  "executions": "f33e9db7ef6da93476128c475bb2762a4096efa26df7d03b43a1d5202a6f8c8b",
+  "requirement_components": "0dcf76e1abde94797dcfa560579a62f986829c43bea34f259dff909dd1d0de32",
+  "requirements": "68ba773541998a2f2b5690b290dc15967e2f7b61b84d55ac0c33a434fe4cf045",
+  "test_cases": "82b64a619a5d597b19e70eef5d063043808def5b37ab6bc5a3cc246f7e895a89",
+  "test_components": "0ed2f602e3fe8550fa7f0a47d3e803bb7eb6083dbf195a6c3ec1e17a73468c1e",
+  "test_requirements": "f309ec1b26c507d8621b58c0c6f2afcf9bd6e268572f1226a34a712a9d990287",
+  "test_variants": "70d1ed3d446c7fb922fef22077715dbe22fe8f0d9934e0b878671e4e3aefa576",
+  "variants": "56a45cfcdf9d78cceff0d39244387f87dccaf641ba1b963ab50688973a835efd"
+ }
+}

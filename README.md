@@ -33,6 +33,13 @@ More screenshots: [control tower](docs/assets/screenshots/01-control-tower-dashb
 [risk & coverage](docs/assets/screenshots/02-risk-coverage.png) · [shadow planning](docs/assets/screenshots/04-shadow-planning-benchmark.png) ·
 [reliability lab](docs/assets/screenshots/05-agent-reliability-lab.png) · [provenance ledger](docs/assets/screenshots/06-provenance-ledger.png)
 
+## Explore the data
+
+The full seeded synthetic dataset is browsable in the repo: [**`data/`**](data) — the visible programme
+([`data/synthetic/dataset/`](data/synthetic/dataset): 40 ECUs, 150 requirements, 250 tests, 1,821 executions, 124 defects)
+and, kept physically separate, the [**hidden ground-truth oracle**](data/synthetic/ground_truth) that only the benchmark
+reads. See [`data/README.md`](data/README.md) for how the two halves work and why the split keeps the benchmark honest.
+
 ## Deployment
 
 ```
@@ -130,6 +137,7 @@ Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The de
 - Methodology: [synthetic data](docs/methodology/synthetic-data.md) · [risk & evidence](docs/methodology/risk-and-evidence.md) ·
   [ranking & shadow planning](docs/methodology/ranking-and-shadow-planning.md) · [agent policy & provenance](docs/methodology/agent-policy-and-provenance.md) ·
   [reliability & adversarial](docs/methodology/agent-reliability-and-adversarial-testing.md) · [dataset summary](docs/methodology/dataset-summary.md)
+- [Data](data/README.md): the seeded synthetic dataset and the hidden ground-truth oracle
 - [Limitations](docs/limitations.md) · [Threat model](docs/threat-model.md) · [Post-release roadmap](docs/roadmap/post-release.md)
 
 ## Non-negotiable rules this codebase enforces

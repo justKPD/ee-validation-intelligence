@@ -1,0 +1,762 @@
+[
+ {
+  "component_id": "ECU-BCM",
+  "requirement_id": "R-001"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "requirement_id": "R-002"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "requirement_id": "R-003"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "requirement_id": "R-004"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "requirement_id": "R-005"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-006"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-007"
+ },
+ {
+  "component_id": "ECU-HVAC_ECU",
+  "requirement_id": "R-008"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-009"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-010"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "requirement_id": "R-010"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "requirement_id": "R-011"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "requirement_id": "R-012"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "requirement_id": "R-013"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "requirement_id": "R-013"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "requirement_id": "R-014"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "requirement_id": "R-015"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "requirement_id": "R-016"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "requirement_id": "R-017"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "requirement_id": "R-018"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-018"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "requirement_id": "R-019"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "requirement_id": "R-020"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-021"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "requirement_id": "R-021"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "requirement_id": "R-022"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "requirement_id": "R-023"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "requirement_id": "R-024"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "requirement_id": "R-025"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "requirement_id": "R-026"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "requirement_id": "R-027"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "requirement_id": "R-028"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "requirement_id": "R-029"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "requirement_id": "R-030"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "requirement_id": "R-030"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "requirement_id": "R-031"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-032"
+ },
+ {
+  "component_id": "ECU-TPMS",
+  "requirement_id": "R-033"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-033"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "requirement_id": "R-034"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "requirement_id": "R-035"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "requirement_id": "R-035"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "requirement_id": "R-036"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-037"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "requirement_id": "R-038"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "requirement_id": "R-038"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "requirement_id": "R-039"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "requirement_id": "R-040"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "requirement_id": "R-041"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-042"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "requirement_id": "R-043"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "requirement_id": "R-044"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-045"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "requirement_id": "R-046"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-046"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "requirement_id": "R-047"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-048"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "requirement_id": "R-049"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-050"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "requirement_id": "R-051"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "requirement_id": "R-052"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-053"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "requirement_id": "R-054"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "requirement_id": "R-055"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-056"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-057"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "requirement_id": "R-057"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-058"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-059"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "requirement_id": "R-060"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "requirement_id": "R-061"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "requirement_id": "R-061"
+ },
+ {
+  "component_id": "ECU-BCM",
+  "requirement_id": "R-062"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "requirement_id": "R-063"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-064"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-065"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "requirement_id": "R-066"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "requirement_id": "R-066"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-067"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "requirement_id": "R-068"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-068"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "requirement_id": "R-069"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "requirement_id": "R-070"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "requirement_id": "R-071"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "requirement_id": "R-072"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "requirement_id": "R-073"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "requirement_id": "R-074"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "requirement_id": "R-075"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "requirement_id": "R-075"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "requirement_id": "R-076"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "requirement_id": "R-077"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "requirement_id": "R-078"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "requirement_id": "R-078"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-079"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "requirement_id": "R-080"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "requirement_id": "R-080"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-081"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "requirement_id": "R-082"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-082"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-083"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "requirement_id": "R-084"
+ },
+ {
+  "component_id": "ECU-INV_REAR",
+  "requirement_id": "R-085"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-086"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-087"
+ },
+ {
+  "component_id": "ECU-ADAS_GATEWAY",
+  "requirement_id": "R-088"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-089"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "requirement_id": "R-090"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "requirement_id": "R-091"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "requirement_id": "R-092"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "requirement_id": "R-092"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-093"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "requirement_id": "R-094"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "requirement_id": "R-094"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "requirement_id": "R-095"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "requirement_id": "R-095"
+ },
+ {
+  "component_id": "ECU-SURROUND_VIEW",
+  "requirement_id": "R-096"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "requirement_id": "R-097"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "requirement_id": "R-097"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "requirement_id": "R-098"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-098"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "requirement_id": "R-099"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "requirement_id": "R-100"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-101"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "requirement_id": "R-101"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-102"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-103"
+ },
+ {
+  "component_id": "ECU-INFOTAINMENT",
+  "requirement_id": "R-103"
+ },
+ {
+  "component_id": "ECU-VCU",
+  "requirement_id": "R-104"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FR",
+  "requirement_id": "R-104"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "requirement_id": "R-105"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-106"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "requirement_id": "R-107"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "requirement_id": "R-108"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-108"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "requirement_id": "R-109"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "requirement_id": "R-110"
+ },
+ {
+  "component_id": "ECU-EPB",
+  "requirement_id": "R-111"
+ },
+ {
+  "component_id": "ECU-RADAR_FRONT",
+  "requirement_id": "R-111"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-112"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-112"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-113"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "requirement_id": "R-114"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "requirement_id": "R-115"
+ },
+ {
+  "component_id": "ECU-AIRBAG",
+  "requirement_id": "R-116"
+ },
+ {
+  "component_id": "ECU-OBC",
+  "requirement_id": "R-117"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-118"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "requirement_id": "R-119"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-119"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "requirement_id": "R-120"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-121"
+ },
+ {
+  "component_id": "ECU-HV_JUNCTION",
+  "requirement_id": "R-121"
+ },
+ {
+  "component_id": "ECU-CENTRAL_GATEWAY",
+  "requirement_id": "R-122"
+ },
+ {
+  "component_id": "ECU-THERMAL_MGMT",
+  "requirement_id": "R-123"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "requirement_id": "R-124"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "requirement_id": "R-124"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "requirement_id": "R-125"
+ },
+ {
+  "component_id": "ECU-WIPER_CTRL",
+  "requirement_id": "R-126"
+ },
+ {
+  "component_id": "ECU-INSTRUMENT_CLUSTER",
+  "requirement_id": "R-126"
+ },
+ {
+  "component_id": "ECU-PARK_ASSIST",
+  "requirement_id": "R-127"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-128"
+ },
+ {
+  "component_id": "ECU-DOOR_CTRL_FL",
+  "requirement_id": "R-129"
+ },
+ {
+  "component_id": "ECU-HUD",
+  "requirement_id": "R-130"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-131"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "requirement_id": "R-132"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "requirement_id": "R-133"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "requirement_id": "R-134"
+ },
+ {
+  "component_id": "ECU-POWER_DIST",
+  "requirement_id": "R-134"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-135"
+ },
+ {
+  "component_id": "ECU-ABS_ESC",
+  "requirement_id": "R-135"
+ },
+ {
+  "component_id": "ECU-SEAT_CTRL",
+  "requirement_id": "R-136"
+ },
+ {
+  "component_id": "ECU-HVAC_ECU",
+  "requirement_id": "R-136"
+ },
+ {
+  "component_id": "ECU-CHARGE_PORT_CTRL",
+  "requirement_id": "R-137"
+ },
+ {
+  "component_id": "ECU-TCU",
+  "requirement_id": "R-138"
+ },
+ {
+  "component_id": "ECU-SUSPENSION_CTRL",
+  "requirement_id": "R-139"
+ },
+ {
+  "component_id": "ECU-INV_FRONT",
+  "requirement_id": "R-140"
+ },
+ {
+  "component_id": "ECU-STEERING_ANGLE",
+  "requirement_id": "R-141"
+ },
+ {
+  "component_id": "ECU-DCDC",
+  "requirement_id": "R-141"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-142"
+ },
+ {
+  "component_id": "ECU-V2X_UNIT",
+  "requirement_id": "R-143"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-143"
+ },
+ {
+  "component_id": "ECU-KEYLESS_ENTRY",
+  "requirement_id": "R-144"
+ },
+ {
+  "component_id": "ECU-EPS",
+  "requirement_id": "R-145"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-146"
+ },
+ {
+  "component_id": "ECU-BMS",
+  "requirement_id": "R-146"
+ },
+ {
+  "component_id": "ECU-OTA_MANAGER",
+  "requirement_id": "R-147"
+ },
+ {
+  "component_id": "ECU-AUDIO_AMP",
+  "requirement_id": "R-148"
+ },
+ {
+  "component_id": "ECU-DIAG_MASTER",
+  "requirement_id": "R-149"
+ },
+ {
+  "component_id": "ECU-LIGHT_CTRL",
+  "requirement_id": "R-149"
+ },
+ {
+  "component_id": "ECU-LIDAR_CTRL",
+  "requirement_id": "R-150"
+ },
+ {
+  "component_id": "ECU-CAMERA_FRONT",
+  "requirement_id": "R-150"
+ }
+]

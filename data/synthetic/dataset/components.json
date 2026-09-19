@@ -1,0 +1,322 @@
+[
+ {
+  "asil": "B",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-BCM",
+  "name": "Bcm (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "D",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-BMS",
+  "name": "Bms (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "D",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-VCU",
+  "name": "Vcu (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "C",
+  "domain": "adas",
+  "fictional": true,
+  "id": "ECU-ADAS_GATEWAY",
+  "name": "Adas Gateway (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "QM",
+  "domain": "infotainment",
+  "fictional": true,
+  "id": "ECU-INFOTAINMENT",
+  "name": "Infotainment (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "C",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-DCDC",
+  "name": "Dcdc (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "B",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-OBC",
+  "name": "Obc (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "QM",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-HVAC_ECU",
+  "name": "Hvac Ecu (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "D",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-EPS",
+  "name": "Eps (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "D",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-ABS_ESC",
+  "name": "Abs Esc (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "D",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-AIRBAG",
+  "name": "Airbag (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "QM",
+  "domain": "connectivity",
+  "fictional": true,
+  "id": "ECU-TCU",
+  "name": "Tcu (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "D",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-INV_FRONT",
+  "name": "Inv Front (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "D",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-INV_REAR",
+  "name": "Inv Rear (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "C",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-HV_JUNCTION",
+  "name": "Hv Junction (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "B",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-THERMAL_MGMT",
+  "name": "Thermal Mgmt (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "B",
+  "domain": "hv_powertrain",
+  "fictional": true,
+  "id": "ECU-CHARGE_PORT_CTRL",
+  "name": "Charge Port Ctrl (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "QM",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-SEAT_CTRL",
+  "name": "Seat Ctrl (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "A",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-DOOR_CTRL_FL",
+  "name": "Door Ctrl Fl (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "A",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-DOOR_CTRL_FR",
+  "name": "Door Ctrl Fr (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "B",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-LIGHT_CTRL",
+  "name": "Light Ctrl (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "A",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-WIPER_CTRL",
+  "name": "Wiper Ctrl (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "A",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-KEYLESS_ENTRY",
+  "name": "Keyless Entry (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "B",
+  "domain": "infotainment",
+  "fictional": true,
+  "id": "ECU-INSTRUMENT_CLUSTER",
+  "name": "Instrument Cluster (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "A",
+  "domain": "infotainment",
+  "fictional": true,
+  "id": "ECU-HUD",
+  "name": "Hud (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "QM",
+  "domain": "infotainment",
+  "fictional": true,
+  "id": "ECU-AUDIO_AMP",
+  "name": "Audio Amp (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "C",
+  "domain": "connectivity",
+  "fictional": true,
+  "id": "ECU-CENTRAL_GATEWAY",
+  "name": "Central Gateway (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "C",
+  "domain": "adas",
+  "fictional": true,
+  "id": "ECU-RADAR_FRONT",
+  "name": "Radar Front (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "C",
+  "domain": "adas",
+  "fictional": true,
+  "id": "ECU-CAMERA_FRONT",
+  "name": "Camera Front (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "C",
+  "domain": "adas",
+  "fictional": true,
+  "id": "ECU-LIDAR_CTRL",
+  "name": "Lidar Ctrl (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "B",
+  "domain": "adas",
+  "fictional": true,
+  "id": "ECU-PARK_ASSIST",
+  "name": "Park Assist (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "A",
+  "domain": "adas",
+  "fictional": true,
+  "id": "ECU-SURROUND_VIEW",
+  "name": "Surround View (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "A",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-TPMS",
+  "name": "Tpms (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "C",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-EPB",
+  "name": "Epb (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "B",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-SUSPENSION_CTRL",
+  "name": "Suspension Ctrl (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "D",
+  "domain": "chassis",
+  "fictional": true,
+  "id": "ECU-STEERING_ANGLE",
+  "name": "Steering Angle (fictional)",
+  "supplier": "In-house (fictional)"
+ },
+ {
+  "asil": "B",
+  "domain": "connectivity",
+  "fictional": true,
+  "id": "ECU-OTA_MANAGER",
+  "name": "Ota Manager (fictional)",
+  "supplier": "Fictional Supplier Alpha"
+ },
+ {
+  "asil": "A",
+  "domain": "connectivity",
+  "fictional": true,
+  "id": "ECU-V2X_UNIT",
+  "name": "V2X Unit (fictional)",
+  "supplier": "Fictional Supplier Beta"
+ },
+ {
+  "asil": "QM",
+  "domain": "connectivity",
+  "fictional": true,
+  "id": "ECU-DIAG_MASTER",
+  "name": "Diag Master (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ },
+ {
+  "asil": "C",
+  "domain": "body",
+  "fictional": true,
+  "id": "ECU-POWER_DIST",
+  "name": "Power Dist (fictional)",
+  "supplier": "Fictional Supplier Gamma"
+ }
+]

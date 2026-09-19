@@ -1,0 +1,38 @@
+[
+ {
+  "build_family": "26.01",
+  "id": "B001",
+  "release_date": "2026-01-12",
+  "sequence": 1
+ },
+ {
+  "build_family": "26.01",
+  "id": "B002",
+  "release_date": "2026-02-02",
+  "sequence": 2
+ },
+ {
+  "build_family": "26.02",
+  "id": "B003",
+  "release_date": "2026-02-23",
+  "sequence": 3
+ },
+ {
+  "build_family": "26.02",
+  "id": "B004",
+  "release_date": "2026-03-16",
+  "sequence": 4
+ },
+ {
+  "build_family": "26.03",
+  "id": "B005",
+  "release_date": "2026-04-06",
+  "sequence": 5
+ },
+ {
+  "build_family": "26.03",
+  "id": "B006",
+  "release_date": "2026-04-27",
+  "sequence": 6
+ }
+]
