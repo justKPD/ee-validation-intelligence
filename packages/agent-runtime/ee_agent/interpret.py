@@ -3,9 +3,10 @@
 The agent acts only when the build and variant are unambiguous. Otherwise it asks, because acting
 prematurely on incomplete information is a known agent failure mode.
 
-Besides planning, it answers read-only evidence questions about one named test, for example
-"Does TC-186 give valid evidence for B006 on V3?". Those need a build and a test id; without a variant the
-answer covers every variant the test runs on.
+Besides planning, it recognises read-only questions (see ``ee_agent.questions``), for example
+"Is TC-186 still valid for B006?", "Did TC-186 pass on B005?", "Is R-033 covered for B006 on V2?",
+"Why is ECU-TPMS risky in B006?", "How many defects does ECU-BMS have?" or "Which tests failed in B005?".
+Questions judged as of a build use the latest build when none is named, and say so.
 """
 
 from __future__ import annotations
@@ -13,6 +14,8 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 from dataclasses import dataclass, field
+
+from ee_agent.questions import AS_OF_KINDS, classify_question
 
 PROHIBITED_INTENTS: list[tuple[re.Pattern[str], str, str]] = [
     (
@@ -67,13 +70,6 @@ INJECTION = re.compile(
 _DEOBFUSCATE = str.maketrans({"0": "o", "1": "l", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s"})
 
 
-# an evidence question names a test and asks about its validity/freshness/coverage
-EVIDENCE_QUESTION = re.compile(
-    r"\b(evidence|valid|validity|current|stale|up[ -]to[ -]date|still (good|ok|okay|valid)|covered|coverage|trust)\b",
-    re.I,
-)
-
-
 def _intent_views(text: str) -> tuple[str, ...]:
     return (text, text.translate(_DEOBFUSCATE))
 
@@ -89,8 +85,10 @@ class Interpretation:
     prohibited: list[tuple[str, str]] = field(default_factory=list)  # (permission, tool)
     injection: bool = False
     clarification: str | None = None
-    question: bool = False  # read-only evidence question about one test
+    question: str | None = None  # read-only question kind (see ee_agent.questions); None for planning
     test_id: str | None = None
+    requirement_id: str | None = None
+    build_defaulted: bool = False  # no build named: the latest build was used for a read-only question
 
     @property
     def action(self) -> str:
@@ -98,7 +96,71 @@ class Interpretation:
             return "refuse"
         if self.clarification:
             return "clarify"
-        return "evidence" if self.question else "plan"
+        return "answer" if self.question else "plan"
+
+
+def _single(kind: str, found: list[str], known: Sequence[str] | None) -> tuple[str | None, str | None]:
+    """(id, clarification) for a question that needs exactly one known id of this kind."""
+    if len(found) > 1:
+        return None, f"You mentioned several {kind}s ({', '.join(found)}). Which single {kind} did you mean?"
+    if known is not None and found[0] not in known:
+        return None, f"{kind.capitalize()} {found[0]} is not in the programme. Which {kind} did you mean?"
+    return found[0], None
+
+
+QUESTION_ENTITY = {
+    "test_evidence": "test",
+    "test_history": "test",
+    "requirement_coverage": "requirement",
+    "component_risk": "component",
+    "component_defects": "component",
+}
+
+
+def _interpret_question(
+    it: Interpretation,
+    kind: str,
+    build_ids: list[str],
+    variant_ids: list[str],
+    ids: dict[str, list[str]],
+    known: dict[str, Sequence[str] | None],
+    builds: list[str],
+    variants: list[str],
+) -> Interpretation:
+    it.question = kind
+    build_list, variant_list = ", ".join(builds), ", ".join(variants)
+    if len(build_ids) > 1:
+        it.clarification = (
+            f"You mentioned several builds ({', '.join(build_ids)}). Which single build did you mean?"
+        )
+    elif build_ids and build_ids[0].upper() not in builds:
+        it.clarification = (
+            f"Build {build_ids[0]} is unknown. Known builds: {build_list}. Which one did you mean?"
+        )
+    elif build_ids:
+        it.build_id = build_ids[0].upper()
+    elif kind in AS_OF_KINDS or kind == "build_failures":
+        it.build_id, it.build_defaulted = builds[-1], True  # "now" = the latest build; said in the answer
+    entity = QUESTION_ENTITY.get(kind)
+    if it.clarification is None and entity:
+        value, it.clarification = _single(entity, ids[entity], known[entity])
+        if entity == "test":
+            it.test_id = value
+        elif entity == "requirement":
+            it.requirement_id = value
+        elif value:
+            it.component_ids = [value]
+    if it.clarification is None:
+        if len(variant_ids) > 1:
+            it.clarification = (
+                f"You mentioned several variants ({', '.join(variant_ids)}). Which one? "
+                "Leave the variant out to cover all of them."
+            )
+        elif variant_ids and variant_ids[0] not in variants:
+            it.clarification = f"Variant {variant_ids[0]} is unknown. Known variants: {variant_list}. Which one did you mean?"
+        elif variant_ids:
+            it.variant_id = variant_ids[0]
+    return it
 
 
 def interpret_request(
@@ -107,10 +169,9 @@ def interpret_request(
     variants: list[str],
     components: list[str],
     tests: Sequence[str] | None = None,
+    requirements: Sequence[str] | None = None,
 ) -> Interpretation:
     it = Interpretation()
-    test_ids = sorted({t.upper() for t in re.findall(r"\bTC-\d{3}\b", text, re.I)})
-    it.question = bool(test_ids) and bool(EVIDENCE_QUESTION.search(text))
     views = _intent_views(text)
     matched = [
         (perm, tool) for pattern, perm, tool in PROHIBITED_INTENTS if any(pattern.search(v) for v in views)
@@ -124,6 +185,17 @@ def interpret_request(
     variant_ids = sorted({v.upper() for v in re.findall(r"\bV\d+\b", text, re.I)})
     it.all_variants = bool(re.search(r"\b(all|every|any)\s+variants?\b", text, re.I))
     mentioned = sorted({m.upper() for m in re.findall(r"\bECU-[A-Z0-9_]+\b", text, re.I)})
+    test_ids = sorted({t.upper() for t in re.findall(r"\bTC-\d{3}\b", text, re.I)})
+    requirement_ids = sorted({r.upper() for r in re.findall(r"\bR-\d{3}\b", text, re.I)})
+
+    # read-only questions; prohibited or injected requests are always refused, planning requests go on below
+    if not (it.prohibited or it.injection):
+        kind = classify_question(text, test_ids, requirement_ids, mentioned)
+        if kind:
+            ids = {"test": test_ids, "requirement": requirement_ids, "component": mentioned}
+            known = {"test": tests, "requirement": requirements, "component": components}
+            return _interpret_question(it, kind, build_ids, variant_ids, ids, known, builds, variants)
+
     it.component_ids = [c for c in mentioned if c in components]
     if m := re.search(r"(\d+(?:\.\d+)?)\s*(h|hours?)\b", text, re.I):
         it.budget_minutes = float(m.group(1)) * 60
@@ -138,38 +210,13 @@ def interpret_request(
             f"You mentioned several builds ({', '.join(build_ids)}). Which single build should I plan for?"
         )
     elif not build_ids:
-        it.clarification = (
-            f"Which software build should I check {test_ids[0]}'s evidence for? Known builds: {build_list}."
-            if it.question
-            else f"Which software build should I plan validation for? Known builds: {build_list}."
-        )
+        it.clarification = f"Which software build should I plan validation for? Known builds: {build_list}."
     elif build_ids[0].upper() not in builds:
         it.clarification = (
             f"Build {build_ids[0]} is unknown. Known builds: {build_list}. Which one did you mean?"
         )
     else:
         it.build_id = build_ids[0].upper()
-
-    if it.clarification is None and it.question:
-        if len(test_ids) > 1:
-            it.clarification = (
-                f"You mentioned several tests ({', '.join(test_ids)}). Which single test should I check?"
-            )
-        elif tests is not None and test_ids[0] not in tests:
-            it.clarification = f"Test {test_ids[0]} is not in the programme. Which test did you mean?"
-        else:
-            it.test_id = test_ids[0]
-        if it.clarification is None:
-            if len(variant_ids) > 1:
-                it.clarification = (
-                    f"You mentioned several variants ({', '.join(variant_ids)}). Which one, or leave the variant out "
-                    "to check every variant the test runs on?"
-                )
-            elif variant_ids and variant_ids[0] not in variants:
-                it.clarification = f"Variant {variant_ids[0]} is unknown. Known variants: {variant_list}. Which one did you mean?"
-            elif variant_ids:
-                it.variant_id = variant_ids[0]
-        return it
 
     if it.clarification is None:
         if len(variant_ids) > 1:

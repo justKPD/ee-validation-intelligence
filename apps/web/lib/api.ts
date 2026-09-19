@@ -168,10 +168,11 @@ export interface AgentResult {
   grounded: boolean;
   latency_ms: number;
   trace: string[];
-  answer?: TestEvidenceAnswer | null;
+  answer?: AgentAnswer | null;
 }
-/** Answer to "does this test give valid evidence for this build (and variant)?" */
+/** Read-only answers from the agent's question engine, one shape per question kind. */
 export interface TestEvidenceAnswer {
+  kind: "test_evidence";
   test_id: string;
   build_id: string;
   known: boolean;
@@ -190,6 +191,89 @@ export interface TestEvidenceAnswer {
     }[];
   }[];
 }
+export interface TestHistoryAnswer {
+  kind: "test_history";
+  test_id: string;
+  build_id: string | null;
+  variant_id: string | null;
+  verdict_counts: Record<string, number>;
+  runs: {
+    execution_id: string;
+    build_id: string;
+    variant_id: string;
+    verdict: string;
+    date: string;
+    defect_id: string | null;
+    defect_component: string | null;
+    defect_severity: number | null;
+  }[];
+}
+export interface RequirementCoverageAnswer {
+  kind: "requirement_coverage";
+  requirement_id: string;
+  build_id: string;
+  title: string;
+  severity: number;
+  revision: number;
+  linked_tests: string[];
+  component_ids: string[];
+  variants: {
+    variant_id: string;
+    status: EvidenceStatus;
+    test_id: string | null;
+    execution_id: string | null;
+    evidence_build_id: string | null;
+    age_days: number | null;
+    reasons: string[];
+  }[];
+}
+export interface ComponentRiskAnswer {
+  kind: "component_risk";
+  component_id: string;
+  build_id: string;
+  score: number;
+  rank: number;
+  of: number;
+  contributions: [string, number][];
+  impact: number;
+  occurrence: number;
+  detectability: number;
+  confidence: number;
+  past_executions: number;
+  past_defects: number;
+  flags: string[];
+  changes: { id: string; change_kind: string; magnitude: number }[];
+}
+export interface ComponentDefectsAnswer {
+  kind: "component_defects";
+  component_id: string;
+  build_id: string | null;
+  defects: { defect_id: string; build_id: string | null; severity: number; error_code: string; title: string }[];
+  by_build: Record<string, number>;
+  by_severity: Record<string, number>;
+}
+export interface BuildFailuresAnswer {
+  kind: "build_failures";
+  build_id: string;
+  variant_id: string | null;
+  runs: number;
+  verdict_counts: Record<string, number>;
+  failures: {
+    test_id: string;
+    variant_id: string;
+    execution_id: string;
+    defect_id: string | null;
+    defect_component: string | null;
+    defect_severity: number | null;
+  }[];
+}
+export type AgentAnswer =
+  | TestEvidenceAnswer
+  | TestHistoryAnswer
+  | RequirementCoverageAnswer
+  | ComponentRiskAnswer
+  | ComponentDefectsAnswer
+  | BuildFailuresAnswer;
 export interface Recommendation {
   id: string;
   run_id: string;

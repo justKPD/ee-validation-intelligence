@@ -1,12 +1,21 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { BuildVariantFilters, Card, ErrorBox, IdList, PageHeader, StatusBadge } from "@/components/ui";
-import { apiGet, apiPost, qs, type AgentResult, type Recommendation } from "@/lib/api";
+import { AnswerDetails, answerTitle } from "@/components/answers";
+import { apiGet, apiPost, type AgentResult, type Recommendation } from "@/lib/api";
 import { num, pct, score } from "@/lib/format";
 
 type Record_ = Record<string, unknown> & { decision?: { status: string; history: { decision: string; reviewer: string; reason: string; at: string }[] } };
+
+const EXAMPLES = [
+  "Is TC-186 still valid for B006?",
+  "Did TC-186 pass on B005?",
+  "Is R-033 covered for B006 on V2?",
+  "Why is ECU-TPMS risky in B006?",
+  "Which tests failed in B005?",
+  "How many defects does ECU-BMS have?",
+];
 
 export default function Planner() {
   const [build, setBuild] = useState<string | null>(null);
@@ -79,15 +88,14 @@ export default function Planner() {
             Or ask in your own words
             <textarea rows={4} value={custom} placeholder={composed} onChange={(e) => setCustom(e.target.value)} />
           </label>
-          <p className="muted" style={{ fontSize: 12, margin: "6px 0 0" }}>
-            You can also ask about evidence, e.g.{" "}
-            {["Does TC-186 give valid evidence for B006 on V2?", "Is TC-031 still valid for B006?"].map((q, i) => (
-              <span key={q}>
-                {i > 0 && " or "}
-                <button className="link" onClick={() => setCustom(q)}>“{q}”</button>
-              </span>
-            ))}
-          </p>
+          <div className="muted" style={{ fontSize: 12, margin: "6px 0 0" }}>
+            You can also ask questions, for example:
+            <ul style={{ margin: "4px 0 0", paddingLeft: 16 }}>
+              {EXAMPLES.map((q) => (
+                <li key={q}><button className="link" onClick={() => setCustom(q)}>{q}</button></li>
+              ))}
+            </ul>
+          </div>
           <label className="secondary" style={{ display: "grid", gap: 4, fontSize: 12, marginTop: 10 }}>
             Reviewer
             <input value={reviewer} onChange={(e) => setReviewer(e.target.value)} />
@@ -104,8 +112,8 @@ export default function Planner() {
           )}
           {result?.status === "ANSWERED" && (
             <p className="muted" style={{ fontSize: 12, marginTop: 10 }}>
-              Computed by the evidence engine from data visible as of {result.build_id}; logged as run <span className="mono">{result.run_id}</span> in
-              the provenance ledger. Nothing was changed or proposed.
+              Answered from the data only (no model); logged as run <span className="mono">{result.run_id}</span> in the provenance
+              ledger. Nothing was changed or proposed.
             </p>
           )}
           {result?.recommendations.length ? (
@@ -144,29 +152,9 @@ export default function Planner() {
           )}
         </Card>
 
-        {result?.answer?.known ? (
-          <Card title={`Evidence for ${result.answer.test_id} as of ${result.answer.build_id}`} subtitle="Per variant: the verdict, then each requirement the test covers.">
-            {result.answer.variants.map((v) => (
-              <div key={v.variant_id} style={{ marginBottom: 14 }}>
-                <p style={{ margin: "0 0 6px" }}><strong>{v.variant_id}</strong> · <StatusBadge status={v.verdict} /></p>
-                {v.records.length === 0 && <p className="muted" style={{ margin: 0 }}>{result.answer!.test_id} is not defined for {v.variant_id}.</p>}
-                {v.records.map((r) => {
-                  const focus = r.component_ids.find((c) => r.reasons.some((x) => x.includes(c))) ?? r.component_ids[0];
-                  return (
-                    <div key={r.requirement_id} style={{ borderLeft: "3px solid var(--border, #ddd)", paddingLeft: 10, margin: "6px 0" }}>
-                      <p style={{ margin: 0 }}><span className="mono">{r.requirement_id}</span> · <StatusBadge status={r.status} /></p>
-                      <p className="secondary" style={{ margin: "2px 0", fontSize: 13 }}>
-                        Latest run: <span className="mono">{r.execution_id ? `${r.execution_id} on ${r.evidence_build_id} (${r.age_days} d before)` : "none"}</span>
-                      </p>
-                      <ul className="reasons" style={{ margin: "2px 0" }}>{r.reasons.map((x) => <li key={x}>{x}</li>)}</ul>
-                      <Link href={`/risk${qs({ build: result.answer!.build_id, variant: v.variant_id, component: focus, status: r.status })}`}>
-                        See it in Risk & Coverage →
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+        {result?.answer ? (
+          <Card title={answerTitle(result.answer)} subtitle="Read-only answer from the data; every value below is what the answer text was written from.">
+            <AnswerDetails answer={result.answer} latestBuild={build} />
           </Card>
         ) : (
         <Card title={rec ? `${rec.test_id} on ${rec.variant_id}` : "Explanation & provenance"} subtitle={rec ? <>Recommendation <span className="mono">{rec.recommendation_id}</span> · {status && <StatusBadge status={status} />}</> : undefined}>

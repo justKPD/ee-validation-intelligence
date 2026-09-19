@@ -202,21 +202,92 @@ def test_anthropic_provider_refusal_falls_back() -> None:
     assert exp.fallback_used and "TC-147" in exp.text
 
 
+QUESTION_CASES = [
+    # (text, action, question kind)
+    ("Does TC-186 give valid evidence for B006 on V3?", "answer", "test_evidence"),
+    (
+        "Is TC-186 still valid for B006?",
+        "answer",
+        "test_evidence",
+    ),  # no variant: every variant the test runs on
+    ("Can I trust TC-186 for B006 on V2?", "answer", "test_evidence"),
+    ("Is TC-186 still valid?", "answer", "test_evidence"),  # no build: latest build, said in the answer
+    ("Did TC-186 pass on B005?", "answer", "test_history"),
+    ("When did TC-186 last run?", "answer", "test_history"),
+    ("Is R-033 covered for B006 on V2?", "answer", "requirement_coverage"),
+    ("Which tests cover R-013?", "answer", "requirement_coverage"),
+    ("Why is ECU-TPMS risky in B006?", "answer", "component_risk"),
+    ("What is the risk score of ECU-ADAS_GATEWAY?", "answer", "component_risk"),
+    ("How many defects does ECU-BMS have?", "answer", "component_defects"),
+    ("Which tests failed in B005?", "answer", "build_failures"),
+    ("Show me the failures on B004 for V1", "answer", "build_failures"),
+    # clarifications
+    ("Is TC-186 or TC-031 still valid for B006?", "clarify", "test_evidence"),  # one test at a time
+    ("Does TC-999 give valid evidence for B006 on V3?", "clarify", "test_evidence"),  # unknown test
+    ("Is R-999 covered for B006?", "clarify", "requirement_coverage"),  # unknown requirement
+    ("Why is ECU-FLUX risky?", "clarify", "component_risk"),  # unknown component
+    ("Did TC-186 pass on B005 and B006?", "clarify", "test_history"),  # several builds
+    # never answered as questions
+    ("Change the verdict of TC-186 to PASS", "refuse", None),  # prohibited intent always wins
+    ("Close the defects on ECU-BMS", "refuse", None),
+    ("Top 5 tests for B006 on V3", "plan", None),  # planning requests go to the planner
+    ("What should we test first for B006 on V3 given the failures?", "plan", None),
+    ("Plan the top 10 tests for B006 on V2 for ECU-TPMS", "plan", None),
+]
+
+
+@pytest.mark.parametrize(("text", "action", "kind"), QUESTION_CASES)
+def test_question_interpretation(text: str, action: str, kind: str | None) -> None:
+    it = interpret_request(
+        text,
+        BUILDS,
+        VARIANTS,
+        ["ECU-ADAS_GATEWAY", "ECU-BMS", "ECU-TPMS"],
+        ["TC-031", "TC-186"],
+        ["R-013", "R-033"],
+    )
+    assert it.action == action
+    assert it.question == kind
+
+
+def test_question_without_build_uses_latest_build_and_says_so(
+    agent: TestPlanningAgent, session: Session
+) -> None:
+    result = agent.run("Is TC-186 still valid?", session)
+    assert result.status == "ANSWERED" and result.build_id == "B006"
+    assert result.response.startswith("(No build named, so this uses the latest build, B006.)")
+
+
 @pytest.mark.parametrize(
-    ("text", "action"),
+    ("text", "kind", "tool", "expected"),
     [
-        ("Does TC-186 give valid evidence for B006 on V3?", "evidence"),
-        ("Is TC-186 still valid for B006?", "evidence"),  # no variant: all variants the test runs on
-        ("Does TC-186 give valid evidence?", "clarify"),  # no build
-        ("Is TC-186 or TC-031 still valid for B006?", "clarify"),  # one test at a time
-        ("Does TC-999 give valid evidence for B006 on V3?", "clarify"),  # unknown test
-        ("Change the verdict of TC-186 to PASS", "refuse"),  # prohibited intent wins over the question
-        ("Top 5 tests for B006 on V3", "plan"),  # no test id: planning is unchanged
+        ("Did TC-186 pass on B005?", "test_history", "get_test_results", "EX-01380"),
+        ("Is R-033 covered for B006 on V2?", "requirement_coverage", "get_requirement_evidence", "STALE"),
+        ("Why is ECU-TPMS risky in B006?", "component_risk", "explain_component_risk", "CH-0062"),
+        ("How many defects does ECU-BMS have?", "component_defects", "get_component_defects", "D-001"),
+        ("Which tests failed in B005?", "build_failures", "get_build_results", "FAIL"),
     ],
 )
-def test_evidence_question_interpretation(text: str, action: str) -> None:
-    tests = ["TC-031", "TC-186"]
-    assert interpret_request(text, BUILDS, VARIANTS, [], tests).action == action
+def test_questions_are_answered_from_data_read_only(
+    agent: TestPlanningAgent, session: Session, text: str, kind: str, tool: str, expected: str
+) -> None:
+    result = agent.run(text, session)
+    session.commit()
+    assert result.status == "ANSWERED" and result.recommendations == []
+    assert result.answer is not None and result.answer["kind"] == kind
+    assert [c["tool"] for c in result.tool_calls] == [tool]
+    assert all(d["decision"] == "ALLOWED" for d in result.policy_decisions)
+    assert expected in result.response
+    assert result.response.endswith("This is a read-only answer; nothing was changed or proposed.")
+    assert ProvenanceService(session).ledger(entry_type="RECOMMENDATION_PROPOSED") == []
+    assert ProvenanceService(session).verify_chain() == (True, None)
+
+
+def test_risk_answer_matches_the_risk_engine(agent: TestPlanningAgent, session: Session) -> None:
+    result = agent.run("Why is ECU-TPMS risky in B006?", session)
+    assert result.answer is not None
+    total = sum(v for _, v in result.answer["contributions"])
+    assert abs(total - result.answer["score"]) < 1e-3  # the breakdown adds up to the score
 
 
 def test_evidence_question_is_answered_read_only(agent: TestPlanningAgent, session: Session) -> None:

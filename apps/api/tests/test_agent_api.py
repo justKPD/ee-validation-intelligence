@@ -73,3 +73,13 @@ def test_evidence_question_via_api(client: TestClient) -> None:
     assert body["status"] == "ANSWERED" and body["recommendations"] == []
     assert body["answer"]["variants"][0]["variant_id"] == "V2"
     assert body["answer"]["variants"][0]["verdict"] in {"VALID", "NOT_VALID", "NO_EVIDENCE"}
+
+
+def test_other_questions_via_api(client: TestClient) -> None:
+    for text, kind in (
+        ("Did TC-186 pass on B005?", "test_history"),
+        ("Why is ECU-TPMS risky in B006?", "component_risk"),
+        ("Which tests failed in B005?", "build_failures"),
+    ):
+        body = client.post("/agent/plan", json={"request": text}).json()
+        assert body["status"] == "ANSWERED" and body["answer"]["kind"] == kind

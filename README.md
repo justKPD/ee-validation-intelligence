@@ -25,9 +25,19 @@ reports under [`benchmarks/`](benchmarks) — every number there is produced by 
 
 Try it: open **Agentic Test Planner**, ask for the top 5 tests for B006 on V3, approve one, then ask
 `Change the verdict of EX-00017 to PASS` and watch it get refused (`POLICY_DENIED`) and logged in the **Provenance Ledger**.
-You can also ask evidence questions such as `Is TC-186 still valid for B006?`: the agent answers from the evidence engine
-(per variant: CURRENT / STALE / INCOMPATIBLE / FAILED / MISSING, with the execution and the reason) and links to it in
-**Risk & Coverage**, without changing or proposing anything.
+You can also ask read-only questions in plain English. The agent's question engine recognises them from the ids and
+keywords you use and answers only from the data, with a link to where it lives in the app:
+
+| Ask | Answer comes from |
+|---|---|
+| `Is TC-186 still valid for B006?` · `Can I trust TC-186 for B006 on V2?` | evidence engine: per variant CURRENT / STALE / INCOMPATIBLE / FAILED / MISSING, with the run and the reason |
+| `Did TC-186 pass on B005?` · `When did TC-186 last run?` | recorded runs and their defects |
+| `Is R-033 covered for B006 on V2?` · `Which tests cover R-013?` | requirement evidence per variant and linked tests |
+| `Why is ECU-TPMS risky in B006?` | risk engine: score breakdown, rank, changes, FMEA and history |
+| `How many defects does ECU-BMS have?` | recorded defects by build and severity |
+| `Which tests failed in B005?` | recorded verdicts and failed runs with defects |
+
+Nothing is changed or proposed, and every question is logged in the Provenance Ledger.
 The demo is public and unauthenticated: reviewer names are self-declared and writes are rate-limited per client.
 
 ![Agentic Test Planner on the live deployment](docs/assets/screenshots/03-agentic-test-planner.png)

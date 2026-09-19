@@ -6,6 +6,7 @@ served by an MCP server or converted into model tool definitions.
 
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
@@ -187,6 +188,161 @@ class ToolRegistry:
             "variants": out,
         }
 
+    # --- read-only question handlers (the question engine answers only from these) ----------------
+    def _recorded(self) -> tuple[list[Any], dict[str, Any]]:
+        """All recorded executions (sorted) and defects by execution id: history, not an as-of view."""
+        executions = sorted(self.data["executions"], key=lambda e: (e.executed_at, e.id))
+        return executions, {d.execution_id: d for d in self.data["defects"]}
+
+    def _test_results(
+        self, test_id: str, build_id: str | None = None, variant_id: str | None = None
+    ) -> dict[str, Any]:
+        executions, defects = self._recorded()
+        runs = []
+        for e in executions:
+            if e.test_id != test_id or (build_id and e.build_id != build_id):
+                continue
+            if variant_id and e.variant_id != variant_id:
+                continue
+            d = defects.get(e.id)
+            runs.append(
+                {
+                    "execution_id": e.id,
+                    "build_id": e.build_id,
+                    "variant_id": e.variant_id,
+                    "verdict": e.verdict,
+                    "date": e.executed_at.date().isoformat(),
+                    "defect_id": d.id if d else None,
+                    "defect_component": d.component_id if d else None,
+                    "defect_severity": d.severity if d else None,
+                }
+            )
+        counts = Counter(r["verdict"] for r in runs)
+        return {
+            "test_id": test_id,
+            "build_id": build_id,
+            "variant_id": variant_id,
+            "runs": runs,
+            "verdict_counts": {v: counts.get(v, 0) for v in ("PASS", "FAIL", "BLOCKED")},
+        }
+
+    def _requirement_evidence(
+        self, build_id: str, requirement_id: str, variant_id: str | None = None
+    ) -> dict[str, Any]:
+        ctx = self.context(build_id)
+        snap = ctx.snapshot
+        req = snap.requirements[requirement_id]
+        keys = sorted(
+            k for k in ctx.evidence if k[0] == requirement_id and (variant_id is None or k[1] == variant_id)
+        )
+        rows = []
+        for key in keys:
+            r = ctx.evidence[key]
+            rows.append(
+                {
+                    "variant_id": r.variant_id,
+                    "status": r.status.value,
+                    "test_id": r.test_id,
+                    "execution_id": r.execution_id,
+                    "evidence_build_id": r.evidence_build_id,
+                    "age_days": r.age_days,
+                    "reasons": r.reasons,
+                }
+            )
+        return {
+            "requirement_id": requirement_id,
+            "build_id": build_id,
+            "title": req.title,
+            "severity": req.severity,
+            "revision": req.revision,
+            "linked_tests": sorted(snap.requirement_tests.get(requirement_id, [])),
+            "component_ids": snap.req_components.get(requirement_id, []),
+            "variants": rows,
+        }
+
+    def _risk_explanation(self, build_id: str, component_id: str) -> dict[str, Any]:
+        ctx = self.context(build_id)
+        ranked = sorted(ctx.component_risk.values(), key=lambda r: (-r.score, r.component_id))
+        r = ctx.component_risk[component_id]
+        return {
+            "component_id": component_id,
+            "build_id": build_id,
+            "score": r.score,
+            "rank": next(i for i, x in enumerate(ranked, start=1) if x.component_id == component_id),
+            "of": len(ranked),
+            "contributions": sorted(r.contributions.items(), key=lambda kv: -kv[1]),
+            "impact": r.impact,
+            "occurrence": r.occurrence,
+            "detectability": r.detectability,
+            "confidence": r.confidence,
+            "past_executions": r.past_executions,
+            "past_defects": r.past_defects,
+            "flags": r.flags,
+            "changes": [
+                {"id": c.id, "change_kind": c.change_kind, "magnitude": c.magnitude}
+                for c in ctx.snapshot.current_changes
+                if c.target_type == "component" and c.target_id == component_id
+            ],
+        }
+
+    def _component_defects(self, component_id: str, build_id: str | None = None) -> dict[str, Any]:
+        executions, _ = self._recorded()
+        build_of = {e.id: e.build_id for e in executions}
+        rows = sorted(
+            (
+                {
+                    "defect_id": d.id,
+                    "build_id": build_of.get(d.execution_id),
+                    "severity": d.severity,
+                    "error_code": d.error_code,
+                    "title": d.title,
+                }
+                for d in self.data["defects"]
+                if d.component_id == component_id
+                and (build_id is None or build_of.get(d.execution_id) == build_id)
+            ),
+            key=lambda x: (x["build_id"] or "", x["defect_id"]),
+        )
+        return {
+            "component_id": component_id,
+            "build_id": build_id,
+            "defects": rows,
+            "by_build": dict(sorted(Counter(x["build_id"] for x in rows).items())),
+            "by_severity": dict(sorted(Counter(x["severity"] for x in rows).items(), reverse=True)),
+        }
+
+    def _build_results(self, build_id: str, variant_id: str | None = None) -> dict[str, Any]:
+        executions, defects = self._recorded()
+        runs = [
+            e
+            for e in executions
+            if e.build_id == build_id and (variant_id is None or e.variant_id == variant_id)
+        ]
+        counts = Counter(e.verdict for e in runs)
+        failures = []
+        for e in runs:
+            if e.verdict != "FAIL":
+                continue
+            d = defects.get(e.id)
+            failures.append(
+                {
+                    "test_id": e.test_id,
+                    "variant_id": e.variant_id,
+                    "execution_id": e.id,
+                    "defect_id": d.id if d else None,
+                    "defect_component": d.component_id if d else None,
+                    "defect_severity": d.severity if d else None,
+                }
+            )
+        failures.sort(key=lambda f: (-(f["defect_severity"] or 0), f["test_id"], f["variant_id"]))
+        return {
+            "build_id": build_id,
+            "variant_id": variant_id,
+            "runs": len(runs),
+            "verdict_counts": {v: counts.get(v, 0) for v in ("PASS", "FAIL", "BLOCKED")},
+            "failures": failures,
+        }
+
     def _test_history(self, build_id: str, test_id: str) -> list[dict[str, Any]]:
         snap = self.context(build_id).snapshot
         defects = {d.execution_id: d.id for d in snap.defects}
@@ -305,6 +461,47 @@ class ToolRegistry:
                     ["build_id", "test_id"],
                 ),
                 self._test_evidence,
+            ),
+            ToolSpec(
+                "get_test_results",
+                "Recorded runs of one test (optionally for a build and variant) with their defects.",
+                "read_results",
+                s(
+                    {"test_id": {"type": "string"}, "build_id": BUILD, "variant_id": VARIANT},
+                    ["test_id"],
+                ),
+                self._test_results,
+            ),
+            ToolSpec(
+                "get_requirement_evidence",
+                "Evidence status of one requirement per variant as of a build, with linked tests.",
+                "read_coverage",
+                s(
+                    {"build_id": BUILD, "requirement_id": {"type": "string"}, "variant_id": VARIANT},
+                    ["build_id", "requirement_id"],
+                ),
+                self._requirement_evidence,
+            ),
+            ToolSpec(
+                "explain_component_risk",
+                "Why a component has its risk score: contributions, rank, changes and history.",
+                "explain_risk",
+                s({"build_id": BUILD, "component_id": {"type": "string"}}, ["build_id", "component_id"]),
+                self._risk_explanation,
+            ),
+            ToolSpec(
+                "get_component_defects",
+                "Recorded defects of one component, optionally for one build.",
+                "read_failures",
+                s({"component_id": {"type": "string"}, "build_id": BUILD}, ["component_id"]),
+                self._component_defects,
+            ),
+            ToolSpec(
+                "get_build_results",
+                "Recorded verdict counts and failed runs of a build, optionally for one variant.",
+                "read_results",
+                s({"build_id": BUILD, "variant_id": VARIANT}, ["build_id"]),
+                self._build_results,
             ),
             ToolSpec(
                 "get_test_history",
