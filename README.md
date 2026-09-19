@@ -13,8 +13,8 @@
 When a new software build arrives and validation time is limited, **which E/E tests should engineers run first?**
 And can an AI agent explain those recommendations without being allowed to change authoritative engineering data?
 
-**Results at a glance:** [technical brief](docs/outreach/technical-brief.md) ([2-page PDF](docs/outreach/technical-brief.pdf)).
-Every number in it is generated from the benchmark runs by `scripts/build_brief.py`, including what the results do *not* show.
+**Results at a glance:** see the [benchmark summary](#benchmark-summary-seed-42-synthetic) below and the generated
+reports under [`benchmarks/`](benchmarks) — every number there is produced by a run, including what the results do *not* show.
 
 ## Live demo
 
@@ -96,7 +96,6 @@ uv run ee-shadow                      # shadow test planning benchmark
 uv run ee-reliability -k 3            # agent reliability lab
 uv run ee-adversarial                 # adversarial search + regression suite
 uv run ee-calibration                 # calibration, dev-seed tuning, overrides, bootstrap CIs (several minutes)
-uv run python scripts/build_brief.py  # regenerate outreach documents from results
 ```
 
 Docker (PostgreSQL 16 + pgvector, API, web): `docker compose up --build`.
@@ -123,7 +122,7 @@ Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The de
 | 11 Learning & calibration | done: calibration, dev-seed tuning with held-out check, overrides, bootstrap CIs |
 | 12 Deployment | **live**: Vercel web + Railway API and PostgreSQL/pgvector ([validation](docs/release/production-deployment-validation.md)); Docker stack validated; CI green; AWS Terraform validated in CI as an alternative target, not deployed ([ADR-007](docs/adr/ADR-007-public-deployment-platform.md)) |
 | 13 Documentation | done: architecture, methodology, ADRs, API reference, limitations, threat model |
-| 14 Portfolio | done: generated two-page technical brief, recruiter and researcher summaries, live screenshots, 60–90 s demo script |
+| 14 Portfolio | done: live deployment, screenshots, benchmark summary |
 
 ## Documentation
 
@@ -132,8 +131,6 @@ Use Claude for explanations: `EE_MODEL_PROVIDER=anthropic uv run ee-api`. The de
   [ranking & shadow planning](docs/methodology/ranking-and-shadow-planning.md) · [agent policy & provenance](docs/methodology/agent-policy-and-provenance.md) ·
   [reliability & adversarial](docs/methodology/agent-reliability-and-adversarial-testing.md) · [dataset summary](docs/methodology/dataset-summary.md)
 - [Limitations](docs/limitations.md) · [Threat model](docs/threat-model.md) · [Post-release roadmap](docs/roadmap/post-release.md)
-- Portfolio: [technical brief](docs/outreach/technical-brief.md) ([PDF](docs/outreach/technical-brief.pdf)) · [recruiter summary](docs/outreach/recruiter-summary.md) ·
-  [researcher summary](docs/outreach/researcher-summary.md) · [demo script](docs/outreach/demo-script.md)
 
 ## Non-negotiable rules this codebase enforces
 
