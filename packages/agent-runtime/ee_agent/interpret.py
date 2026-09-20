@@ -88,6 +88,8 @@ class Interpretation:
     question: str | None = None  # read-only question kind (see ee_agent.questions); None for planning
     test_id: str | None = None
     requirement_id: str | None = None
+    run_id: str | None = None
+    recommendation_id: str | None = None
     compare_build_id: str | None = (
         None  # earlier build of a comparison or trend range (build_id is the later one)
     )
@@ -255,10 +257,18 @@ def interpret_request(
     mentioned = sorted({m.upper() for m in re.findall(r"\bECU-[A-Z0-9_]+\b", text, re.I)})
     test_ids = sorted({t.upper() for t in re.findall(r"\bTC-\d{3}\b", text, re.I)})
     requirement_ids = sorted({r.upper() for r in re.findall(r"\bR-\d{3}\b", text, re.I)})
+    run_ids = sorted({r.upper() for r in re.findall(r"\bRUN-\d{4}\b", text, re.I)})
+    rec_ids = sorted({r.upper() for r in re.findall(r"\bREC-\d{4}\b", text, re.I)})
 
     # read-only questions; prohibited or injected requests are always refused, planning requests go on below
     if not (it.prohibited or it.injection):
         kind = classify_question(text, test_ids, requirement_ids, mentioned, build_ids)
+        if kind == "agent_run":
+            it.question, it.run_id = kind, run_ids[0]
+            return it
+        if kind == "recommendation":
+            it.question, it.recommendation_id = kind, rec_ids[0]
+            return it
         if kind:
             ids = {"test": test_ids, "requirement": requirement_ids, "component": mentioned}
             known = {"test": tests, "requirement": requirements, "component": components}

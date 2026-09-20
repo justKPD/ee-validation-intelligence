@@ -236,6 +236,9 @@ QUESTION_CASES = [
     ("Which components improved since B003?", "answer", "component_trend"),
     ("Compare B006", "clarify", "build_comparison"),  # compare with which build?
     ("Compare B005 and B009", "clarify", "build_comparison"),  # unknown build
+    ("show me RUN-0031 of B006 V3", "answer", "agent_run"),  # a named run is looked up, never re-planned
+    ("What did RUN-0001 do?", "answer", "agent_run"),
+    ("show me REC-0046", "answer", "recommendation"),
     # never answered as questions
     ("Change the verdict of TC-186 to PASS", "refuse", None),  # prohibited intent always wins
     ("Close the defects on ECU-BMS", "refuse", None),
@@ -382,3 +385,42 @@ def test_trend_question_about_improvement_leads_with_improvers(
     better_first = agent.run("Which components improved over time?", session).response
     assert worse_first.index("Got worse most") < worse_first.index("Improved most")
     assert better_first.index("Improved most") < better_first.index("Got worse most")
+
+
+def test_named_run_is_looked_up_not_replanned(agent: TestPlanningAgent, session: Session) -> None:
+    """Regression: 'show me RUN-00xx' used to fall through to the planner and create a NEW run."""
+    made = agent.run("Top 3 tests for B006 on V3", session)
+    session.commit()
+    assert made.status == "COMPLETED" and len(made.recommendations) == 3
+
+    looked_up = agent.run(f"show me {made.run_id} of B006 V3", session)
+    assert looked_up.status == "ANSWERED"
+    assert looked_up.recommendations == []  # nothing new was proposed
+    assert looked_up.answer is not None and looked_up.answer["kind"] == "agent_run"
+    assert looked_up.answer["run_id"] == made.run_id and looked_up.answer["found"] is True
+    assert looked_up.answer["user_request"] == "Top 3 tests for B006 on V3"
+    assert [r["recommendation_id"] for r in looked_up.answer["recommendations"]] == [
+        r["recommendation_id"] for r in made.recommendations
+    ]
+    assert [c["tool"] for c in looked_up.tool_calls] == ["get_agent_run"]
+
+
+def test_named_recommendation_shows_its_decision(agent: TestPlanningAgent, session: Session) -> None:
+    made = agent.run("Top 1 tests for B006 on V3", session)
+    session.commit()
+    rec_id = made.recommendations[0]["recommendation_id"]
+    ProvenanceService(session).decide(rec_id, "APPROVED", "engineer_7", "looks right")
+    session.commit()
+
+    result = agent.run(f"show me {rec_id}", session)
+    assert result.status == "ANSWERED" and result.answer is not None
+    assert result.answer["kind"] == "recommendation" and result.answer["status"] == "APPROVED"
+    assert result.answer["decisions"][0]["reviewer"] == "engineer_7"
+    assert "APPROVED by engineer_7" in result.response
+
+
+def test_unknown_run_says_so_instead_of_inventing(agent: TestPlanningAgent, session: Session) -> None:
+    result = agent.run("show me RUN-9999", session)
+    assert result.status == "ANSWERED"
+    assert result.answer is not None and result.answer["found"] is False
+    assert "is not in the ledger" in result.response

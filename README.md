@@ -38,6 +38,7 @@ keywords you use and answers only from the data, with a link to where it lives i
 | `Which tests failed in B005?` | recorded verdicts and failed runs with defects |
 | `Compare B005 and B006` · `What changed between B004 and B006 on V2?` | both builds side by side: changes, current evidence, risk, results, and the biggest risk movers |
 | `Which ECU got worse over time?` · `How did ECU-TPMS risk change over time?` | component risk as of every build: risers and fallers, or one component's history |
+| `What did RUN-0001 do?` · `show me REC-0046` | a recorded run or proposal from the ledger: what was asked, what it proposed, who decided |
 
 Nothing is changed or proposed, and every question is logged in the Provenance Ledger.
 The demo is public and unauthenticated: reviewer names are self-declared and writes are rate-limited per client.

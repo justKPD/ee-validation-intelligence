@@ -17,6 +17,7 @@ const EXAMPLES = [
   "How many defects does ECU-BMS have?",
   "Compare B005 and B006",
   "Which ECU got worse over time?",
+  "What did RUN-0001 do?",
 ];
 
 export default function Planner() {

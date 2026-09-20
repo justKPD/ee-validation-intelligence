@@ -26,6 +26,10 @@ export function answerTitle(a: AgentAnswer): string {
       return a.component_id
         ? `${a.component_id} risk, ${a.build_from} → ${a.build_to}`
         : `Risk movers, ${a.build_from} → ${a.build_to}`;
+    case "agent_run":
+      return a.found ? `${a.run_id} · ${a.status}` : `${a.run_id} not found`;
+    case "recommendation":
+      return a.found ? `${a.recommendation_id} · ${a.status}` : `${a.recommendation_id} not found`;
   }
 }
 
@@ -227,6 +231,64 @@ export function AnswerDetails({ answer: a, latestBuild }: { answer: AgentAnswer;
               <Moves title="Improved most" rows={a.better ?? []} build={a.build_to} />
             </>
           )}
+        </>
+      );
+
+    case "agent_run":
+      if (!a.found) return <p className="muted">No run with that id is in the ledger.</p>;
+      return (
+        <>
+          <p style={{ marginTop: 0 }} className="secondary">
+            Asked by <span className="mono">{a.actor}</span> · {a.model?.provider}/{a.model?.name} · policy {a.policy_version} · {a.latency_ms} ms
+          </p>
+          <p>“{a.user_request}”</p>
+          {a.denials && a.denials.length > 0 && (
+            <p className="secondary" style={{ fontSize: 13 }}>
+              Denied: {a.denials.map((d) => `${d.tool} (${d.permission})`).join(", ")}
+            </p>
+          )}
+          {a.recommendations && a.recommendations.length > 0 ? (
+            <div className="table-wrap">
+              <table>
+                <thead><tr><th className="num">#</th><th>Recommendation</th><th>Test</th><th>Variant</th><th className="num">Priority</th><th>Status</th></tr></thead>
+                <tbody>
+                  {a.recommendations.map((r) => (
+                    <tr key={r.recommendation_id}>
+                      <td className="num">{r.rank}</td><td className="mono">{r.recommendation_id}</td>
+                      <td className="mono">{r.test_id}</td><td>{r.variant_id}</td>
+                      <td className="num">{r.priority_score.toFixed(3)}</td><td><StatusBadge status={r.status} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : <p className="muted">This run proposed nothing.</p>}
+          <Link href="/provenance">See it in the Provenance Ledger →</Link>
+        </>
+      );
+
+    case "recommendation":
+      if (!a.found) return <p className="muted">No recommendation with that id is in the ledger.</p>;
+      return (
+        <>
+          <p style={{ marginTop: 0 }}>
+            <strong>{a.test_id} on {a.variant_id}</strong> · {a.build_id} · priority {a.priority_score?.toFixed(3)} · {a.estimated_minutes?.toFixed(1)} min
+          </p>
+          <p className="secondary" style={{ fontSize: 13 }}>Proposed by <span className="mono">{a.run_id}</span></p>
+          <h4 style={{ margin: "10px 0 2px", fontSize: 13 }}>Reasons</h4>
+          <ul className="reasons">{(a.reasons ?? []).map((x) => <li key={x}>{x}</li>)}</ul>
+          <h4 style={{ margin: "10px 0 2px", fontSize: 13 }}>Evidence</h4>
+          <p className="mono" style={{ margin: 0 }}>{(a.evidence_ids ?? []).join(", ")}</p>
+          <h4 style={{ margin: "10px 0 2px", fontSize: 13 }}>Decision</h4>
+          {a.decisions && a.decisions.length > 0 ? (
+            a.decisions.map((d, i) => (
+              <Row key={i}>
+                <p style={{ margin: 0 }}><StatusBadge status={d.decision} /> by <span className="mono">{d.reviewer}</span></p>
+                <p className="secondary" style={{ margin: "2px 0", fontSize: 13 }}>{d.at.slice(0, 16).replace("T", " ")}{d.reason ? ` — “${d.reason}”` : ""}</p>
+              </Row>
+            ))
+          ) : <p className="muted" style={{ margin: 0 }}>Not decided yet — it stays PROPOSED until an engineer approves or rejects it.</p>}
+          <Link href="/provenance">See it in the Provenance Ledger →</Link>
         </>
       );
 

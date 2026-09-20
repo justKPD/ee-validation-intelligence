@@ -13,6 +13,8 @@ Kinds:
 - ``build_failures``       fail/defect + which/what/how many/list/show     (recorded executions)
 - ``build_comparison``     compare/vs/difference + two builds              (each build as of its release + results)
 - ``component_trend``      worse/better/increase/trend/over time + ECU     (risk as of every build in a range)
+- ``agent_run``            RUN-#### named                                 (what that recorded run did)
+- ``recommendation``       REC-#### named                                 (that proposal and its decision)
 """
 
 from __future__ import annotations
@@ -57,6 +59,8 @@ _TREND = re.compile(
 )
 # a trend question asking what got better (rather than worse) leads the answer with the improvers
 ASKS_BETTER = re.compile(r"\b(improv\w*|better|safer|decreas\w*|fell|fall\w*|drop\w*|less risky)\b", re.I)
+RUN_ID = re.compile(r"\bRUN-\d{4}\b", re.I)
+REC_ID = re.compile(r"\bREC-\d{4}\b", re.I)
 _COMPONENT_WORD = re.compile(r"\b(ecus?|components?|modules?)\b", re.I)
 
 QUESTION_KINDS = (
@@ -68,6 +72,8 @@ QUESTION_KINDS = (
     "build_failures",
     "build_comparison",
     "component_trend",
+    "agent_run",
+    "recommendation",
 )
 # kinds judged "as of" a build (default: the latest build); the others read recorded results
 AS_OF_KINDS = {"test_evidence", "requirement_coverage", "component_risk"}
@@ -83,6 +89,11 @@ def classify_question(
     """Question kind, or ``None`` when the text is a planning request (or not a recognised question)."""
     if PLANNING.search(text):
         return None
+    # a named run or recommendation is unambiguous: look it up instead of planning something new
+    if RUN_ID.search(text):
+        return "agent_run"
+    if REC_ID.search(text):
+        return "recommendation"
     if tests:
         if _EVIDENCE.search(text):
             return "test_evidence"
@@ -125,6 +136,8 @@ def describe(kind: str, data: dict[str, Any]) -> str:
         "build_failures": _build_failures,
         "build_comparison": _build_comparison,
         "component_trend": _component_trend,
+        "agent_run": _agent_run,
+        "recommendation": _recommendation,
     }[kind]
     return writer(data) + "\nThis is a read-only answer; nothing was changed or proposed."
 
@@ -419,4 +432,50 @@ def _component_trend(t: dict[str, Any]) -> str:
     lines += parts
     lines.append(f"Riskiest in {last}: {t['riskiest']['component_id']} ({t['riskiest']['score']:.3f}).")
     lines.append("Risk is judged as of each build's release.")
+    return "\n".join(lines)
+
+
+def _agent_run(r: dict[str, Any]) -> str:
+    if not r["found"]:
+        return f"{r['run_id']} is not in the ledger. Open the Provenance Ledger to see the runs that exist."
+    scope = " ".join(x for x in (r["build_id"] or "", r["variant_id"] or "") if x)
+    lines = [
+        f"{r['run_id']} · {r['status']}{' · ' + scope if scope else ''}, asked by {r['actor']} on {r['created_at'][:16].replace('T', ' ')}.",
+        f'It was asked: "{r["user_request"]}"',
+        f"Answer given: {r['response'].splitlines()[0]}",
+    ]
+    if r["recommendations"]:
+        lines.append(f"It proposed {len(r['recommendations'])} test(s):")
+        for rec in r["recommendations"]:
+            decided = rec["status"] if rec["status"] != "PROPOSED" else "still PROPOSED"
+            lines.append(
+                f"{rec['recommendation_id']}: {rec['test_id']} on {rec['variant_id']}, priority {rec['priority_score']:.3f}, {decided}."
+            )
+    else:
+        lines.append("It proposed nothing.")
+    if r["denials"]:
+        lines.append(
+            "Policy denials: " + _join([f"{d['tool']} ({d['permission']})" for d in r["denials"]]) + "."
+        )
+    lines.append(
+        f"Engine versions: {r['model']['provider']}/{r['model']['name']}, policy {r['policy_version']}, {r['latency_ms']} ms."
+    )
+    return "\n".join(lines)
+
+
+def _recommendation(r: dict[str, Any]) -> str:
+    if not r["found"]:
+        return f"{r['recommendation_id']} is not in the ledger. Open the Provenance Ledger to see the recommendations that exist."
+    lines = [
+        f"{r['recommendation_id']} · {r['status']}: run {r['test_id']} on {r['variant_id']} for {r['build_id']}, "
+        f"priority {r['priority_score']:.3f}, {r['estimated_minutes']:.1f} min, coverage gain {r['expected_coverage_gain'] * 100:.1f}%.",
+        f"Proposed by {r['run_id']}.",
+        "Why: " + _join(r["reasons"]) + ".",
+        "Evidence: " + _join(r["evidence_ids"]) + ".",
+    ]
+    for d in r["decisions"]:
+        reason = f' — "{d["reason"]}"' if d["reason"] else ""
+        lines.append(f"{d['decision']} by {d['reviewer']} on {d['at'][:16].replace('T', ' ')}{reason}.")
+    if not r["decisions"]:
+        lines.append("No human decision yet; it stays PROPOSED until an engineer approves or rejects it.")
     return "\n".join(lines)

@@ -15,8 +15,12 @@ from ee_coverage import EvidenceStatus, assess_test_evidence
 from ee_domain.snapshot import DatasetView, build_snapshot
 from ee_domain.visibility import visible_data
 from ee_policies import PolicyDeniedError, PolicyGate
+from ee_provenance import NotFoundError, ProvenanceService
+from ee_provenance.models import AgentRun, PolicyDecisionRecord, Recommendation
 from ee_ranking import DecisionContext, RankingConfig, build_context, rank_engineering
 from ee_risk import RiskConfig
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 
 @dataclass(frozen=True)
@@ -56,10 +60,12 @@ class ToolRegistry:
         risk_config: RiskConfig | None = None,
         ranking_config: RankingConfig | None = None,
         faults: set[str] | None = None,
+        session: Session | None = None,
     ):
         self.data = data
         self.gate = gate
         self.faults = faults or set()
+        self.session = session  # the agentic layer (runs, recommendations) lives in the database
         self.risk_config = risk_config or RiskConfig()
         self.ranking_config = ranking_config or RankingConfig()
         self._contexts: dict[str, DecisionContext] = {}
@@ -464,6 +470,76 @@ class ToolRegistry:
         )
         return out
 
+    def _agent_run(self, run_id: str) -> dict[str, Any]:
+        """One recorded agent run: what was asked, what it proposed, what the gate decided."""
+        if self.session is None:
+            raise ToolUnavailableError("get_agent_run")
+        run = self.session.get(AgentRun, run_id)
+        if run is None:
+            return {"run_id": run_id, "found": False}
+        recs = self.session.scalars(
+            select(Recommendation).where(Recommendation.run_id == run_id).order_by(Recommendation.rank)
+        ).all()
+        denials = self.session.scalars(
+            select(PolicyDecisionRecord)
+            .where(PolicyDecisionRecord.run_id == run_id, PolicyDecisionRecord.decision != "ALLOWED")
+            .order_by(PolicyDecisionRecord.id)
+        ).all()
+        return {
+            "run_id": run.id,
+            "found": True,
+            "status": run.status,
+            "actor": run.actor,
+            "created_at": run.created_at.isoformat(),
+            "user_request": run.user_request,
+            "response": run.response,
+            "build_id": run.build_id,
+            "variant_id": run.variant_id,
+            "policy_version": run.policy_version,
+            "latency_ms": run.latency_ms,
+            "model": {"provider": run.model_provider, "name": run.model_name},
+            "recommendations": [
+                {
+                    "recommendation_id": r.id,
+                    "test_id": r.test_id,
+                    "variant_id": r.variant_id,
+                    "rank": r.rank,
+                    "priority_score": r.priority_score,
+                    "status": r.status,
+                }
+                for r in recs
+            ],
+            "denials": [
+                {"tool": d.tool_name, "permission": d.permission, "reason": d.reason} for d in denials
+            ],
+        }
+
+    def _recommendation_record(self, recommendation_id: str) -> dict[str, Any]:
+        """One proposal with its reasons, evidence and the human decision taken on it."""
+        if self.session is None:
+            raise ToolUnavailableError("get_recommendation")
+        try:
+            record = ProvenanceService(self.session).record_for(recommendation_id)
+        except NotFoundError:
+            return {"recommendation_id": recommendation_id, "found": False}
+        rec = self.session.get(Recommendation, recommendation_id)
+        assert rec is not None
+        return {
+            "recommendation_id": recommendation_id,
+            "found": True,
+            "status": rec.status,
+            "run_id": rec.run_id,
+            "build_id": rec.build_id,
+            "variant_id": rec.variant_id,
+            "test_id": rec.test_id,
+            "priority_score": rec.priority_score,
+            "estimated_minutes": rec.estimated_minutes,
+            "expected_coverage_gain": rec.expected_coverage_gain,
+            "reasons": record["reasons"],
+            "evidence_ids": record["sources"],
+            "decisions": record["decision"]["history"],
+        }
+
     def _test_history(self, build_id: str, test_id: str) -> list[dict[str, Any]]:
         snap = self.context(build_id).snapshot
         defects = {d.execution_id: d.id for d in snap.defects}
@@ -640,6 +716,20 @@ class ToolRegistry:
                     ["build_from", "build_to"],
                 ),
                 self._risk_trend,
+            ),
+            ToolSpec(
+                "get_agent_run",
+                "A recorded agent run: what was asked, what it proposed and what the policy gate decided.",
+                "read_results",
+                s({"run_id": {"type": "string"}}, ["run_id"]),
+                self._agent_run,
+            ),
+            ToolSpec(
+                "get_recommendation",
+                "One recommendation with its reasons, evidence and human decision history.",
+                "read_results",
+                s({"recommendation_id": {"type": "string"}}, ["recommendation_id"]),
+                self._recommendation_record,
             ),
             ToolSpec(
                 "get_test_history",

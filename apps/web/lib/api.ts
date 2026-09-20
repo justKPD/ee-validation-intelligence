@@ -310,6 +310,46 @@ export interface ComponentTrendAnswer {
   better?: RiskMove[];
   riskiest?: { component_id: string; score: number };
 }
+export interface AgentRunAnswer {
+  kind: "agent_run";
+  run_id: string;
+  found: boolean;
+  status?: string;
+  actor?: string;
+  created_at?: string;
+  user_request?: string;
+  response?: string;
+  build_id?: string | null;
+  variant_id?: string | null;
+  policy_version?: string;
+  latency_ms?: number;
+  model?: { provider: string; name: string };
+  recommendations?: {
+    recommendation_id: string;
+    test_id: string;
+    variant_id: string;
+    rank: number;
+    priority_score: number;
+    status: string;
+  }[];
+  denials?: { tool: string; permission: string; reason: string }[];
+}
+export interface RecommendationAnswer {
+  kind: "recommendation";
+  recommendation_id: string;
+  found: boolean;
+  status?: string;
+  run_id?: string;
+  build_id?: string;
+  variant_id?: string;
+  test_id?: string;
+  priority_score?: number;
+  estimated_minutes?: number;
+  expected_coverage_gain?: number;
+  reasons?: string[];
+  evidence_ids?: string[];
+  decisions?: { decision: string; reviewer: string; reason: string; at: string }[];
+}
 export type AgentAnswer =
   | TestEvidenceAnswer
   | TestHistoryAnswer
@@ -318,7 +358,9 @@ export type AgentAnswer =
   | ComponentDefectsAnswer
   | BuildFailuresAnswer
   | BuildComparisonAnswer
-  | ComponentTrendAnswer;
+  | ComponentTrendAnswer
+  | AgentRunAnswer
+  | RecommendationAnswer;
 export interface Recommendation {
   id: string;
   run_id: string;

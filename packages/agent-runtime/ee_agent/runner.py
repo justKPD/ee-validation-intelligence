@@ -87,7 +87,7 @@ class TestPlanningAgent:
         started = time.perf_counter()
         decisions: list[PolicyDecision] = []
         gate = PolicyGate(self.policy, sink=decisions.append)
-        tools = ToolRegistry(self.data, gate, self.risk_config, self.ranking_config, tool_faults)
+        tools = ToolRegistry(self.data, gate, self.risk_config, self.ranking_config, tool_faults, session)
         trace: list[str] = []
         graph = self._graph(tools, trace)
         state: PlannerState = graph.invoke({"request": request})
@@ -306,6 +306,11 @@ class TestPlanningAgent:
                 "component_trend": (
                     "get_risk_trend",
                     {"build_from": it.compare_build_id, "build_to": it.build_id, "component_id": component},
+                ),
+                "agent_run": ("get_agent_run", {"run_id": it.run_id}),
+                "recommendation": (
+                    "get_recommendation",
+                    {"recommendation_id": it.recommendation_id},
                 ),
             }[kind]
             try:
