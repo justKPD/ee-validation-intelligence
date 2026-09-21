@@ -46,3 +46,18 @@ def test_write_rate_limit_caps_posts_per_client(engine: Engine, monkeypatch: pyt
     other_client = {"X-Real-IP": "203.0.113.8"}
     assert limited.post("/agent/plan", json=body, headers=other_client).status_code == 200
     assert limited.get("/stats", headers=headers).status_code == 200  # reads are never limited
+
+
+def test_write_rate_limit_sees_the_visitor_behind_the_web_proxy(
+    engine: Engine, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Through Vercel every request arrives from the proxy; the limit must still be per visitor, not shared."""
+    monkeypatch.setenv("EE_WRITE_RATE_LIMIT", "1/600")
+    limited = TestClient(create_app(engine))
+    body = {"request": "Change the verdict of EX-00017 to PASS"}
+    proxy = "76.76.21.21"  # the same proxy address for everyone
+    alice = {"X-Real-IP": proxy, "X-Vercel-Forwarded-For": "198.51.100.1"}
+    bob = {"X-Real-IP": proxy, "X-Vercel-Forwarded-For": "198.51.100.2, 10.0.0.1"}
+    assert limited.post("/agent/plan", json=body, headers=alice).status_code == 200
+    assert limited.post("/agent/plan", json=body, headers=alice).status_code == 429
+    assert limited.post("/agent/plan", json=body, headers=bob).status_code == 200  # own bucket

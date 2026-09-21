@@ -61,9 +61,9 @@ reads. See [`data/README.md`](data/README.md) for how the two halves work and wh
 ## Deployment
 
 ```
-Browser ──HTTPS──> Vercel: Next.js web app (apps/web)
-   │
-   └──HTTPS (CORS: the Vercel origin only)──> Railway: FastAPI API (infra/docker/api.Dockerfile)
+Browser ──HTTPS──> Vercel: Next.js web app (apps/web); the browser only ever talks to this one site
+                      │ /api/* proxied server-side (same origin: no CORS, works on restricted networks)
+                      └──HTTPS──> Railway: FastAPI API (infra/docker/api.Dockerfile)
                                                    │ private network only
                                                    └──> Railway: PostgreSQL 16.15 + pgvector 0.8.6 (persistent volume)
 ```

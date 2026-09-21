@@ -59,7 +59,7 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
         @app.middleware("http")
         async def limit_writes(request: Request, call_next):  # type: ignore[no-untyped-def]
             if request.method == "POST":
-                client = request.headers.get("x-real-ip") or (request.client.host if request.client else "?")
+                client = _client_key(request)
                 now = time.monotonic()
                 hits = recent[client]
                 while hits and now - hits[0] > window_s:
@@ -87,6 +87,19 @@ def create_app(engine: Engine | None = None, benchmark_dir: Path | None = None) 
 
     FastAPIInstrumentor.instrument_app(app)
     return app
+
+
+def _client_key(request: Request) -> str:
+    """The visitor behind a request, for the write limit.
+
+    Through the web app's same-origin proxy the request comes from Vercel, which passes the visitor's address in
+    ``x-vercel-forwarded-for``; a direct call carries the platform edge's ``x-real-ip``. This is a courtesy guard
+    against casual flooding, not a security boundary: a direct caller can set either header.
+    """
+    for header in ("x-vercel-forwarded-for", "x-real-ip"):
+        if value := request.headers.get(header):
+            return value.split(",")[0].strip()
+    return request.client.host if request.client else "?"
 
 
 def _parse_rate_limit(spec: str) -> tuple[int, int] | None:

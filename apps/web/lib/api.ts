@@ -1,4 +1,5 @@
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+// Same-origin: next.config.mjs proxies /api/* to the FastAPI service, so the browser never calls another domain.
+export const API_URL = "/api";
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {

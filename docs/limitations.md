@@ -86,7 +86,10 @@ see [ADR-007](adr/ADR-007-public-deployment-platform.md) and the
 - **Shared demo state.** Visitors see each other's runs, approvals and denials; a restart re-seeds engineering data but keeps them.
 - **Single region, single instance.** One API instance and one database in one EU region, without replicas or managed backups
   beyond the persistent volume.
-- **CORS allows only the production web origin.** Vercel preview deployments cannot call the API.
+- **The web app proxies the API through its own origin** (`/api/*`), so the browser never makes a cross-origin
+  call and the demo works on any address the site is served from and on networks that block the API's domain.
+  The API's own CORS allow-list still admits only the production web origin for direct browser use.
+  Per-deployment Vercel URLs are behind Vercel's deployment protection; share only the production URL.
 - **Hosting configuration.** Railway applies only the build section of `railway.toml` (config-as-code support ends 2026-12-01);
   the health check and Dockerfile path are also set on the service.
 - **The write rate limit is in-process.** It is per API instance and resets when the API restarts.
